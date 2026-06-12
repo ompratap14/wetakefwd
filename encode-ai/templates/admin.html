@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Encode AI Admin Dashboard</title>
+
+    <style>
+        body{
+            background:#050816;
+            color:white;
+            font-family:Arial,sans-serif;
+            padding:30px;
+        }
+
+        h1{
+            text-align:center;
+            margin-bottom:30px;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            background:#0f172a;
+        }
+
+        th,td{
+            border:1px solid #333;
+            padding:12px;
+            text-align:left;
+        }
+
+        th{
+            background:#7c3aed;
+        }
+
+        tr:nth-child(even){
+            background:#111827;
+        }
+
+        tr:hover{
+            background:#1e293b;
+        }
+    </style>
+</head>
+<body>
+
+<h1>🚀 Encode AI Lead Dashboard</h1>
+
+<table>
+
+<tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Company</th>
+    <th>Service</th>
+    <th>Message</th>
+    <th>Action</th>
+</tr>
+{% for lead in leads %}
+<tr>
+    <td>{{ lead[0] }}</td>
+    <td>{{ lead[1] }}</td>
+    <td>{{ lead[2] }}</td>
+    <td>{{ lead[3] }}</td>
+    <td>{{ lead[4] }}</td>
+    <td>{{ lead[5] }}</td>
+
+    <td>
+        <a href="/delete/{{ lead[0] }}"
+           onclick="return confirm('Delete this lead?')"
+           style="
+             background:#dc2626;
+             color:white;
+             padding:6px 12px;
+             border-radius:6px;
+             text-decoration:none;
+             font-size:14px;">
+             Delete
+        </a>
+    </td>
+</tr>
+{% endfor %}
+
+</table>
+
+</body>
+</html>
