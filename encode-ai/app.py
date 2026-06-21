@@ -2,7 +2,10 @@ import sqlite3
 import smtplib
 from email.mime.text import MIMEText
 from flask import Flask, render_template, request, redirect, session
+import os
+import requests
 
+RESEND_API_KEY = os.getenv("RESEND_API_KEY")
 import database
 
 app = Flask(__name__)
@@ -16,110 +19,33 @@ EMAIL_APP_PASSWORD = "sdfl bpvj aqvo btm"
 # ==========================
 def send_email(name, email, company, service, message):
 
-    sender_email = EMAIL_ADDRESS
-    receiver_email = EMAIL_ADDRESS
+    response = requests.post(
+        "https://api.resend.com/emails",
+        headers={
+            "Authorization": f"Bearer {RESEND_API_KEY}",
+            "Content-Type": "application/json"
+        },
+        json={
+            "from": "onboarding@resend.dev",
+            "to": ["encodeai2808@gmail.com"],
+            "subject": "New Lead - Encode AI Solutions",
+            "html": f"""
+            <h2>New Lead Received</h2>
 
-    # Google App Password
-    app_password = EMAIL_APP_PASSWORD
+            <p><b>Name:</b> {name}</p>
+            <p><b>Email:</b> {email}</p>
+            <p><b>Company:</b> {company}</p>
+            <p><b>Service:</b> {service}</p>
 
-    body = f"""
-New Lead Received - Encode AI Solutions
+            <p><b>Message:</b></p>
+            <p>{message}</p>
+            """
+        }
+    )
 
-Name: {name}
-Email: {email}
-Company: {company}
-Service: {service}
+    print("Status:", response.status_code)
+    print(response.text)
 
-Message:
-{message}
-"""
-
-    msg = MIMEText(body)
-
-    msg["Subject"] = "New Lead - Encode AI Solutions"
-    msg["From"] = sender_email
-    msg["To"] = receiver_email
-
-    try:
-        with smtplib.SMTP("smtp.gmail.com", 587,timeout=10) as server:
-            server.starttls()
-            server.login(sender_email, app_password)
-            print("LOGIN SUCCESS")
-            server.send_message(msg)
-            print("EMAIL SENT")
-
-        print("Email Sent Successfully")
-
-    except Exception as e:
-        print("Email Error:", e)
-def send_confirmation_email(name, client_email,service, message):
-
-    sender_email = EMAIL_ADDRESS
-    app_password = EMAIL_APP_PASSWORD
-
-    body = f"""
-Dear {name},
-
-Thank you for contacting Encode AI Solutions.
-
-We have successfully received your inquiry.
-
-━━━━━━━━━━━━━━━━━━━━━━
-YOUR SUBMITTED DETAILS
-━━━━━━━━━━━━━━━━━━━━━━
-
-Name: {name}
-Email: {client_email}
-Service: {service}
-
-Message:
-{message}
-
-━━━━━━━━━━━━━━━━━━━━━━
-
-Our team is currently reviewing your request and will get back to you as soon as possible.
-
-You can also contact us directly:
-
-Email: encodeai2808@gmail.com
-WhatsApp: +91 8191904121
-
-Best Regards,
-
-Encode AI Solutions
-Transforming Data • Into Intelligence
-"""
-    msg = MIMEText(body)
-
-    msg["Subject"] = "We Received Your Inquiry - Encode AI Solutions"
-    msg["From"] = EMAIL_ADDRESS
-    msg["To"] = client_email
-    print("Client Email:", client_email)
-
-    try:
-        with smtplib.SMTP("smtp.gmail.com", 587, timeout=10) as server:
-            server.starttls()
-            server.login(sender_email, app_password)
-
-            print("Sending to:", client_email)
-
-            server.send_message(msg)
-
-            print("Confirmation Email Sent Successfully")
-            print("=================================")
-            print("Name:", name)
-            print("Client Email:", client_email)
-            print("Service:", service)
-            print("=================================")
-
-
-    except Exception as e:
-        print("=================================")
-        print("CONFIRMATION EMAIL ERROR")
-        print(type(e))
-        print(e)
-        print("=================================")
-# ==========================
 # HOME PAGE
 # ==========================
 @app.route("/")
@@ -163,12 +89,7 @@ def contact():
             message
         )
 
-        send_confirmation_email(
-            name,
-            email,
-            service,
-            message
-        )
+       
 
     except Exception as e:
         print("EMAIL ERROR:", e)
