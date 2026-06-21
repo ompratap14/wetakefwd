@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.secret_key = "encode_ai_secret_key"
 
 EMAIL_ADDRESS = "encodeai2808@gmail.com"
-EMAIL_APP_PASSWORD = "zsdf wzwo fbek tnvb"
+EMAIL_APP_PASSWORD = "sdfl bpvj aqvo btm"
 
 # ==========================
 # EMAIL FUNCTION
@@ -41,7 +41,7 @@ Message:
     msg["To"] = receiver_email
 
     try:
-        with smtplib.SMTP("smtp.gmail.com", 587) as server:
+        with smtplib.SMTP("smtp.gmail.com", 587,timeout=10) as server:
             server.starttls()
             server.login(sender_email, app_password)
             print("LOGIN SUCCESS")
@@ -97,7 +97,7 @@ Transforming Data • Into Intelligence
     print("Client Email:", client_email)
 
     try:
-        with smtplib.SMTP("smtp.gmail.com", 587) as server:
+        with smtplib.SMTP("smtp.gmail.com", 587, timeout=10) as server:
             server.starttls()
             server.login(sender_email, app_password)
 
@@ -135,7 +135,6 @@ def contact():
 
     name = request.form["name"]
     email = request.form["email"]
-    print("client email =",email)
     company = request.form["company"]
     service = request.form["service"]
     message = request.form["message"]
@@ -155,20 +154,24 @@ def contact():
     conn.commit()
     conn.close()
 
-    # Send Email
-    send_email(
-        name,
-        email,
-        company,
-        service,
-        message
-    )
-    send_confirmation_email(
-    name,
-    email,
-    service,
-    message
-    )
+    try:
+        send_email(
+            name,
+            email,
+            company,
+            service,
+            message
+        )
+
+        send_confirmation_email(
+            name,
+            email,
+            service,
+            message
+        )
+
+    except Exception as e:
+        print("EMAIL ERROR:", e)
 
     return render_template("success.html")
 
