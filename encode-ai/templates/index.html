@@ -293,11 +293,12 @@
   }
   .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
 
-  .hero-stats {
-    display: flex; gap: 32px; margin-top: 44px;
-    padding-top: 32px;
-    border-top: 1px solid var(--border-subtle);
-  }
+  @media (max-width:768px){
+    .hero-stats{
+        flex-direction: column;
+        gap: 16px;
+    }
+}
   .hero-stat-num {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 1.75rem; font-weight: 700;
@@ -338,12 +339,11 @@
     display: grid; grid-template-columns: 1fr 1fr 1fr;
     gap: 12px; margin-bottom: 20px;
   }
-  .dash-metric {
-    background: rgba(124,58,237,0.1);
-    border: 1px solid rgba(124,58,237,0.2);
-    border-radius: 10px; padding: 14px;
-    text-align: center;
-  }
+ @media (max-width:480px){
+    .dash-metrics{
+        grid-template-columns:1fr;
+    }
+}
   .dash-metric-val {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 1.4rem; font-weight: 700;
@@ -911,7 +911,104 @@ select option {
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   }
+  /* =========================
+   MOBILE OVERFLOW FIX
+========================= */
+
+html,
+body {
+    width: 100%;
+    overflow-x: hidden !important;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+img,
+video,
+canvas,
+svg {
+    max-width: 100%;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .hero-dashboard {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .floating-tag {
+        display: none;
+    }
+
+    .hero-inner,
+    .about-grid,
+    .why-grid,
+    .contact-grid,
+    .services-grid,
+    .portfolio-grid,
+    .founders-grid {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .hero-visual,
+    .hero-dashboard,
+    .about-content,
+    .contact-form-card,
+    .contact-info {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+@media (max-width:768px){
+
+    .orb{
+        display:none !important;
+    }
+
+    .floating-tag{
+        display:none !important;
+    }
+
+    *{
+        max-width:100%;
+    }
+}
+.whatsapp-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #25D366;
+    color: white;
+    text-decoration: none;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 9999;
+    transition: transform 0.3s ease;
+}
+
+.whatsapp-btn:hover {
+    transform: scale(1.1);
+}
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
@@ -1827,5 +1924,11 @@ document.getElementById('back-top').addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 </script>
+<a href="https://wa.me/918191904121?text=Hello%20Encode%20AI%20Solutions%2C%20I%20would%20like%20to%20know%20more%20about%20your%20services."
+   class="whatsapp-btn"
+   target="_blank"
+   aria-label="chat on WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
 </body>
 </html>
