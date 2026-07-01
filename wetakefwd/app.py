@@ -6,6 +6,7 @@ import os
 import requests
 
 RESEND_API_KEY = os.getenv("RESEND_API_KEY")
+
 import database
 
 app = Flask(__name__)
