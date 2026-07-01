@@ -11,8 +11,8 @@ import database
 app = Flask(__name__)
 app.secret_key = "encode_ai_secret_key"
 
-EMAIL_ADDRESS = "encodeai2808@gmail.com"
-EMAIL_APP_PASSWORD = "sdfl bpvj aqvo btm"
+EMAIL_ADDRESS = "wetakefwd@gmail.com"
+EMAIL_APP_PASSWORD = "taqr iylk hmie bryh"
 
 # ==========================
 # EMAIL FUNCTION
