@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.secret_key = "encode_ai_secret_key"
 
 EMAIL_ADDRESS = "wetakefwd@gmail.com"
-EMAIL_APP_PASSWORD = "taqr iylk hmie bryh"
+EMAIL_APP_PASSWORD = "kasg nzvj xnkw wbhg"
 
 # ==========================
 # EMAIL FUNCTION
@@ -27,7 +27,7 @@ def send_email(name, email, company, service, message):
         },
         json={
             "from": "onboarding@resend.dev",
-            "to": ["surjeetsolanki51@gmail.com"],
+            "to": ["wetakefwd@gmail.com"],
             "subject": "New Lead - We Take Forward (WTF) Solutions",
             "html": f"""
             <h2>New Lead Received</h2>
