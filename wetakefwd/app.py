@@ -164,7 +164,7 @@ def admin():
 # ==========================
 # DELETE LEAD
 # ==========================
-@app.route("/delete/<int:id>")
+@app.route("/delete/<int:id>",methods=["POST"])
 def delete_lead(id):
 
     if not session.get("logged_in"):

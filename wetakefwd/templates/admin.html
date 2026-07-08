@@ -66,17 +66,25 @@
     <td>{{ lead[5] }}</td>
 
     <td>
-        <a href="/delete/{{ lead[0] }}"
-           onclick="return confirm('Delete this lead?')"
-           style="
-             background:#dc2626;
-             color:white;
-             padding:6px 12px;
-             border-radius:6px;
-             text-decoration:none;
-             font-size:14px;">
-             Delete
-        </a>
+        <form action="/delete/{{ lead[0] }}"
+      method="POST"
+      style="display:inline;"
+      onsubmit="return confirm('Delete this lead?');">
+
+    <button type="submit"
+        style="
+            background:#dc2626;
+            color:white;
+            padding:6px 12px;
+            border:none;
+            border-radius:6px;
+            cursor:pointer;
+            font-size:14px;">
+        Delete
+    </button>
+
+</form>
+        
     </td>
 </tr>
 {% endfor %}
