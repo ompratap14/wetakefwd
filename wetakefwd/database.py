@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS leads (
     email TEXT,
     company TEXT,
     service TEXT,
-    message TEXT
+    message TEXTn
 )
 """)
 
