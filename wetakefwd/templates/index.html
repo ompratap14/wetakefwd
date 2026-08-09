@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="intro-active">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -121,6 +121,96 @@ body.dark-mode .founders-names{
         }
 
         /* =========================
+               OS INTRO OVERLAY (Three.js)
+            ========================= */
+        /* Lock scroll only while the intro is playing */
+        html.intro-active,
+        body.intro-active {
+            overflow: hidden !important;
+            height: 100%;
+        }
+
+        #os-intro {
+            position: fixed;
+            inset: 0;
+            z-index: 100000;
+            background: #060810;
+            transition: opacity 0.8s ease;
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: #fff;
+            -webkit-font-smoothing: antialiased;
+            user-select: none;
+        }
+        #os-intro.done {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        #os-canvas {
+            position: fixed;
+            inset: 0;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        #boot-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: #060810;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.6s ease;
+            pointer-events: none;
+        }
+        #boot-screen.hidden {
+            opacity: 0;
+        }
+        #boot-screen .power-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #7C6DFF;
+            box-shadow: 0 0 30px rgba(124, 109, 255, 0.3);
+            margin-bottom: 12px;
+            opacity: 0;
+            animation: powerPulse 1.2s ease forwards;
+        }
+        @keyframes powerPulse {
+            0%   { opacity: 0; transform: scale(0.5); }
+            40%  { opacity: 1; transform: scale(1.2); }
+            70%  { opacity: 0.8; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        #boot-screen .boot-label {
+            font-size: 0.65rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.15);
+            opacity: 0;
+            animation: labelFade 1.2s ease 0.3s forwards;
+        }
+        @keyframes labelFade {
+            0%   { opacity: 0; transform: translateY(4px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Logo fallback (shown only if the templated logo image fails to load) */
+        .logo-fallback {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+        .logo-fallback .highlight {
+            color: var(--primary);
+        }
+
+        /* =========================
                LOADER
             ========================= */
         #loader {
@@ -162,12 +252,8 @@ body.dark-mode .founders-names{
             animation: loadFill 1.2s ease forwards;
         }
         @keyframes loadFill {
-            from {
-                width: 0;
-            }
-            to {
-                width: 100%;
-            }
+            from { width: 0; }
+            to { width: 100%; }
         }
 
         /* =========================
@@ -440,21 +526,11 @@ body.dark-mode .founders-names{
             opacity: 1;
             transform: none;
         }
-        .reveal-delay-1 {
-            transition-delay: 0.08s;
-        }
-        .reveal-delay-2 {
-            transition-delay: 0.16s;
-        }
-        .reveal-delay-3 {
-            transition-delay: 0.24s;
-        }
-        .reveal-delay-4 {
-            transition-delay: 0.32s;
-        }
-        .reveal-delay-5 {
-            transition-delay: 0.40s;
-        }
+        .reveal-delay-1 { transition-delay: 0.08s; }
+        .reveal-delay-2 { transition-delay: 0.16s; }
+        .reveal-delay-3 { transition-delay: 0.24s; }
+        .reveal-delay-4 { transition-delay: 0.32s; }
+        .reveal-delay-5 { transition-delay: 0.40s; }
 
         /* =========================
                HERO
@@ -496,13 +572,8 @@ body.dark-mode .founders-names{
             animation: pulse 2s infinite;
         }
         @keyframes pulse {
-            0%,
-            100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.3;
-            }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
         }
 
         .hero-headline {
@@ -642,12 +713,8 @@ body.dark-mode .founders-names{
             opacity: 0.5;
         }
         @keyframes barGrow {
-            from {
-                transform: scaleY(0);
-            }
-            to {
-                transform: scaleY(1);
-            }
+            from { transform: scaleY(0); }
+            to { transform: scaleY(1); }
         }
         .dash-label {
             font-size: 0.6rem;
@@ -1005,9 +1072,7 @@ body.dark-mode .founders-names{
             animation: spin 40s linear infinite;
         }
         @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
+            to { transform: rotate(360deg); }
         }
         .why-ring-inner {
             width: 72%;
@@ -1797,6 +1862,11 @@ body.dark-mode .founders-names{
             max-width: 100%;
             height: auto;
         }
+        /* keep the intro's WebGL canvas full-bleed, unconstrained by the global media rule */
+        #os-canvas canvas {
+            max-width: none;
+            height: 100% !important;
+        }
         @media (max-width: 768px) {
             .container {
                 width: 100%;
@@ -1834,11 +1904,11 @@ body.dark-mode .founders-names{
             * {
                 max-width: 100%;
             }
+            #os-canvas canvas {
+                max-width: none;
+            }
         }
         /* =========================
-   ABOUT FOUNDERS
-========================= */
-/* =========================
    ABOUT FOUNDERS
 ========================= */
 
@@ -1923,9 +1993,408 @@ body.dark-mode .founders-names{
     align-items:center;
     gap:12px;
 }
+        /* ============================================================
+           DESIGN REFINEMENT LAYER
+           Visual-only polish. No structural, class, ID or JS changes.
+           Inherits existing CSS variables → fully dark-mode compatible.
+           Inspired by the restraint of Linear / Stripe / Vercel:
+           layered shadows, tightened type, distinct per-section card
+           identities, and quiet, GPU-friendly micro-interactions.
+           ============================================================ */
+
+        /* ---- Refined tokens: depth, motion, tuned neutrals ---- */
+        :root {
+            /* Softer, layered, more premium elevation */
+            --shadow-sm: 0 1px 2px rgba(17, 12, 46, 0.05),
+                         0 1px 3px rgba(17, 12, 46, 0.04);
+            --shadow-md: 0 2px 6px rgba(17, 12, 46, 0.05),
+                         0 8px 24px rgba(17, 12, 46, 0.07);
+            --shadow-lg: 0 4px 12px rgba(17, 12, 46, 0.06),
+                         0 18px 48px rgba(17, 12, 46, 0.10);
+            --shadow-xl: 0 8px 24px rgba(17, 12, 46, 0.08),
+                         0 32px 72px rgba(17, 12, 46, 0.14);
+            /* A slightly springier ease for interactive lifts */
+            --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+            --ring: color-mix(in srgb, var(--primary) 32%, transparent);
+        }
+        body.dark-mode {
+            /* Deeper shadows read better on the near-black canvas */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.40);
+            --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.45),
+                         0 10px 28px rgba(0, 0, 0, 0.40);
+            --shadow-lg: 0 6px 16px rgba(0, 0, 0, 0.50),
+                         0 22px 52px rgba(0, 0, 0, 0.45);
+            --shadow-xl: 0 10px 30px rgba(0, 0, 0, 0.55),
+                         0 36px 80px rgba(0, 0, 0, 0.55);
+        }
+
+        /* ---- Anchor offset so sections clear the fixed nav ---- */
+        html { scroll-padding-top: 96px; }
+
+        /* ---- Typographic polish (tuning only, no family swaps) ---- */
+        body { letter-spacing: -0.006em; }
+        .section-title,
+        .hero-headline,
+        .hero-sub { text-wrap: balance; }
+        .hero-desc,
+        .about-desc,
+        .service-card p,
+        .why-content > p,
+        .testimonial-text,
+        .faq-a-inner { text-wrap: pretty; }
+        .hero-headline { line-height: 1.04; }
+        /* Give the gradient headline a hair more depth */
+        .hero-headline .highlight,
+        .section-title .highlight {
+            background: linear-gradient(120deg,
+                        var(--primary) 0%,
+                        var(--primary-light) 55%,
+                        var(--accent) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        /* ---- Text selection + custom scrollbar (subtle premium cue) ---- */
+        ::selection {
+            background: color-mix(in srgb, var(--primary) 22%, transparent);
+            color: var(--text-primary);
+        }
+        * { scrollbar-color: var(--border) transparent; scrollbar-width: thin; }
+        ::-webkit-scrollbar { width: 11px; height: 11px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border: 3px solid var(--bg-primary);
+            border-radius: 99px;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+        /* ---- Accessible focus rings across interactive elements ---- */
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        textarea:focus-visible,
+        select:focus-visible,
+        .faq-q:focus-visible {
+            outline: 2px solid var(--ring);
+            outline-offset: 3px;
+            border-radius: var(--radius-sm);
+        }
+
+        /* ---- Navigation: right-size the logo, refine link affordance ---- */
+        .nav-logo img { height: 48px; }
+        nav.scrolled .nav-logo img { height: 42px; }
+        .nav-logo img:hover { transform: scale(1.04) rotate(-1deg); }
+
+        .nav-links a {
+            position: relative;
+            padding-block: 4px;
+        }
+        .nav-links a:not(.nav-cta)::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 100%;
+            height: 1.5px;
+            background: var(--primary);
+            border-radius: 2px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.32s var(--ease-spring);
+        }
+        .nav-links a:not(.nav-cta):hover::after { transform: scaleX(1); }
+
+        .nav-cta {
+            background: linear-gradient(180deg, var(--primary-light), var(--primary));
+            box-shadow: var(--shadow-sm),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+        }
+        .nav-cta:hover {
+            box-shadow: var(--shadow-md),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.24);
+        }
+
+        /* ---- Buttons: dimensional primary, tactile press, springier lift ---- */
+        .btn-primary,
+        .form-submit {
+            background: linear-gradient(180deg, var(--primary-light), var(--primary));
+            box-shadow: var(--shadow-sm),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+            transition: transform 0.28s var(--ease-spring),
+                        box-shadow 0.28s var(--ease),
+                        filter 0.28s var(--ease);
+        }
+        .btn-primary:hover,
+        .form-submit:hover {
+            background: linear-gradient(180deg, var(--primary-light), var(--primary));
+            filter: saturate(1.06) brightness(1.02);
+            box-shadow: var(--shadow-md),
+                        0 8px 22px var(--ring),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.24);
+        }
+        .btn-primary:active,
+        .form-submit:active,
+        .nav-cta:active { transform: translateY(0) scale(0.985); }
+        .btn-primary span[aria-hidden] {
+            transition: transform 0.3s var(--ease-spring);
+        }
+        .btn-primary:hover span[aria-hidden] { transform: translateX(3px); }
+        .btn-ghost {
+            transition: transform 0.28s var(--ease-spring),
+                        border-color var(--duration) var(--ease),
+                        background var(--duration) var(--ease),
+                        box-shadow var(--duration) var(--ease);
+        }
+        .btn-ghost:hover { box-shadow: var(--shadow-sm); }
+
+        /* ---- Shared card motion: smoother, springier settle ---- */
+        .service-card,
+        .project-card,
+        .glass-card,
+        .why-item,
+        .testimonial-card,
+        .contact-form-card,
+        .contact-info-card,
+        .about-hex,
+        .faq-item {
+            transition: transform 0.4s var(--ease-spring),
+                        border-color 0.3s var(--ease),
+                        box-shadow 0.4s var(--ease),
+                        background 0.3s var(--ease);
+        }
+
+        /* ---- SERVICES — signature card: sweeping top accent + icon fill ---- */
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.45s var(--ease-spring);
+        }
+        .service-card:hover::before { transform: scaleX(1); }
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
+        .service-icon {
+            transition: transform 0.4s var(--ease-spring),
+                        background 0.4s var(--ease),
+                        color 0.4s var(--ease),
+                        box-shadow 0.4s var(--ease);
+        }
+        .service-card:hover .service-icon {
+            background: linear-gradient(140deg, var(--primary), var(--accent));
+            border-color: transparent;
+            color: #fff;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 20px var(--ring);
+        }
+
+        /* ---- WHY — left accent bar that fills on hover ---- */
+        .why-item {
+            position: relative;
+            overflow: hidden;
+        }
+        .why-item::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.4s var(--ease-spring);
+        }
+        .why-item:hover::before { transform: scaleY(1); }
+        .why-item:hover {
+            transform: translateX(3px);
+            box-shadow: var(--shadow-md);
+        }
+        .why-item-icon { transition: transform 0.4s var(--ease-spring); }
+        .why-item:hover .why-item-icon { transform: scale(1.15); }
+
+        /* ---- PORTFOLIO — media zoom, distinct warmer lift ---- */
+        .project-img { transition: transform 0.6s var(--ease-spring); }
+        .project-card:hover { transform: translateY(-6px); }
+        .project-card:hover .project-img { transform: scale(1.05); }
+        .project-body h3 { transition: color 0.3s var(--ease); }
+        .project-card:hover .project-body h3 { color: var(--primary); }
+
+        /* ---- ABOUT hex tiles: gentler, springier ---- */
+        .about-hex:hover { transform: translateY(-3px) scale(1.06); }
+
+        /* ---- TESTIMONIALS — oversized quotation watermark ---- */
+        .testimonial-card { position: relative; overflow: hidden; }
+        .testimonial-card::after {
+            content: '\201C';
+            position: absolute;
+            top: -0.35em;
+            right: 0.12em;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 7rem;
+            line-height: 1;
+            color: var(--primary);
+            opacity: 0.06;
+            pointer-events: none;
+        }
+        .testimonial-card:hover { transform: translateY(-4px); }
+        .author-avatar { box-shadow: 0 4px 12px var(--ring); }
+
+        /* ---- FAQ — quiet lift + primary hairline on the active row ---- */
+        .faq-item:hover:not(.open) {
+            border-color: var(--accent-light);
+            box-shadow: var(--shadow-md);
+        }
+        .faq-item.open {
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ---- FORM fields: subtle focus lift ---- */
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            transition: border-color var(--duration) var(--ease),
+                        box-shadow var(--duration) var(--ease),
+                        transform var(--duration) var(--ease);
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            box-shadow: 0 0 0 3px var(--ring);
+        }
+
+        /* ---- Section eyebrow: cleaner, quieter chip ---- */
+        .section-eyebrow,
+        .hero-badge {
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        /* ---- Stats: let the big numbers breathe on wide screens ---- */
+        @media (min-width: 1025px) {
+            #hero { padding-top: 132px; }
+            .about, #about,
+            #services, #why, #portfolio,
+            #testimonials, #faq, #contact { }
+        }
+
+        /* ---- Floating buttons: springier, layered depth ---- */
+        #back-top,
+        .whatsapp-btn {
+            transition: transform 0.35s var(--ease-spring),
+                        box-shadow 0.35s var(--ease),
+                        opacity var(--duration) var(--ease),
+                        background var(--duration) var(--ease);
+        }
+        #back-top:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+        .whatsapp-btn:hover { transform: translateY(-3px) scale(1.06); }
+
+        /* ---- Founders block: keep the warm accent, refine the finish ---- */
+        .about-founders { border-radius: var(--radius); }
+
+        /* ---- Honor reduced-motion for all refinement transforms ---- */
+        @media (prefers-reduced-motion: reduce) {
+            .nav-links a:not(.nav-cta)::after,
+            .service-card::before,
+            .why-item::before { transition: none; }
+            .service-card:hover,
+            .project-card:hover,
+            .why-item:hover,
+            .testimonial-card:hover,
+            .about-hex:hover,
+            #back-top:hover,
+            .whatsapp-btn:hover { transform: none; }
+        }
+        /* ============================================================
+           EDITORIAL COMPOSITION LAYER  (desktop ≥1025px only)
+           Breaks the uniform grids into handcrafted, asymmetric
+           layouts so no two sections share the same rhythm.
+           Pure CSS grid spans — HTML, content and JS untouched.
+           Below 1025px, the site's original responsive rules govern.
+           ============================================================ */
+        @media (min-width: 1025px) {
+
+            /* ---- SERVICES → bento: one large feature + compact + mediums ---- */
+            #services { padding: 116px 0; }
+            .services-grid {
+                grid-template-columns: repeat(6, 1fr);
+                gap: 22px;
+                align-items: start;
+            }
+            /* Large horizontal feature card (icon left, content right) */
+            .service-card:nth-child(1) {
+                grid-column: span 4;
+                display: grid;
+                grid-template-columns: auto 1fr;
+                column-gap: 28px;
+                align-items: center;
+                background: linear-gradient(160deg,
+                            var(--bg-card) 0%,
+                            var(--bg-secondary) 140%);
+            }
+            .service-card:nth-child(1) .service-icon {
+                grid-row: 1 / span 3;
+                align-self: start;
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+                margin-bottom: 0;
+            }
+            .service-card:nth-child(1) h3 { font-size: 1.35rem; }
+            .service-card:nth-child(1) p { max-width: 42ch; }
+            /* Compact card + a row of three equal mediums */
+            .service-card:nth-child(2),
+            .service-card:nth-child(3),
+            .service-card:nth-child(4),
+            .service-card:nth-child(5) { grid-column: span 2; }
+            /* Closing pair of half-width cards */
+            .service-card:nth-child(6),
+            .service-card:nth-child(7) { grid-column: span 3; }
+
+            /* ---- PORTFOLIO → woven zigzag of wide feature tiles ---- */
+            #portfolio { padding: 116px 0; }
+            .portfolio-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 24px;
+                grid-auto-flow: row;
+                align-items: start;
+            }
+            /* c1=2,c2=1 | c3=1,c4=2 | c5=2,c6=1  → perfectly gapless */
+            .project-card:nth-child(1),
+            .project-card:nth-child(4),
+            .project-card:nth-child(5) { grid-column: span 2; }
+            /* Wide tiles get a taller, more cinematic media area */
+            .project-card:nth-child(1) .project-img,
+            .project-card:nth-child(4) .project-img,
+            .project-card:nth-child(5) .project-img {
+                height: 236px;
+                font-size: 3.6rem;
+            }
+
+            /* ---- Section headers: nudge the display scale up for air ---- */
+            .services-header,
+            .portfolio-header { margin-bottom: 60px; }
+            .services-header p,
+            .portfolio-header p { font-size: 1.05rem; }
+        }
     </style>
 </head>
-<body>
+<body class="intro-active">
+
+    <!-- =========================================================
+    OS INTRO OVERLAY (Three.js boot experience)
+    ========================================================= -->
+    <div id="os-intro">
+        <div id="boot-screen">
+            <div class="power-indicator"></div>
+            <div class="boot-label">Initializing Intelligence Core</div>
+        </div>
+        <div id="os-canvas"></div>
+    </div>
 
     <!-- LOADER -->
     <div id="loader" role="status" aria-label="Loading We Take Forward (WTF)">
@@ -1941,7 +2410,9 @@ body.dark-mode .founders-names{
         <div class="nav-inner">
             <a href="#hero" class="nav-logo" aria-label="We Take Forward (WTF) Home">
                <img src="{{ url_for('static', filename='images/logo.png') }}"
-     alt="We Take Forward Logo">
+     alt="We Take Forward Logo"
+     onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block';">
+               <span class="logo-fallback" style="display:none;">We Take <span class="highlight">Forward</span></span>
             </a>
             <ul class="nav-links">
               <li><a href="#about">About</a></li>
@@ -2180,6 +2651,12 @@ body.dark-mode .founders-names{
                     <p>Full-stack web applications with AI deeply integrated — smart search, content generation, user personalization, and more.</p>
                     <span class="service-tag">React · FastAPI · Cloud</span>
                 </article>
+                <article class="service-card reveal reveal-delay-5">
+                    <div class="service-icon" aria-hidden="true"><i class="fas fa-school"></i></div>
+                    <h3>School ERP</h3>
+                    <p>Complete school management software — admissions, attendance, fees, timetables, exams, and parent–teacher communication unified in one intelligent platform.</p>
+                    <span class="service-tag">Admissions · Fees · Attendance</span>
+                </article>
             </div>
         </div>
     </section>
@@ -2403,6 +2880,39 @@ body.dark-mode .founders-names{
                             </div>
                         </div>
                     </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                        <p class="testimonial-text">We Take Forward designed a complete school ERP app for us — admissions, attendance, fees, and results now live in one place. Our staff and parents adopted it within days. It has genuinely simplified how we run the school.</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar" style="background:var(--primary);" aria-hidden="true">JG</div>
+                            <div>
+                                <div class="author-name">Mr. Jitender Gupta</div>
+                                <div class="author-company">Manager, DPS(Dhumari)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                        <p class="testimonial-text">The ERP that We Take Forward built for our school handles everything from student records to fee collection effortlessly. It's reliable, easy to use, and their team supported us at every step of the rollout.</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar" style="background:var(--accent);" aria-hidden="true">LS</div>
+                            <div>
+                                <div class="author-name">Lokmandas School</div>
+                                <div class="author-company">Etah, Uttar Pradesh</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                        <p class="testimonial-text">The app We Take Forward built for our café made a real difference — digital menu, table orders, and billing all run smoothly now, and our staff picked it up instantly. Service is faster and our customers love it.</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar" style="background:var(--primary-light);" aria-hidden="true">SS</div>
+                            <div>
+                                <div class="author-name">SS Cafe</div>
+                                <div class="author-company">Dhumari</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="carousel-controls" aria-label="Testimonial navigation">
@@ -2410,6 +2920,7 @@ body.dark-mode .founders-names{
                 <button class="carousel-dot" aria-label="Go to testimonial 2" data-index="1"></button>
                 <button class="carousel-dot" aria-label="Go to testimonial 3" data-index="2"></button>
                 <button class="carousel-dot" aria-label="Go to testimonial 4" data-index="3"></button>
+                <button class="carousel-dot" aria-label="Go to testimonial 5" data-index="4"></button>
             </div>
         </div>
     </section>
@@ -2584,7 +3095,9 @@ body.dark-mode .founders-names{
                 <div class="footer-brand">
                     <a href="#hero" class="nav-logo">
                        <img src="{{ url_for('static', filename='images/logo.png') }}"
-                          alt="We Take Forward Logo">
+                          alt="We Take Forward Logo"
+                          onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block';">
+                       <span class="logo-fallback" style="display:none;font-size:1.05rem;">We Take <span class="highlight">Forward</span></span>
                     </a>
                     <p>Transforming Data into Intelligence. Building the future of AI solutions for forward-thinking businesses worldwide.</p>
                 <div class="footer-social">
@@ -2854,6 +3367,668 @@ themeToggle.addEventListener("click", () => {
 });
 </script>
 
+    <!-- =========================================================
+    THREE.JS – OS INTRO EXPERIENCE (module)
+    ========================================================= -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.163.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.163.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module">
+        // If WebGL / modules can't load for any reason, reveal the site immediately.
+        function revealSite() {
+            const intro = document.getElementById('os-intro');
+            if (!intro || intro.dataset.done === '1') return;
+            intro.dataset.done = '1';
+            intro.classList.add('done');
+            document.documentElement.classList.remove('intro-active');
+            document.body.classList.remove('intro-active');
+            const loader = document.getElementById('loader');
+            if (loader) loader.classList.add('hidden');
+            setTimeout(() => { intro.style.display = 'none'; }, 900);
+        }
+
+        try {
+            const THREE = await import('three');
+            const { EffectComposer } = await import('three/addons/postprocessing/EffectComposer.js');
+            const { RenderPass } = await import('three/addons/postprocessing/RenderPass.js');
+            const { UnrealBloomPass } = await import('three/addons/postprocessing/UnrealBloomPass.js');
+            const { OutputPass } = await import('three/addons/postprocessing/OutputPass.js');
+            const gsapModule = await import('https://cdn.esm.sh/gsap@3.12.5');
+            const gsap = gsapModule.default || gsapModule.gsap || gsapModule;
+
+            // =========================================================
+            // DOM REFS
+            // =========================================================
+            const container = document.getElementById('os-canvas');
+            const bootScreen = document.getElementById('boot-screen');
+
+            // =========================================================
+            // SCENE SETUP
+            // =========================================================
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x060810);
+
+            const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 60);
+            camera.position.set(0, 1.5, 10);
+            camera.lookAt(0, 0, 0);
+
+            const renderer = new THREE.WebGLRenderer({
+                antialias: true,
+                alpha: false,
+                powerPreference: 'high-performance'
+            });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.2;
+            renderer.outputColorSpace = THREE.SRGBColorSpace;
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            container.appendChild(renderer.domElement);
+
+            // =========================================================
+            // POST PROCESSING
+            // =========================================================
+            const composer = new EffectComposer(renderer);
+            const renderPass = new RenderPass(scene, camera);
+            composer.addPass(renderPass);
+
+            const bloomPass = new UnrealBloomPass(
+                new THREE.Vector2(window.innerWidth, window.innerHeight),
+                0.3, 0.1, 0.05
+            );
+            composer.addPass(bloomPass);
+
+            const outputPass = new OutputPass();
+            composer.addPass(outputPass);
+
+            // =========================================================
+            // LIGHTING
+            // =========================================================
+            const ambient = new THREE.AmbientLight(0x223355, 0.5);
+            scene.add(ambient);
+
+            const keyLight = new THREE.DirectionalLight(0xFFFFFF, 2.0);
+            keyLight.position.set(4, 6, 6);
+            keyLight.castShadow = true;
+            scene.add(keyLight);
+
+            const fillLight = new THREE.DirectionalLight(0x8899CC, 0.5);
+            fillLight.position.set(-3, 2, 4);
+            scene.add(fillLight);
+
+            const rimLight = new THREE.DirectionalLight(0xFFFFFF, 0.6);
+            rimLight.position.set(0, -4, -6);
+            scene.add(rimLight);
+
+            const pointLight = new THREE.PointLight(0x7C6DFF, 0.8, 12);
+            pointLight.position.set(0, 2, 3);
+            scene.add(pointLight);
+
+            // =========================================================
+            // ENVIRONMENT MAP
+            // =========================================================
+            const pmremGenerator = new THREE.PMREMGenerator(renderer);
+            pmremGenerator.compileEquirectangularShader();
+
+            const envScene = new THREE.Scene();
+            envScene.background = new THREE.Color(0x1a1a2e);
+            const envLight1 = new THREE.DirectionalLight(0x8888FF, 1);
+            envLight1.position.set(1, 1, 1);
+            envScene.add(envLight1);
+            const envLight2 = new THREE.DirectionalLight(0xFF8866, 0.5);
+            envLight2.position.set(-1, -0.5, 0.5);
+            envScene.add(envLight2);
+
+            const envRenderTarget = pmremGenerator.fromScene(envScene, 0, 0.1, 100);
+            const envMap = envRenderTarget.texture;
+
+            // =========================================================
+            // SUBTLE GRID FLOOR
+            // =========================================================
+            const gridHelper = new THREE.GridHelper(14, 14, 0x444466, 0x222244);
+            gridHelper.position.y = -1.2;
+            gridHelper.material.transparent = true;
+            gridHelper.material.opacity = 0.06;
+            scene.add(gridHelper);
+
+            // =========================================================
+            // WIDGET SYSTEM
+            // =========================================================
+            const widgetGroup = new THREE.Group();
+            scene.add(widgetGroup);
+
+            const widgetDefs = [
+                { label: 'AI Intelligence', icon: '🧠', color: '#7C6DFF', pos: [-4.2, 2.2, 0.8] },
+                { label: 'ERP Dashboard', icon: '📊', color: '#FF6B8A', pos: [4.2, 2.2, 0.8] },
+                { label: 'Automation', icon: '⚡', color: '#4FC3F7', pos: [-4.2, -0.8, 0.8] },
+                { label: 'Analytics', icon: '📈', color: '#81C784', pos: [4.2, -0.8, 0.8] },
+                { label: 'Cloud Core', icon: '☁️', color: '#FFB74D', pos: [-2.0, 3.6, 1.2] },
+                { label: 'Website Builder', icon: '🌐', color: '#4DD0E1', pos: [2.0, 3.6, 1.2] },
+                { label: 'Mobile Apps', icon: '📱', color: '#CE93D8', pos: [-2.0, -2.0, 1.2] },
+                { label: 'AI Assistant', icon: '🤖', color: '#90CAF9', pos: [2.0, -2.0, 1.2] },
+                { label: 'Projects', icon: '📋', color: '#FFAB91', pos: [-5.0, 0.2, 1.6] },
+                { label: 'Notifications', icon: '🔔', color: '#EF5350', pos: [5.0, 0.2, 1.6] },
+            ];
+
+            const widgets = [];
+
+            function createWidgetTexture(label, icon, color, index) {
+                const canvas = document.createElement('canvas');
+                canvas.width = 512;
+                canvas.height = 340;
+                const ctx = canvas.getContext('2d');
+
+                const grad = ctx.createRadialGradient(256, 170, 20, 256, 170, 300);
+                grad.addColorStop(0, 'rgba(255,255,255,0.02)');
+                grad.addColorStop(0.5, 'rgba(255,255,255,0.00)');
+                grad.addColorStop(1, 'rgba(255,255,255,0.01)');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                const colorObj = new THREE.Color(color);
+                const r = Math.floor(colorObj.r * 255);
+                const g = Math.floor(colorObj.g * 255);
+                const b = Math.floor(colorObj.b * 255);
+                ctx.shadowColor = `rgba(${r},${g},${b},0.05)`;
+                ctx.shadowBlur = 20;
+                ctx.strokeStyle = `rgba(${r},${g},${b},0.12)`;
+                ctx.lineWidth = 1.5;
+                ctx.strokeRect(16, 16, canvas.width - 32, canvas.height - 32);
+                ctx.shadowBlur = 0;
+
+                ctx.font = '48px "Segoe UI", "Apple Color Emoji", sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillStyle = `rgba(255,255,255,0.5)`;
+                ctx.fillText(icon, canvas.width / 2, canvas.height / 2 - 18);
+
+                ctx.font = '600 22px "Inter", "Space Grotesk", sans-serif';
+                ctx.fillStyle = `rgba(255,255,255,0.85)`;
+                ctx.textBaseline = 'bottom';
+                ctx.fillText(label, canvas.width / 2, canvas.height - 28);
+
+                ctx.strokeStyle = `rgba(${r},${g},${b},0.15)`;
+                ctx.lineWidth = 1.5;
+                const data = [];
+                for (let i = 0; i < 12; i++) {
+                    data.push(30 + Math.sin(i * 0.5 + index) * 25 + Math.random() * 15);
+                }
+                const chartX = 60,
+                    chartY = 210,
+                    chartW = canvas.width - 120,
+                    chartH = 50;
+                ctx.beginPath();
+                data.forEach((val, i) => {
+                    const x = chartX + (i / (data.length - 1)) * chartW;
+                    const y = chartY + chartH - (val / 100) * chartH;
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                });
+                ctx.stroke();
+
+                const lastX = chartX + chartW;
+                const lastY = chartY + chartH - (data[data.length - 1] / 100) * chartH;
+                ctx.lineTo(lastX, chartY + chartH);
+                ctx.lineTo(chartX, chartY + chartH);
+                ctx.closePath();
+                ctx.fillStyle = `rgba(${r},${g},${b},0.04)`;
+                ctx.fill();
+
+                data.forEach((val, i) => {
+                    const x = chartX + (i / (data.length - 1)) * chartW;
+                    const y = chartY + chartH - (val / 100) * chartH;
+                    ctx.beginPath();
+                    ctx.arc(x, y, 2, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${r},${g},${b},0.2)`;
+                    ctx.fill();
+                });
+
+                ctx.fillStyle = `rgba(${r},${g},${b},0.2)`;
+                ctx.beginPath();
+                ctx.arc(canvas.width - 32, 32, 4, 0, Math.PI * 2);
+                ctx.fill();
+
+                const texture = new THREE.CanvasTexture(canvas);
+                texture.colorSpace = THREE.SRGBColorSpace;
+                return texture;
+            }
+
+            widgetDefs.forEach((def, index) => {
+                const texture = createWidgetTexture(def.label, def.icon, def.color, index);
+
+                const material = new THREE.MeshPhysicalMaterial({
+                    map: texture,
+                    transparent: true,
+                    roughness: 0.05,
+                    metalness: 0.1,
+                    clearcoat: 0.6,
+                    clearcoatRoughness: 0.1,
+                    envMap: envMap,
+                    envMapIntensity: 0.8,
+                    side: THREE.DoubleSide,
+                    opacity: 0,
+                });
+
+                const geometry = new THREE.PlaneGeometry(2.0, 1.35);
+                const mesh = new THREE.Mesh(geometry, material);
+                mesh.position.set(def.pos[0], def.pos[1], def.pos[2]);
+                mesh.castShadow = true;
+                mesh.receiveShadow = true;
+
+                mesh.rotation.y = (Math.random() - 0.5) * 0.08;
+                mesh.rotation.x = (Math.random() - 0.5) * 0.04;
+
+                mesh.userData = {
+                    label: def.label,
+                    color: def.color,
+                    index: index,
+                    targetPos: new THREE.Vector3(def.pos[0], def.pos[1], def.pos[2]),
+                    targetRotY: mesh.rotation.y,
+                    targetRotX: mesh.rotation.x,
+                    originalPos: new THREE.Vector3(def.pos[0], def.pos[1], def.pos[2]),
+                    isExpanded: false,
+                    scaleTarget: 1,
+                };
+
+                const glowMat = new THREE.MeshBasicMaterial({
+                    color: def.color,
+                    transparent: true,
+                    opacity: 0.02,
+                    blending: THREE.AdditiveBlending,
+                    side: THREE.DoubleSide,
+                    depthWrite: false,
+                });
+                const glowMesh = new THREE.Mesh(
+                    new THREE.PlaneGeometry(2.2, 1.55),
+                    glowMat
+                );
+                glowMesh.position.set(def.pos[0], def.pos[1], def.pos[2] - 0.02);
+                glowMesh.rotation.copy(mesh.rotation);
+
+                widgetGroup.add(mesh);
+                widgetGroup.add(glowMesh);
+
+                widgets.push({
+                    mesh: mesh,
+                    glow: glowMesh,
+                    glowMat: glowMat,
+                    def: def,
+                    material: material,
+                });
+            });
+
+            // =========================================================
+            // MOUSE INTERACTION
+            // =========================================================
+            const mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+            let isInteracting = false;
+            let interactionStartTime = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouse.targetX = (e.clientX / window.innerWidth) * 2 - 1;
+                mouse.targetY = -(e.clientY / window.innerHeight) * 2 + 1;
+                if (!isInteracting) {
+                    isInteracting = true;
+                    interactionStartTime = Date.now();
+                }
+            });
+
+            document.addEventListener('touchmove', (e) => {
+                const touch = e.touches[0];
+                if (touch) {
+                    mouse.targetX = (touch.clientX / window.innerWidth) * 2 - 1;
+                    mouse.targetY = -(touch.clientY / window.innerHeight) * 2 + 1;
+                    if (!isInteracting) {
+                        isInteracting = true;
+                        interactionStartTime = Date.now();
+                    }
+                }
+            }, { passive: true });
+
+            // Click / tap to skip straight to the site
+            document.getElementById('os-intro').addEventListener('click', () => {
+                triggerMagic();
+                clearInterval(magicCheckInterval);
+            });
+
+            // =========================================================
+            // BOOT SEQUENCE
+            // =========================================================
+            function startOS() {
+                bootScreen.classList.add('hidden');
+
+                widgets.forEach((w, i) => {
+                    const delay = 0.2 + i * 0.04;
+                    gsap.to(w.material, {
+                        opacity: 0.85,
+                        duration: 0.6,
+                        ease: 'power2.out',
+                        delay: delay,
+                    });
+                    gsap.to(w.glowMat, {
+                        opacity: 0.04,
+                        duration: 0.6,
+                        ease: 'power2.out',
+                        delay: delay,
+                    });
+                    w.mesh.scale.set(0.92, 0.92, 0.92);
+                    gsap.to(w.mesh.scale, {
+                        x: 1,
+                        y: 1,
+                        z: 1,
+                        duration: 0.5,
+                        ease: 'back.out(1.6)',
+                        delay: delay + 0.1,
+                    });
+                });
+
+                gsap.to(camera.position, {
+                    x: 0.5,
+                    y: 1.8,
+                    z: 9.5,
+                    duration: 2.0,
+                    ease: 'power1.inOut',
+                    onUpdate: () => { camera.lookAt(0, 0, 0); }
+                }, 0.6);
+            }
+
+            // =========================================================
+            // THE MAGIC MOMENT
+            // =========================================================
+            let magicTriggered = false;
+
+            function triggerMagic() {
+                if (magicTriggered) return;
+                magicTriggered = true;
+
+                widgets.forEach((w) => {
+                    gsap.to(w.material, {
+                        opacity: 0.4,
+                        duration: 0.4,
+                        ease: 'power2.out',
+                    });
+                });
+
+                const letterPositions = [
+                    { char: 'W', x: -4.5, y: 0.6 },
+                    { char: 'E', x: -3.2, y: 0.6 },
+                    { char: 'T', x: -1.9, y: 0.6 },
+                    { char: 'A', x: -0.6, y: 0.6 },
+                    { char: 'K', x: 0.7, y: 0.6 },
+                    { char: 'E', x: 2.0, y: 0.6 },
+                    { char: 'F', x: 3.3, y: 0.6 },
+                    { char: 'W', x: 4.6, y: 0.6 },
+                    { char: 'D', x: 5.9, y: 0.6 },
+                ];
+
+                const usedWidgets = widgets.slice(0, 9);
+                usedWidgets.forEach((w, i) => {
+                    const pos = letterPositions[i];
+                    if (!pos) return;
+                    gsap.to(w.mesh.position, {
+                        x: pos.x,
+                        y: pos.y + 0.2,
+                        z: 0.2,
+                        duration: 0.8,
+                        ease: 'power2.inOut',
+                    });
+                    gsap.to(w.mesh.scale, {
+                        x: 1.15,
+                        y: 1.15,
+                        z: 1.15,
+                        duration: 0.6,
+                        ease: 'power2.out',
+                    });
+                    gsap.to(w.mesh.rotation, {
+                        y: 0,
+                        x: 0,
+                        duration: 0.6,
+                        ease: 'power2.out',
+                    });
+                    gsap.to(w.glow.position, {
+                        x: pos.x,
+                        y: pos.y + 0.2,
+                        z: 0.18,
+                        duration: 0.8,
+                        ease: 'power2.inOut',
+                    });
+                    gsap.to(w.glow.rotation, {
+                        y: 0,
+                        x: 0,
+                        duration: 0.6,
+                        ease: 'power2.out',
+                    });
+                    gsap.to(w.glowMat, {
+                        opacity: 0.12,
+                        duration: 0.5,
+                        ease: 'power2.out',
+                    });
+                });
+
+                const lastWidget = widgets[9];
+                if (lastWidget) {
+                    gsap.to(lastWidget.mesh.position, {
+                        x: 7.2,
+                        y: 0.6,
+                        z: 0.2,
+                        duration: 0.8,
+                        ease: 'power2.inOut',
+                    });
+                    gsap.to(lastWidget.glow.position, {
+                        x: 7.2,
+                        y: 0.6,
+                        z: 0.18,
+                        duration: 0.8,
+                        ease: 'power2.inOut',
+                    });
+                    gsap.to(lastWidget.material, {
+                        opacity: 0.2,
+                        duration: 0.5,
+                        ease: 'power2.out',
+                    });
+                }
+
+                // Update textures with letters
+                setTimeout(() => {
+                    usedWidgets.forEach((w, i) => {
+                        const pos = letterPositions[i];
+                        if (!pos) return;
+                        const canvas = document.createElement('canvas');
+                        canvas.width = 512;
+                        canvas.height = 340;
+                        const ctx = canvas.getContext('2d');
+
+                        const grad = ctx.createRadialGradient(256, 170, 20, 256, 170, 300);
+                        grad.addColorStop(0, 'rgba(255,255,255,0.02)');
+                        grad.addColorStop(1, 'rgba(255,255,255,0.00)');
+                        ctx.fillStyle = grad;
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                        ctx.strokeStyle = `rgba(255,255,255,0.06)`;
+                        ctx.lineWidth = 1.5;
+                        ctx.strokeRect(16, 16, canvas.width - 32, canvas.height - 32);
+
+                        ctx.font = '700 160px "Space Grotesk", "Inter", sans-serif';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillStyle = `rgba(255,255,255,0.9)`;
+                        ctx.shadowColor = `rgba(124,109,255,0.1)`;
+                        ctx.shadowBlur = 30;
+                        ctx.fillText(pos.char, canvas.width / 2, canvas.height / 2);
+                        ctx.shadowBlur = 0;
+
+                        const glowGrad = ctx.createRadialGradient(canvas.width / 2, canvas.height / 2, 20, canvas.width / 2,
+                            canvas.height / 2, 120);
+                        glowGrad.addColorStop(0, 'rgba(124,109,255,0.03)');
+                        glowGrad.addColorStop(1, 'rgba(124,109,255,0)');
+                        ctx.fillStyle = glowGrad;
+                        ctx.beginPath();
+                        ctx.arc(canvas.width / 2, canvas.height / 2, 120, 0, Math.PI * 2);
+                        ctx.fill();
+
+                        ctx.font = '14px "Inter", sans-serif';
+                        ctx.fillStyle = `rgba(255,255,255,0.2)`;
+                        ctx.textBaseline = 'bottom';
+                        ctx.fillText(w.def.label, canvas.width / 2, canvas.height - 20);
+
+                        const texture = new THREE.CanvasTexture(canvas);
+                        texture.colorSpace = THREE.SRGBColorSpace;
+                        w.material.map = texture;
+                        w.material.needsUpdate = true;
+                        w.material.opacity = 0.95;
+                    });
+                }, 800);
+
+                // Transition to hero
+                setTimeout(() => {
+                    widgets.forEach((w) => {
+                        gsap.to(w.material, {
+                            opacity: 0,
+                            duration: 0.6,
+                            ease: 'power2.out',
+                        });
+                        gsap.to(w.glowMat, {
+                            opacity: 0,
+                            duration: 0.6,
+                            ease: 'power2.out',
+                        });
+                    });
+
+                    gsap.to(gridHelper.material, {
+                        opacity: 0,
+                        duration: 0.5,
+                        ease: 'power2.out',
+                    });
+
+                    gsap.to(bloomPass, {
+                        strength: 0,
+                        duration: 0.6,
+                        ease: 'power2.out',
+                    });
+
+                    setTimeout(() => {
+                        gsap.to(renderer.domElement, {
+                            opacity: 0,
+                            duration: 0.8,
+                            ease: 'power2.out',
+                            onComplete: () => {
+                                renderer.domElement.style.display = 'none';
+                                revealSite();
+                            }
+                        });
+                    }, 400);
+
+                }, 1800);
+            }
+
+            // =========================================================
+            // CHECK FOR MAGIC TRIGGER
+            // =========================================================
+            let magicCheckInterval = setInterval(() => {
+                if (isInteracting && !magicTriggered) {
+                    const elapsed = (Date.now() - interactionStartTime) / 1000;
+                    if (elapsed > 1.8) {
+                        triggerMagic();
+                        clearInterval(magicCheckInterval);
+                    }
+                }
+            }, 200);
+
+            // Fallback: trigger after 3.5 seconds if there's no interaction
+            setTimeout(() => {
+                if (!magicTriggered) {
+                    triggerMagic();
+                    clearInterval(magicCheckInterval);
+                }
+            }, 3500);
+
+            // =========================================================
+            // RENDER LOOP
+            // =========================================================
+            const clock = new THREE.Clock();
+
+            function animate() {
+                requestAnimationFrame(animate);
+
+                const time = clock.getElapsedTime();
+
+                mouse.x += (mouse.targetX - mouse.x) * 0.06;
+                mouse.y += (mouse.targetY - mouse.y) * 0.06;
+
+                if (!magicTriggered) {
+                    const targetX = 0.3 + mouse.x * 0.15;
+                    const targetY = 1.5 + mouse.y * 0.1;
+                    camera.position.x += (targetX - camera.position.x) * 0.008;
+                    camera.position.y += (targetY - camera.position.y) * 0.008;
+                    camera.lookAt(0, 0, 0);
+                }
+
+                widgets.forEach((w, i) => {
+                    if (!magicTriggered) {
+                        const offset = i * 0.2;
+                        const floatY = Math.sin(time * 0.2 + offset) * 0.015;
+                        w.mesh.position.y += floatY * 0.01;
+                        w.glow.position.y += floatY * 0.01;
+
+                        const rotZ = Math.sin(time * 0.1 + offset) * 0.001;
+                        w.mesh.rotation.z += (rotZ - w.mesh.rotation.z) * 0.01;
+
+                        const tiltX = mouse.y * 0.02;
+                        const tiltY = mouse.x * 0.02;
+                        const targetRotX = w.mesh.userData.targetRotX + tiltX * 0.5;
+                        const targetRotY = w.mesh.userData.targetRotY + tiltY * 0.5;
+                        w.mesh.rotation.x += (targetRotX - w.mesh.rotation.x) * 0.02;
+                        w.mesh.rotation.y += (targetRotY - w.mesh.rotation.y) * 0.02;
+                        w.glow.rotation.copy(w.mesh.rotation);
+                    }
+                });
+
+                composer.render();
+            }
+
+            animate();
+
+            // =========================================================
+            // RESIZE
+            // =========================================================
+            window.addEventListener('resize', () => {
+                const w = window.innerWidth;
+                const h = window.innerHeight;
+                camera.aspect = w / h;
+                camera.updateProjectionMatrix();
+                renderer.setSize(w, h);
+                composer.setSize(w, h);
+                bloomPass.resolution.set(w, h);
+            });
+
+            // =========================================================
+            // START OS
+            // =========================================================
+            setTimeout(() => {
+                startOS();
+            }, 1000);
+
+            // Safety net: never leave the visitor stuck on the intro
+            setTimeout(revealSite, 9000);
+
+            window.addEventListener('beforeunload', () => {
+                renderer.dispose();
+            });
+
+            console.log('AI Operating System intro initialized.');
+        } catch (err) {
+            // WebGL unsupported or a CDN failed to load — skip straight to the site.
+            console.warn('Intro failed to load, revealing site directly:', err);
+            revealSite();
+        }
+    </script>
 
 </body>
 </html>
