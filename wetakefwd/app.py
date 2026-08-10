@@ -20,10 +20,7 @@ def sitemap():
 @app.route('/robots.txt')
 def robots():
     return send_from_directory('static', 'robots.txt')
-app.secret_key = "encode_ai_secret_key"
-
-EMAIL_ADDRESS = "wetakefwd@gmail.com"
-EMAIL_APP_PASSWORD = "kasg nzvj xnkw wbhg"
+app.secret_key = os.getenv("SECRET_KEY", "local-development-only-change-me")
 
 # ==========================
 # EMAIL FUNCTION

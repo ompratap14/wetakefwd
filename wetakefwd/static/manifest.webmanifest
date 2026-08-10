@@ -1,0 +1,18 @@
+{
+  "name": "We Take Forward",
+  "short_name": "WTF",
+  "description": "AI studio for automation, analytics, custom AI, and intelligent business systems.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0A0B10",
+  "theme_color": "#0A0B10",
+  "icons": [
+    {
+      "src": "/static/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
