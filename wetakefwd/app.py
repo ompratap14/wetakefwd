@@ -105,6 +105,11 @@ def contact():
     except Exception as e:
         print("EMAIL ERROR:", e)
 
+    return redirect("/success")
+
+
+@app.route("/success")
+def success():
     return render_template("success.html")
 
 

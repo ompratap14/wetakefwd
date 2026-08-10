@@ -132,7 +132,8 @@
         border-color:var(--line-soft);box-shadow:0 8px 30px rgba(11,12,17,.08);
     }
     .brand{display:flex;align-items:center;gap:11px}
-    .brand img{height:34px;width:auto}
+    .brand-logo{display:block;width:180px;height:44px;overflow:hidden;position:relative;flex-shrink:0}
+    .brand-logo img{position:absolute;top:-30px;left:-40px;height:106px;width:auto;max-width:none}
     .brand .mark{
         font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.12rem;letter-spacing:-.03em;color:var(--ink)}
     .brand .mark b{color:var(--accent)}
@@ -443,8 +444,8 @@
     <header class="nav" id="nav">
         <div class="nav-in">
             <a href="#top" class="brand" aria-label="We Take Forward home">
-                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="We Take Forward"
-                     onerror="this.style.display='none';this.nextElementSibling.style.display='inline';">
+                <span class="brand-logo"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="We Take Forward"
+                     onerror="this.parentElement.style.display='none';this.parentElement.nextElementSibling.style.display='inline';"></span>
                 <span class="mark" style="display:none">We Take <b>Forward</b></span>
             </a>
             <nav class="nav-links" aria-label="Primary">
@@ -519,8 +520,8 @@
         <!-- marquee -->
         <div class="marq" aria-hidden="true">
             <div class="marq-track">
-                <span>Delhi Public School<span></span></span><span>Lokmandas School<span></span></span><span>SS Cafe<span></span></span><span>AI Agents<span></span></span><span>Automation<span></span></span><span>Analytics<span></span></span><span>School ERP<span></span></span><span>RAG<span></span></span>
-                <span>Delhi Public School<span></span></span><span>Lokmandas School<span></span></span><span>SS Cafe<span></span></span><span>AI Agents<span></span></span><span>Automation<span></span></span><span>Analytics<span></span></span><span>School ERP<span></span></span><span>RAG<span></span></span>
+                <span>Dhumari Public School<span></span></span><span>Lokmandas School<span></span></span><span>SS Cafe<span></span></span><span>AI Agents<span></span></span><span>Automation<span></span></span><span>Analytics<span></span></span><span>School ERP<span></span></span><span>RAG<span></span></span>
+                <span>Dhumari Public School<span></span></span><span>Lokmandas School<span></span></span><span>SS Cafe<span></span></span><span>AI Agents<span></span></span><span>Automation<span></span></span><span>Analytics<span></span></span><span>School ERP<span></span></span><span>RAG<span></span></span>
             </div>
         </div>
     </section>
@@ -534,7 +535,7 @@
                     We Take Forward is an AI studio built on one idea: <b>raw data should move you ahead, not sit still.</b>
                     We help organizations automate workflows, sharpen decisions, and scale — turning information into intelligence that compounds.
                 </p>
-                <div class="about-founders rv d2"><span class="dot"></span><span>Founded by Om Pratap · Anshul · Utkarsh</span></div>
+                <div class="about-founders rv d2"><span class="dot"></span><span>Founded by Om Pratap · Anshul · Utkarsh · Vikas · Harsh</span></div>
             </div>
             <div class="principles rv d2">
                 <div class="principle"><h4><span class="ix">P1</span> Mission-driven</h4><p>Enterprise-grade AI, made accessible to every business regardless of size.</p></div>
@@ -669,7 +670,7 @@
                 <blockquote class="q lead rv">
                     <span class="mk">“</span>
                     <p>We Take Forward designed a complete school ERP app for us — admissions, attendance, fees, and results now live in one place. Our staff and parents adopted it within days. It has genuinely simplified how we run the school.</p>
-                    <div class="who"><div class="av">JG</div><div><div class="nm">Mr. Jitender Gupta</div><div class="co">Manager · Delhi Public School</div></div></div>
+                    <div class="who"><div class="av">JG</div><div><div class="nm">Mr. Jitender Gupta</div><div class="co">Manager · Dhumari Public School</div></div></div>
                 </blockquote>
                 <blockquote class="q rv d1">
                     <span class="stars">★★★★★</span><span class="mk">“</span>
