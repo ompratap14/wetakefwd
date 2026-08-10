@@ -132,8 +132,6 @@
         border-color:var(--line-soft);box-shadow:0 8px 30px rgba(11,12,17,.08);
     }
     .brand{display:flex;align-items:center;gap:11px}
-    .brand-logo{display:block;width:180px;height:44px;overflow:hidden;position:relative;flex-shrink:0}
-    .brand-logo img{position:absolute;top:-30px;left:-40px;height:106px;width:auto;max-width:none}
     .brand .mark{
         font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.12rem;letter-spacing:-.03em;color:var(--ink)}
     .brand .mark b{color:var(--accent)}
@@ -444,9 +442,7 @@
     <header class="nav" id="nav">
         <div class="nav-in">
             <a href="#top" class="brand" aria-label="We Take Forward home">
-                <span class="brand-logo"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="We Take Forward"
-                     onerror="this.parentElement.style.display='none';this.parentElement.nextElementSibling.style.display='inline';"></span>
-                <span class="mark" style="display:none">We Take <b>Forward</b></span>
+                <span class="mark">We Take <b>Forward</b></span>
             </a>
             <nav class="nav-links" aria-label="Primary">
                 <a href="#about">About</a>
