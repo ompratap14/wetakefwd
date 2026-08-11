@@ -253,6 +253,36 @@
     .svc.feat h3{font-size:1.7rem}
     .svc.feat{background:linear-gradient(180deg,var(--paper-2),transparent)}
 
+    #solution-finder{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden}
+    .finder-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;align-items:stretch}
+    .finder-copy{display:flex;flex-direction:column;justify-content:space-between;gap:28px;padding:8px 0}
+    .finder-copy .sec-title{max-width:11ch}
+    .finder-hint{border-left:2px solid var(--spark);padding-left:16px;color:var(--text-soft);font-size:.95rem;line-height:1.65;max-width:34ch}
+    .finder-console{background:var(--ink);border:1px solid var(--ink);border-radius:var(--r-lg);overflow:hidden;color:var(--on-dark);box-shadow:0 24px 70px rgba(11,12,17,.2)}
+    .finder-top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 18px;border-bottom:1px solid var(--on-dark-line)}
+    .finder-dots{display:flex;gap:7px}
+    .finder-dots span{width:9px;height:9px;border-radius:50%;background:var(--accent-2)}
+    .finder-dots span:first-child{background:var(--spark)}.finder-dots span:last-child{background:#5be0a8}
+    .finder-top code{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--on-dark-soft)}
+    .finder-body{display:grid;grid-template-columns:.9fr 1.1fr;gap:0;min-height:390px}
+    .finder-options{padding:20px;border-right:1px solid var(--on-dark-line);display:flex;flex-direction:column;gap:10px}
+    .finder-option{width:100%;display:flex;align-items:center;gap:12px;text-align:left;border:1px solid var(--on-dark-line);background:rgba(255,255,255,.035);color:var(--on-dark);border-radius:12px;padding:13px 14px;font:600 .86rem 'Inter',sans-serif;cursor:pointer;transition:background .25s var(--e),border-color .25s var(--e),transform .25s var(--e)}
+    .finder-option i{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:rgba(124,140,255,.16);color:var(--accent-2);flex-shrink:0}
+    .finder-option:hover,.finder-option.active{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.26);transform:translateX(4px)}
+    .finder-option.active i{background:var(--spark);color:#fff}
+    .finder-result{padding:24px;display:flex;flex-direction:column;justify-content:space-between;gap:24px}
+    .finder-label{font-family:'JetBrains Mono',monospace;font-size:.64rem;text-transform:uppercase;letter-spacing:.15em;color:var(--accent-2)}
+    .finder-result h3{font-family:'Bricolage Grotesque',sans-serif;font-size:1.75rem;line-height:1.05;letter-spacing:-.035em;color:#fff;margin:10px 0}
+    .finder-result p{color:var(--on-dark-soft);font-size:.94rem;line-height:1.62}
+    .finder-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+    .finder-pills span{border:1px solid var(--on-dark-line);border-radius:99px;padding:7px 10px;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--on-dark-soft)}
+    .finder-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .finder-step{background:rgba(255,255,255,.045);border:1px solid var(--on-dark-line);border-radius:12px;padding:12px}
+    .finder-step strong{display:block;font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;color:#fff}
+    .finder-step span{display:block;margin-top:4px;font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--on-dark-soft);text-transform:uppercase;letter-spacing:.1em}
+    .finder-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+    .finder-mini{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--on-dark-soft)}
+
     #work{background:var(--ink);color:var(--on-dark);border-top:1px solid var(--ink)}
     #work .sec-title{color:#fff}
     #work .sec-note{color:var(--on-dark-soft)}
@@ -378,6 +408,8 @@
         .hero-grid{grid-template-columns:1fr;gap:44px}
         .signal{order:-1;max-width:520px}
         .about-grid{grid-template-columns:1fr;gap:40px}
+        .finder-grid,.finder-body{grid-template-columns:1fr}
+        .finder-options{border-right:0;border-bottom:1px solid var(--on-dark-line)}
         .work-grid{grid-template-columns:1fr}
         .contact-grid{grid-template-columns:1fr;gap:40px}
         .foot-top{grid-template-columns:1fr 1fr}
@@ -397,6 +429,7 @@
         #hero{padding:120px 0 50px}
         .quotes{grid-template-columns:1fr}
         .q.lead{grid-column:span 1}
+        .finder-steps{grid-template-columns:1fr}
         .frow{grid-template-columns:1fr}
         .foot-top{grid-template-columns:1fr}
         .stats-grid{grid-template-columns:1fr 1fr}
@@ -579,6 +612,56 @@
                     <div><div class="d">Complete school management — admissions, attendance, fees, timetables, exams, and parent–teacher comms in one platform.</div><div class="tags">Admissions · Fees · Attendance</div></div>
                     <a href="#contact" class="go" aria-label="School ERP"><i class="fas fa-arrow-right"></i></a>
                 </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================= SOLUTION FINDER ============================= -->
+    <section id="solution-finder" class="sec">
+        <div class="wrap finder-grid">
+            <div class="finder-copy">
+                <div>
+                    <span class="kicker rv">// smart match</span>
+                    <h2 class="sec-title rv d1">Find your <em>AI fit</em></h2>
+                </div>
+                <p class="finder-hint rv d2">Pick the problem closest to your business. The page will recommend a service, timeline, and first build step instantly.</p>
+            </div>
+
+            <div class="finder-console rv d1" aria-label="AI solution finder">
+                <div class="finder-top">
+                    <div class="finder-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                    <code>solution_finder.exe</code>
+                </div>
+                <div class="finder-body">
+                    <div class="finder-options" role="tablist" aria-label="Business goals">
+                        <button type="button" class="finder-option active" data-solution="support" role="tab" aria-selected="true"><i class="fas fa-headset"></i><span>Handle customer questions</span></button>
+                        <button type="button" class="finder-option" data-solution="leads" role="tab" aria-selected="false"><i class="fas fa-bullseye"></i><span>Get more qualified leads</span></button>
+                        <button type="button" class="finder-option" data-solution="school" role="tab" aria-selected="false"><i class="fas fa-school"></i><span>Manage a school better</span></button>
+                        <button type="button" class="finder-option" data-solution="data" role="tab" aria-selected="false"><i class="fas fa-chart-line"></i><span>Understand business data</span></button>
+                    </div>
+
+                    <div class="finder-result" aria-live="polite">
+                        <div>
+                            <div class="finder-label" id="finderLabel">Recommended build</div>
+                            <h3 id="finderTitle">AI Support Chatbot</h3>
+                            <p id="finderText">A smart support assistant for FAQs, lead capture, service questions, WhatsApp handoff, and basic customer guidance without adding extra workload.</p>
+                            <div class="finder-pills" id="finderPills">
+                                <span>No API option</span><span>WhatsApp handoff</span><span>1-2 weeks</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="finder-steps">
+                                <div class="finder-step"><strong id="finderStepOne">Map FAQs</strong><span>Step 01</span></div>
+                                <div class="finder-step"><strong id="finderStepTwo">Build flow</strong><span>Step 02</span></div>
+                                <div class="finder-step"><strong id="finderStepThree">Launch bot</strong><span>Step 03</span></div>
+                            </div>
+                            <div class="finder-actions">
+                                <a href="#contact" class="btn accent" id="finderCta">Start this project <span class="arw">→</span></a>
+                                <span class="finder-mini" id="finderMini">Best for service websites and small businesses.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -865,6 +948,25 @@
     const totop=document.getElementById('totop');
     addEventListener('scroll',()=>totop.classList.toggle('show',scrollY>600),{passive:true});
     totop.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+
+    // Solution finder
+    const solutionData={
+        support:{service:'AI Chatbots',title:'AI Support Chatbot',text:'A smart support assistant for FAQs, lead capture, service questions, WhatsApp handoff, and basic customer guidance without adding extra workload.',pills:['No API option','WhatsApp handoff','1-2 weeks'],steps:['Map FAQs','Build flow','Launch bot'],mini:'Best for service websites and small businesses.'},
+        leads:{service:'Business Automation',title:'Lead Generation Agent',text:'An automated system that captures inquiries, qualifies prospects, sends follow-ups, and keeps your sales pipeline moving even when your team is offline.',pills:['Lead capture','Auto follow-up','2-4 weeks'],steps:['Define leads','Connect tools','Track results'],mini:'Best for agencies, local services, and sales teams.'},
+        school:{service:'School ERP',title:'School ERP Platform',text:'A central school system for admissions, attendance, fees, exams, parent updates, staff records, and daily operations in one clean dashboard.',pills:['Attendance','Fees','4-8 weeks'],steps:['Map modules','Build portal','Train staff'],mini:'Best for schools that want fewer registers and faster admin work.'},
+        data:{service:'Data Analytics',title:'AI Analytics Dashboard',text:'A real-time dashboard that turns business data into clear metrics, alerts, forecasts, and decisions your team can act on quickly.',pills:['Reports','Forecasting','3-6 weeks'],steps:['Clean data','Build views','Add insights'],mini:'Best for teams with spreadsheets, sales data, or operational reports.'}
+    };
+    const finderTitle=document.getElementById('finderTitle'), finderText=document.getElementById('finderText'), finderPills=document.getElementById('finderPills'), finderStepOne=document.getElementById('finderStepOne'), finderStepTwo=document.getElementById('finderStepTwo'), finderStepThree=document.getElementById('finderStepThree'), finderMini=document.getElementById('finderMini'), finderCta=document.getElementById('finderCta'), contactService=document.getElementById('contact-service'), contactMessage=document.getElementById('contact-message');
+    document.querySelectorAll('.finder-option').forEach(button=>button.addEventListener('click',()=>{
+        const data=solutionData[button.dataset.solution]; if(!data)return;
+        document.querySelectorAll('.finder-option').forEach(option=>{option.classList.toggle('active',option===button);option.setAttribute('aria-selected',option===button)});
+        finderTitle.textContent=data.title; finderText.textContent=data.text; finderMini.textContent=data.mini;
+        finderPills.innerHTML=data.pills.map(pill=>`<span>${pill}</span>`).join('');
+        [finderStepOne.textContent,finderStepTwo.textContent,finderStepThree.textContent]=data.steps;
+        finderCta.setAttribute('aria-label',`Start ${data.title}`);
+        contactService.value=data.service;
+        if(!contactMessage.value.trim()) contactMessage.placeholder=`I am interested in ${data.title}. Please share timeline and pricing.`;
+    }));
 
     // Support chat
     const supportChat=document.querySelector('.support-chat'), supportPanel=document.getElementById('supportPanel'), supportToggle=document.getElementById('supportToggle'), supportClose=document.getElementById('supportClose'), supportMessages=document.getElementById('supportMessages'), supportForm=document.getElementById('supportForm'), supportInput=document.getElementById('supportInput');
