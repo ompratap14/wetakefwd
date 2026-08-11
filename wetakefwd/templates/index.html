@@ -787,6 +787,48 @@
 
     <button id="totop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 
+    <!-- ============================= SUPPORT CHAT ============================= -->
+    <section class="support-chat" aria-label="Website support chat">
+        <div class="support-panel" id="supportPanel" aria-hidden="true">
+            <div class="support-head">
+                <div><span class="support-status"></span><strong>Forward Support</strong><small>Usually replies instantly</small></div>
+                <button type="button" id="supportClose" aria-label="Close support chat"><i class="fas fa-xmark"></i></button>
+            </div>
+            <div class="support-messages" id="supportMessages" aria-live="polite">
+                <div class="support-message bot">Hi! I’m the We Take Forward support assistant. Ask about our AI services, project timelines, pricing, or support.</div>
+            </div>
+            <div class="support-actions">
+                <button type="button" data-question="What services do you offer?">Services</button>
+                <button type="button" data-question="How long does a project take?">Timeline</button>
+                <button type="button" data-question="How does pricing work?">Pricing</button>
+            </div>
+            <form id="supportForm" class="support-form">
+                <label class="sr-only" for="supportInput">Ask a question</label>
+                <input id="supportInput" maxlength="1000" placeholder="Ask a question…" autocomplete="off" required />
+                <button type="submit" aria-label="Send question"><i class="fas fa-arrow-up"></i></button>
+            </form>
+            <a class="support-whatsapp" href="https://wa.me/918191904121" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Prefer WhatsApp? Chat with us</a>
+        </div>
+        <button type="button" id="supportToggle" class="support-toggle" aria-expanded="false" aria-controls="supportPanel" aria-label="Open chatbot"><i class="fas fa-robot"></i><span>Chat with bot</span></button>
+    </section>
+
+    <style>
+    .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .support-chat{position:fixed;right:22px;bottom:22px;z-index:950}
+.support-toggle{position:relative;display:flex;align-items:center;gap:9px;border:0;border-radius:99px;background:linear-gradient(135deg,#ff3d00,#ffb000);color:#fff;padding:14px 19px;font:600 .85rem 'Inter',sans-serif;cursor:pointer;box-shadow:0 12px 30px rgba(255,61,0,.48);animation:chatFloat 3.2s ease-in-out infinite;transition:transform .25s var(--e),background .25s var(--e),box-shadow .25s var(--e)}
+.support-toggle::before{content:"";position:absolute;inset:-5px;border:1px solid rgba(255,176,0,.64);border-radius:99px;animation:chatPulse 2.4s ease-out infinite;pointer-events:none}
+.support-toggle:hover{background:linear-gradient(135deg,#e63500,#ff8a00);transform:translateY(-3px);box-shadow:0 17px 34px rgba(255,61,0,.58);animation-play-state:paused}
+    @keyframes chatFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+    @keyframes chatPulse{0%{opacity:.7;transform:scale(.92)}70%,100%{opacity:0;transform:scale(1.16)}}
+    .support-panel{position:absolute;right:0;bottom:64px;width:min(370px,calc(100vw - 32px));background:var(--paper-2);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 22px 65px rgba(11,12,17,.25);opacity:0;visibility:hidden;transform:translateY(12px) scale(.98);transform-origin:bottom right;transition:.25s var(--e)}
+    .support-chat.open .support-panel{opacity:1;visibility:visible;transform:none}
+    .support-head{background:var(--ink);color:var(--on-dark);padding:17px 18px;display:flex;justify-content:space-between;align-items:flex-start}.support-head>div{display:grid;grid-template-columns:10px 1fr;column-gap:9px}.support-head strong{font-size:.92rem}.support-head small{grid-column:2;color:var(--on-dark-soft);font-size:.72rem}.support-status{width:8px;height:8px;margin-top:5px;border-radius:50%;background:#5be0a8;box-shadow:0 0 10px #5be0a8}.support-head button{background:transparent;border:0;color:var(--on-dark);font-size:1.15rem;cursor:pointer;padding:0 2px}
+    .support-messages{height:265px;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}.support-message{max-width:88%;padding:10px 12px;border-radius:12px;font-size:.82rem;line-height:1.5;white-space:pre-wrap}.support-message.bot{align-self:flex-start;background:var(--paper-3);color:var(--text)}.support-message.user{align-self:flex-end;background:var(--accent);color:#fff}.support-message.loading{color:var(--text-soft);font-style:italic}
+    .support-actions{display:flex;gap:7px;padding:0 14px 12px;overflow-x:auto}.support-actions button{white-space:nowrap;border:1px solid var(--line);border-radius:99px;background:transparent;color:var(--text-soft);padding:6px 10px;font:500 .7rem 'Inter',sans-serif;cursor:pointer}.support-actions button:hover{border-color:var(--accent);color:var(--accent)}
+    .support-form{border-top:1px solid var(--line);padding:11px;display:flex;gap:8px}.support-form input{min-width:0;flex:1;border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px 11px;font:400 .82rem 'Inter',sans-serif;color:var(--text)}.support-form button{width:39px;border:0;border-radius:10px;background:var(--accent);color:#fff;cursor:pointer}.support-form button:disabled{opacity:.55;cursor:wait}.support-whatsapp{display:block;text-align:center;padding:0 12px 13px;color:#178d52;font-size:.75rem;font-weight:600}.support-whatsapp i{margin-right:5px}
+    @media(max-width:560px){.support-chat{right:16px;bottom:16px}.support-toggle span{display:none}.support-toggle{width:52px;height:52px;justify-content:center;padding:0}.support-panel{bottom:62px}}
+    </style>
+
     <!-- ============================= SCRIPTS ============================= -->
     <script>
     /* ---- year, nav, mobile, reveal, counters, faq, back-to-top ---- */
@@ -823,6 +865,23 @@
     const totop=document.getElementById('totop');
     addEventListener('scroll',()=>totop.classList.toggle('show',scrollY>600),{passive:true});
     totop.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+
+    // Support chat
+    const supportChat=document.querySelector('.support-chat'), supportPanel=document.getElementById('supportPanel'), supportToggle=document.getElementById('supportToggle'), supportClose=document.getElementById('supportClose'), supportMessages=document.getElementById('supportMessages'), supportForm=document.getElementById('supportForm'), supportInput=document.getElementById('supportInput');
+    function setSupportOpen(open){supportChat.classList.toggle('open',open);supportPanel.setAttribute('aria-hidden',!open);supportToggle.setAttribute('aria-expanded',open);if(open)setTimeout(()=>supportInput.focus(),180)}
+    function addSupportMessage(text,kind){const el=document.createElement('div');el.className=`support-message ${kind}`;el.textContent=text;supportMessages.appendChild(el);supportMessages.scrollTop=supportMessages.scrollHeight;return el}
+    function localSupportReply(message){const q=message.toLowerCase();const answers=[
+        [['service','offer','do you do','what do you','help with'],'We Take Forward builds AI agents, business automation, AI chatbots, data analytics, custom AI solutions, AI-powered web apps, and school ERP systems.'],
+        [['price','pricing','cost','budget','charge','quote'],'Our pricing depends on the project scope. We offer project-based pricing, monthly retainers, and milestone-based billing. Share your requirements through the contact form or WhatsApp for a tailored quote.'],
+        [['time','timeline','long','duration','deliver'],'Simple chatbots and automation flows usually take 1–2 weeks. Complex AI agents or full-stack apps generally take 4–8 weeks. We confirm a precise timeline after a scoping discussion.'],
+        [['support','maintenance','after launch','post launch'],'Every project includes 30 days of post-launch support at no extra cost. We also offer flexible monthly retainers for monitoring, fine-tuning, and new features.'],
+        [['secure','security','data','privacy','nda'],'Client data is encrypted in transit and at rest. We can sign an NDA before work begins and do not use client data to train models without explicit written consent.'],
+        [['integrate','integration','existing','crm','erp','software'],'Yes. We can integrate AI into your existing CRM, ERP, or web application through APIs and connectors that fit your current setup.'],
+        [['contact','email','phone','whatsapp','talk','reach'],'You can reach us at wetakefwd@gmail.com, call +91 8191904121, or chat on WhatsApp: https://wa.me/918191904121'],
+        [['hello','hi','hey'],'Hi! I can help with our services, timelines, pricing, support, data security, integrations, and contact details.']
+    ];const match=answers.find(([keywords])=>keywords.some(keyword=>q.includes(keyword)));return match?match[1]:'I can help with services, pricing, project timelines, support, security, integrations, and contact details. For a specific project question, please message us on WhatsApp: https://wa.me/918191904121'}
+    function askSupport(question){const text=question.trim();if(!text)return;addSupportMessage(text,'user');supportInput.value='';supportInput.disabled=true;const loading=addSupportMessage('Thinking…','bot loading');setTimeout(()=>{loading.remove();addSupportMessage(localSupportReply(text),'bot');supportInput.disabled=false;supportInput.focus()},250)}
+    supportToggle.addEventListener('click',()=>setSupportOpen(!supportChat.classList.contains('open')));supportClose.addEventListener('click',()=>setSupportOpen(false));supportForm.addEventListener('submit',e=>{e.preventDefault();askSupport(supportInput.value)});document.querySelectorAll('[data-question]').forEach(button=>button.addEventListener('click',()=>askSupport(button.dataset.question)));
     </script>
 
     <!-- Three.js import map -->

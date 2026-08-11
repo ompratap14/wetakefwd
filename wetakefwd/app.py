@@ -1,9 +1,9 @@
 import sqlite3
 import smtplib
 from email.mime.text import MIMEText
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, jsonify
 import os
-import requests
+import time
 from flask import send_from_directory
 
 
@@ -21,6 +21,54 @@ def sitemap():
 def robots():
     return send_from_directory('static', 'robots.txt')
 app.secret_key = os.getenv("SECRET_KEY", "local-development-only-change-me")
+
+CHAT_RATE_LIMIT = {}
+
+def local_support_reply(message):
+    """A no-cost, keyword-based support assistant for common visitor questions."""
+    question = message.lower()
+    answers = [
+        (("service", "offer", "do you do", "what do you", "help with"),
+         "We Take Forward builds AI agents, business automation, AI chatbots, data analytics, custom AI solutions, AI-powered web apps, and school ERP systems."),
+        (("price", "pricing", "cost", "budget", "charge", "quote"),
+         "Our pricing depends on the project scope. We offer project-based pricing, monthly retainers, and milestone-based billing. Share your requirements through the contact form or WhatsApp for a tailored quote."),
+        (("time", "timeline", "long", "duration", "deliver"),
+         "Simple chatbots and automation flows usually take 1–2 weeks. Complex AI agents or full-stack apps generally take 4–8 weeks. We confirm a precise timeline after a scoping discussion."),
+        (("support", "maintenance", "after launch", "post launch"),
+         "Every project includes 30 days of post-launch support at no extra cost. We also offer flexible monthly retainers for monitoring, fine-tuning, and new features."),
+        (("secure", "security", "data", "privacy", "nda"),
+         "Client data is encrypted in transit and at rest. We can sign an NDA before work begins and do not use client data to train models without explicit written consent."),
+        (("integrate", "integration", "existing", "crm", "erp", "software"),
+         "Yes. We can integrate AI into your existing CRM, ERP, or web application through APIs and connectors that fit your current setup."),
+        (("contact", "email", "phone", "whatsapp", "talk", "reach"),
+         "You can reach us at wetakefwd@gmail.com, call +91 8191904121, or chat on WhatsApp: https://wa.me/918191904121"),
+        (("hello", "hi", "hey"),
+         "Hi! I can help with our services, timelines, pricing, support, data security, integrations, and contact details."),
+    ]
+    for keywords, answer in answers:
+        if any(keyword in question for keyword in keywords):
+            return answer
+    return "I can help with services, pricing, project timelines, support, security, integrations, and contact details. For a specific project question, please message us on WhatsApp: https://wa.me/918191904121"
+
+
+@app.route("/api/support-chat", methods=["POST"])
+def support_chat():
+    data = request.get_json(silent=True) or {}
+    message = data.get("message", "").strip()
+
+    if not message or len(message) > 1000:
+        return jsonify(error="Please enter a question of up to 1,000 characters."), 400
+
+    # A small per-IP limit protects the public endpoint from accidental or abusive use.
+    client_ip = request.headers.get("X-Forwarded-For", request.remote_addr).split(",")[0].strip()
+    now = time.time()
+    recent = [stamp for stamp in CHAT_RATE_LIMIT.get(client_ip, []) if now - stamp < 60]
+    if len(recent) >= 10:
+        return jsonify(error="Please wait a minute before sending more questions."), 429
+    recent.append(now)
+    CHAT_RATE_LIMIT[client_ip] = recent
+
+    return jsonify(answer=local_support_reply(message))
 
 # ==========================
 # EMAIL FUNCTION
