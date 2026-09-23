@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>we take forward(wtf) Admin Dashboard</title>
+    <title>WeTakeFWD Lead Dashboard</title>
+    <meta name="robots" content="noindex,nofollow">
 
     <style>
         body{
-            background:#050816;
+            background:#11131b;
             color:white;
             font-family:Arial,sans-serif;
             padding:30px;
@@ -29,7 +30,7 @@
         }
 
         th{
-            background:#7c3aed;
+            background:#2647ff;
         }
 
         tr:nth-child(even){
@@ -43,7 +44,8 @@
 </head>
 <body>
 
-<h1>🚀 we take forward(wtf) Lead Dashboard</h1>
+<h1>WeTakeFWD Lead Dashboard</h1>
+<p><a href="/logout" style="color:#aebaff">Log out</a></p>
 
 <table>
 
@@ -70,6 +72,7 @@
       method="POST"
       style="display:inline;"
       onsubmit="return confirm('Delete this lead?');">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
 
     <button type="submit"
         style="

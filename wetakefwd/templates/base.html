@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="CXXuRvBb4bJCw89ys9N3htZO2YMjT73-PeIGxL4zHOQ">
+  <meta name="theme-color" content="#eeece6">
+  <meta name="robots" content="{% block robots %}index,follow,max-image-preview:large{% endblock %}">
+  <title>{% block title %}{% endblock %}</title>
+  <meta name="description" content="{% block description %}{% endblock %}">
+  <link rel="canonical" href="{% block canonical %}{% endblock %}">
+  <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/redesign.css') }}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="WeTakeFWD">
+  <meta property="og:title" content="{{ self.title()|striptags|trim }}">
+  <meta property="og:description" content="{{ self.description()|striptags|trim }}">
+  <meta property="og:url" content="{{ self.canonical()|striptags|trim }}">
+  <meta property="og:image" content="{{ site_url }}/static/images/logo.png">
+  <meta property="og:locale" content="en_IN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ self.title()|striptags|trim }}">
+  <meta name="twitter:description" content="{{ self.description()|striptags|trim }}">
+  <meta name="twitter:image" content="{{ site_url }}/static/images/logo.png">
+  {% block schema %}{% endblock %}
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="container header-inner"><a class="brand" href="{{ url_for('home') }}" aria-label="WeTakeFWD home"><span class="brand-symbol" aria-hidden="true">»</span><span>WeTake<span>FWD</span></span></a><nav id="primary-nav" class="nav-links" aria-label="Primary navigation"><a href="{{ url_for('services_index') }}">Services</a><a href="{{ url_for('home') }}#approach">Approach</a><a href="{{ url_for('home') }}#work">Work</a><a href="{{ url_for('home') }}#faq">FAQ</a><a class="nav-cta" href="{{ url_for('home') }}#contact">Let’s talk <span aria-hidden="true">↗</span></a></nav><button class="menu-button" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu"><span></span><span></span></button></div></header>
+  <main id="main">{% block content %}{% endblock %}</main>
+  <footer class="site-footer"><div class="container"><div class="footer-top"><div><a class="brand footer-brand" href="{{ url_for('home') }}"><span class="brand-symbol" aria-hidden="true">»</span><span>WeTake<span>FWD</span></span></a><p>Build. Automate. Grow.</p></div><div class="footer-nav"><a href="{{ url_for('services_index') }}">Services</a><a href="{{ url_for('home') }}#approach">Approach</a><a href="{{ url_for('home') }}#faq">FAQ</a><a href="{{ url_for('home') }}#contact">Contact</a></div><div class="footer-contact"><a href="mailto:wetakefwd@gmail.com">wetakefwd@gmail.com</a><a href="tel:+918191904121">+91 81919 04121</a><span>Serving businesses across India</span></div></div><div class="footer-bottom"><span>© {{ current_year }} WeTakeFWD</span><span>AI Automation &amp; Digital Growth Agency</span><div><a href="https://www.linkedin.com/company/wetakefwd-369/" rel="noopener noreferrer">LinkedIn</a><a href="https://www.instagram.com/weta_kefwd" rel="noopener noreferrer">Instagram</a></div></div></div></footer>
+  <script src="{{ url_for('static', filename='js/redesign.js') }}" defer></script>
+</body>
+</html>
