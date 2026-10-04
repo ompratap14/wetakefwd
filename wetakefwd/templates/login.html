@@ -3,6 +3,7 @@
 <head>
 <title>We Take Forward (WTF) Login</title>
 <meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body{
 background:#11131b;
@@ -22,6 +23,7 @@ width:300px;
 }
 
 input{
+box-sizing:border-box;
 width:100%;
 padding:10px;
 margin:10px 0;
@@ -42,12 +44,20 @@ border:none;
 
 <h2>We Take Forward (WTF) Admin</h2>
 
+{% if unavailable %}
+<p role="status">Admin sign-in is temporarily unavailable. The site owner needs to complete the server configuration.</p>
+<a href="/" style="color:#aebaff">Back to website</a>
+{% else %}
+{% if error %}<p role="alert">{{ error }}</p>{% endif %}
+<label for="username">Username</label>
 <input type="text"
+id="username" autocomplete="username"
 name="username"
 placeholder="Username"
 required>
 
-<input type="password"
+<label for="password">Password</label>
+<input type="password" id="password" autocomplete="current-password"
 name="password"
 placeholder="Password"
 required>
@@ -55,6 +65,7 @@ required>
 <button type="submit">
 Login
 </button>
+{% endif %}
 
 </form>
 

@@ -39,3 +39,30 @@ The admin area is disabled until `ADMIN_USERNAME` and `ADMIN_PASSWORD_HASH` are 
 - Earn relevant mentions and links from real partners, directories and publications.
 
 The site does not promise search rankings or AI answer engine placement. Visibility depends on site quality, indexation, competition and third-party signals over time.
+
+## Verification
+
+Run `python -m unittest discover -s wetakefwd -p test_app.py -v` from the repository root. Tests use temporary databases and mocked email requests; they never email real enquiries. Coverage includes all service pages, old database upgrades, email failures, validation and protected admin access.
+
+## Render Free deployment
+
+Keep the current Free instance plan. It sleeps after 15 idle minutes, so the first visitor can see a startup screen. Application code cannot remove this hosting delay.
+
+Use `RESEND_API_KEY` for HTTPS email delivery. Render Free blocks SMTP ports, so `GMAIL_APP_PASSWORD` alone will not work there. Set a stable random `SECRET_KEY`, `FLASK_ENV=production`, and optionally `ADMIN_USERNAME` plus `ADMIN_PASSWORD_HASH` in the Render environment settings. The example file contains no working credentials.
+
+Render Free local files are ephemeral: SQLite enquiries can disappear on restart, redeploy or spin-down. Back up existing enquiries before deploying. Persistent enquiry storage requires an external database or a paid instance with a persistent disk; this patch does not provision either. Email API acceptance is not proof of inbox delivery: verify a controlled enquiry reaches the intended inbox after deployment.
+
+The application automatically adds the missing `created_at` column to older lead databases without deleting existing rows. Existing rows retain an unknown (NULL) creation date.
+
+Hosting reference: https://render.com/docs/free
+
+## Restore admin access
+
+A missing admin username, password hash, or stable session secret now shows a 503 unavailable page instead of a misleading 404. No login is permitted until configuration is complete.
+
+1. Run `python admin_setup.py` from the `wetakefwd` folder in a private terminal. Choose your own username and password; input is hidden for the password.
+2. In the existing Render service's Environment settings, set `ADMIN_USERNAME` and `ADMIN_PASSWORD_HASH` to the generated values. Set `SECRET_KEY` only if missing; preserve an existing secret. Set `FLASK_ENV=production` for HTTPS session cookies.
+3. Save the environment and deploy the updated application, after backing up any enquiries stored on ephemeral storage.
+4. Visit `/login`, sign in and confirm your labelled test enquiry appears in `/admin`. Logging out must prevent further dashboard access.
+
+Never use the old source-code password. The helper does not modify the server or store your password in a file.

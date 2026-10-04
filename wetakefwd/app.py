@@ -3,6 +3,7 @@ import re
 import secrets
 import smtplib
 import sqlite3
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from email.message import EmailMessage
 from pathlib import Path
@@ -47,11 +48,22 @@ SERVICE_BY_SLUG = {service["slug"]: service for service in SERVICES}
 FEATURED_SLUGS = ["ai-business-automation", "ai-agents-chatbots", "whatsapp-crm-automation", "lead-generation", "website-app-development", "meta-google-ads"]
 
 
+@contextmanager
 def db_connection():
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)
     connection = sqlite3.connect(DB_PATH)
-    connection.execute("CREATE TABLE IF NOT EXISTS leads (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, email TEXT NOT NULL, company TEXT, service TEXT, message TEXT NOT NULL, created_at TEXT)")
-    return connection
+    try:
+        # Serialize upgrades across workers and preserve pre-redesign enquiries.
+        connection.execute("BEGIN IMMEDIATE")
+        connection.execute("CREATE TABLE IF NOT EXISTS leads (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, email TEXT NOT NULL, company TEXT, service TEXT, message TEXT NOT NULL, created_at TEXT)")
+        columns = {row[1] for row in connection.execute("PRAGMA table_info(leads)")}
+        if "created_at" not in columns:
+            connection.execute("ALTER TABLE leads ADD COLUMN created_at TEXT")
+        connection.commit()
+        with connection:
+            yield connection
+    finally:
+        connection.close()
 
 
 def breadcrumb(items):
@@ -184,16 +196,21 @@ def success():
 def login():
     configured_username = os.getenv("ADMIN_USERNAME")
     password_hash = os.getenv("ADMIN_PASSWORD_HASH")
-    if not configured_username or not password_hash:
-        abort(404)
+    if not configured_username or not password_hash or not os.getenv("SECRET_KEY"):
+        return render_template("login.html", unavailable=True), 503
     if request.method == "POST":
         username = request.form.get("username", "")
         password = request.form.get("password", "")
-        if secrets.compare_digest(username, configured_username) and check_password_hash(password_hash, password):
+        try:
+            password_matches = check_password_hash(password_hash, password)
+        except (ValueError, TypeError):
+            app.logger.error("Admin password hash configuration is invalid")
+            return render_template("login.html", unavailable=True), 503
+        if secrets.compare_digest(username.encode(), configured_username.encode()) and password_matches:
             session.clear()
             session["logged_in"] = True
             return redirect(url_for("admin"))
-        return "Invalid login", 401
+        return render_template("login.html", error="Incorrect username or password."), 401
     return render_template("login.html")
 
 
