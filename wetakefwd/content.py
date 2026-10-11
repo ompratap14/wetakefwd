@@ -14,6 +14,8 @@ SERVICES = [
 ]
 
 HOME_FAQ = [
+    dict(question="How much does AI automation cost?", answer="Cost depends on the workflow, integrations, data preparation and support required. Share your current tools and monthly task volume so we can scope a first phase. Ask for implementation fees, platform subscriptions and any AI usage charges to be shown separately."),
+    dict(question="What should we prepare before an automation consultation?", answer="Bring an example of the task, the tools involved, how often it runs and where errors or delays occur. Avoid sharing passwords or sensitive customer data in an initial enquiry. We use this context to identify a practical starting point."),
     dict(question="What does WeTakeFWD do?", answer="WeTakeFWD is an AI Automation & Digital Growth Agency. We connect websites, marketing, lead generation, AI systems and business automation so digital work supports a clear business goal."),
     dict(question="Can you work with our existing website or CRM?", answer="Yes. We review what you already use, keep what works and plan integrations or improvements around the gaps."),
     dict(question="Do we need an AI solution?", answer="Not always. We first identify the bottleneck. A better website, clearer campaign or simpler workflow may be the right first step."),

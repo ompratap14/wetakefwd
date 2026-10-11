@@ -25,6 +25,8 @@
   <meta name="twitter:title" content="{{ self.title()|striptags|trim }}">
   <meta name="twitter:description" content="{{ self.description()|striptags|trim }}">
   <meta name="twitter:image" content="{{ site_url }}/static/images/logo.png">
+  <script type="application/ld+json">{{ organization_schema|tojson }}</script>
+  <script type="application/ld+json">{{ website_schema|tojson }}</script>
   {% block schema %}{% endblock %}
 </head>
 <body>

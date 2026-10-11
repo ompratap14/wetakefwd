@@ -75,7 +75,7 @@ def breadcrumb(items):
 
 ORGANIZATION_SCHEMA = {
     "@context": "https://schema.org", "@type": "Organization", "@id": f"{SITE_URL}/#organization",
-    "name": "WeTakeFWD", "alternateName": "We Take Forward", "url": SITE_URL,
+    "name": "WeTakeFWD", "alternateName": ["We Take Forward", "WeTakeFwd", "wetakefwd"], "url": SITE_URL,
     "logo": f"{SITE_URL}/static/app-icon.svg", "description": "AI Automation & Digital Growth Agency serving businesses in India.",
     "email": "wetakefwd@gmail.com", "telephone": "+91-8191904121",
     "areaServed": {"@type": "Country", "name": "India"},
@@ -85,7 +85,20 @@ ORGANIZATION_SCHEMA = {
 
 @app.context_processor
 def site_context():
-    return {"site_url": SITE_URL, "services": SERVICES, "current_year": datetime.now(timezone.utc).year}
+    return {"site_url": SITE_URL, "services": SERVICES, "current_year": datetime.now(timezone.utc).year,
+            "organization_schema": ORGANIZATION_SCHEMA,
+            "website_schema": {"@context": "https://schema.org", "@type": "WebSite",
+                               "@id": f"{SITE_URL}/#website", "url": f"{SITE_URL}/",
+                               "name": "WeTakeFWD", "alternateName": "We Take Forward",
+                               "publisher": {"@id": f"{SITE_URL}/#organization"}}}
+
+
+@app.after_request
+def indexing_headers(response):
+    # Let crawlers see noindex; robots.txt must not block these URLs.
+    if request.endpoint in {"login", "admin", "success", "logout", "delete_lead", "contact"} or response.status_code >= 400:
+        response.headers["X-Robots-Tag"] = "noindex, nofollow"
+    return response
 
 
 @app.route("/")
