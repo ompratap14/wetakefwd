@@ -22,3 +22,39 @@ HOME_FAQ = [
     dict(question="How do projects begin?", answer="We start with a discovery conversation, review the goal and current setup, then propose a scoped first phase with deliverables and timeline."),
     dict(question="Can you guarantee rankings or sales?", answer="No. Search rankings and sales depend on many factors. We can define the work we control, measure progress and improve the system over time."),
 ]
+
+# Educational examples describe proposed workflows, not completed client results.
+AUTOMATION_DETAILS = {
+    "ai-business-automation": {
+        "heading": "From a new enquiry to an organised follow-up",
+        "steps": [("Capture", "Collect the enquiry through a website form and validate the required fields."), ("Route", "Create or update a CRM record, check for duplicates and assign an owner."), ("Review", "Let a team member approve sensitive actions; send an alert when a step fails."), ("Measure", "Compare handling time, missed follow-ups and errors with the baseline recorded before launch.")],
+        "deliverables": "An agreed workflow map, configured integrations, test scenarios, exception handling and handover documentation. The proposal identifies which systems and workflows are included.",
+        "integrations": "We review your website forms, CRM, spreadsheets and email tools for supported APIs, permissions and usage limits. Tool compatibility is confirmed during scoping, before a delivery commitment.",
+        "cost": "The number of workflow steps, data clean-up, integration complexity and approval rules affect implementation cost. Software subscriptions and ongoing monitoring should be budgeted separately.",
+        "testing": "Test duplicate submissions, missing fields, expired credentials and API failures. Agree who receives alerts and how incomplete tasks are retried without creating duplicate records."
+    },
+    "ai-agents-chatbots": {
+        "heading": "A support assistant with a clear human handoff",
+        "steps": [("Prepare knowledge", "Select approved service information and support answers, then identify who will keep them current."), ("Set boundaries", "Define the questions the assistant can answer and the actions it may take."), ("Escalate", "When information is missing or a request needs judgement, pass the conversation to a person."), ("Evaluate", "Review answer accuracy, unresolved questions and handoff quality using a representative test set.")],
+        "deliverables": "A scoped assistant, an approved knowledge source, conversation and escalation rules, a test set and maintenance guidance. Channels and permitted actions are agreed before implementation.",
+        "integrations": "A website assistant may connect to approved documents or a helpdesk when supported access is available. Customer records and write actions require separately defined permissions and review.",
+        "cost": "Knowledge preparation, channels, integrations and testing affect the build. Model usage, hosting and knowledge updates may add recurring costs. A rule-based assistant can be sufficient for a fixed set of questions.",
+        "testing": "Check ordinary questions, ambiguous requests, outdated information and attempts to make the assistant ignore its instructions. Define a useful fallback instead of allowing unsupported answers."
+    },
+    "whatsapp-crm-automation": {
+        "heading": "Keep an enquiry connected to its sales record",
+        "steps": [("Receive", "Capture an incoming conversation through the business messaging setup agreed for the project."), ("Match", "Match the enquiry to an existing CRM record or create a new one with the appropriate consent information."), ("Assign", "Give the conversation an owner and create a follow-up task with relevant context."), ("Track", "Monitor unassigned enquiries, response time and follow-up completion so the team can identify gaps.")],
+        "deliverables": "A lead-field map, supported CRM connection, routing rules, follow-up tasks and handover documentation. Outbound messaging is scoped around the account's current platform requirements.",
+        "integrations": "We check the CRM's available APIs, messaging provider and account configuration before confirming compatibility. Business account access and required approvals remain with the business owner.",
+        "cost": "CRM seats, messaging provider charges, message volume and workflow complexity affect the total. A proposal should separate implementation work from third-party charges and maintenance.",
+        "testing": "Test repeat enquiries, incorrect contact details, assignment failures and opt-out handling. Ensure a team member can take over and that retries do not trigger duplicate follow-ups."
+    }
+}
+for service in SERVICES:
+    if service["slug"] in AUTOMATION_DETAILS:
+        service["guide"] = AUTOMATION_DETAILS[service["slug"]]
+        service["faq"].extend([
+            ("How is project pricing decided?", service["guide"]["cost"]),
+            ("What happens after launch?", "Agree responsibility for hosting, subscriptions, monitoring and updates before launch. Ongoing support can be scoped separately around the workflow and the response coverage your team needs."),
+            ("Is this example a client case study?", "No. This is an illustrative workflow showing how a project could be scoped. It is not a claim about a completed client project or a promised result.")
+        ])

@@ -44,3 +44,17 @@ class SeoTests(unittest.TestCase):
         for item in site.HOME_FAQ:
             self.assertIn(str(escape(item['question'])), html)
             self.assertIn(str(escape(item['answer'])), html)
+
+    def test_automation_guides_are_visible_and_labelled(self):
+        client = site.app.test_client()
+        from markupsafe import escape
+        for service in site.SERVICES:
+            if "guide" not in service:
+                continue
+            html = client.get('/services/' + service['slug']).get_data(as_text=True)
+            self.assertIn('not a client case study', html)
+            for title, detail in service['guide']['steps']:
+                self.assertIn(str(escape(title)), html)
+                self.assertIn(str(escape(detail)), html)
+            for key in ['deliverables', 'integrations', 'cost', 'testing']:
+                self.assertIn(str(escape(service['guide'][key])), html)
