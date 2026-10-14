@@ -41,3 +41,10 @@
 
 /* Readable buyer guidance and related-service cards. */
 .include-card p{font-size:15px;line-height:1.65;margin:16px 0 0}.include-card a,.service-intro a{text-decoration:underline;text-underline-offset:3px}.include-card:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+
+/* Keep supporting hero, scenario and form text readable against their backgrounds. */
+.hero-cred{color:#515663}
+.showcase-tile>span{color:#b22c16}
+.scenario-top{color:#eef1ff}
+.scenario-note{color:#555b65}
+.form-note{color:#555b65}
