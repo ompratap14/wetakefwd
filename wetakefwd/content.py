@@ -14,7 +14,7 @@ SERVICES = [
 ]
 
 HOME_FAQ = [
-    dict(question="What does WeTakeFWD do?", answer="WeTakeFWD is an AI Automation & Digital Growth Company. We connect websites, marketing, lead generation, AI systems and business automation so digital work supports a clear business goal."),
+    dict(question="What does WeTakeFWD do?", answer="WeTakeFWD is an AI Automation & Digital Growth Company. We help businesses get found, earn trust, turn interest into enquiries and work more efficiently by connecting websites, marketing, AI and automation."),
     dict(question="Can you work with our existing website or CRM?", answer="Yes. We review what you already use, keep what works and plan integrations or improvements around the gaps."),
     dict(question="Do we need an AI solution?", answer="Not always. We first identify the bottleneck. A better website, clearer campaign or simpler workflow may be the right first step."),
     dict(question="How do projects begin?", answer="We start with a discovery conversation, review the goal and current setup, then propose a scoped first phase with deliverables and timeline."),
