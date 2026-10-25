@@ -1,6 +1,6 @@
 # WeTakeFWD website
 
-Flask website for WeTakeFWD, redesigned around its AI Automation & Digital Growth Agency positioning.
+Flask website for WeTakeFWD, redesigned around its AI Automation & Digital Growth Company positioning.
 
 ## Run locally
 
