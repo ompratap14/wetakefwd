@@ -24,7 +24,7 @@ class WebsiteTests(unittest.TestCase):
         self.client = site.app.test_client()
         self.values = dict(name="Test visitor", email="test@example.com", company="", service="Not sure yet", message="Test enquiry")
 
-    def test_pages_and_work_link(self):
+    def test_pages_and_primary_contact_link(self):
         for path in ["/", "/services", "/robots.txt", "/sitemap.xml"] + ["/services/" + s["slug"] for s in site.SERVICES]:
             with self.subTest(path=path):
                 with self.client.get(path) as response:
