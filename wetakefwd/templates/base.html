@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-site-verification" content="CXXuRvBb4bJCw89ys9N3htZO2YMjT73-PeIGxL4zHOQ">
-  <meta name="theme-color" content="#eeece6">
+  <meta name="theme-color" content="#10151c">
   <meta name="robots" content="{% block robots %}index,follow,max-image-preview:large{% endblock %}">
   <title>{% block title %}{% endblock %}</title>
   <meta name="description" content="{% block description %}{% endblock %}">
@@ -12,8 +12,8 @@
   <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/redesign.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="WeTakeFWD">
   <meta property="og:title" content="{{ self.title()|striptags|trim }}">
@@ -29,9 +29,27 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header"><div class="container header-inner"><a class="brand" href="{{ url_for('home') }}" aria-label="WeTakeFWD home"><span class="brand-symbol" aria-hidden="true">»</span><span>WeTake<span>FWD</span></span></a><nav id="primary-nav" class="nav-links" aria-label="Primary navigation"><a href="{{ url_for('services_index') }}">Services</a><a href="{{ url_for('home') }}#approach">Approach</a><a href="{{ url_for('home') }}#work">Work</a><a href="{{ url_for('home') }}#faq">FAQ</a><a class="nav-cta" href="{{ url_for('home') }}#contact">Let’s talk <span aria-hidden="true">↗</span></a></nav><button class="menu-button" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu"><span></span><span></span></button></div></header>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="{{ url_for('home') }}" aria-label="WeTakeFWD home"><span class="brand-icon" aria-hidden="true">↗</span><span>we<span>take</span>fwd<span class="brand-period">.</span></span></a>
+      <nav class="nav-links" id="primary-nav" aria-label="Main navigation">
+        <a href="{{ url_for('home') }}#approach">Approach</a>
+        <a href="{{ url_for('services_index') }}">Services</a>
+        <a href="{{ url_for('home') }}#solutions">Solutions</a>
+        <a href="{{ url_for('home') }}#faq">FAQ</a>
+        <a class="nav-cta" href="{{ url_for('home') }}#contact">Let's talk <span aria-hidden="true">↗</span></a>
+      </nav>
+      <button class="menu-button" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu"><span></span><span></span></button>
+    </div>
+  </header>
   <main id="main">{% block content %}{% endblock %}</main>
-  <footer class="site-footer"><div class="container"><div class="footer-top"><div><a class="brand footer-brand" href="{{ url_for('home') }}"><span class="brand-symbol" aria-hidden="true">»</span><span>WeTake<span>FWD</span></span></a><p>Build. Automate. Grow.</p></div><div class="footer-nav"><a href="{{ url_for('services_index') }}">Services</a><a href="{{ url_for('home') }}#approach">Approach</a><a href="{{ url_for('home') }}#faq">FAQ</a><a href="{{ url_for('home') }}#contact">Contact</a></div><div class="footer-contact"><a href="mailto:wetakefwd@gmail.com">wetakefwd@gmail.com</a><a href="tel:+918191904121">+91 81919 04121</a><span>Serving businesses across India</span></div></div><div class="footer-bottom"><span>© {{ current_year }} WeTakeFWD</span><span>AI Automation &amp; Digital Growth Company</span><div><a href="https://www.linkedin.com/company/wetakefwd-369/" rel="noopener noreferrer">LinkedIn</a><a href="https://www.instagram.com/weta_kefwd" rel="noopener noreferrer">Instagram</a></div></div></div></footer>
-  <script src="{{ url_for('static', filename='js/redesign.js') }}" defer></script>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top"><div><p class="eyebrow">READY WHEN YOU ARE</p><h2>Let's make the<br><em>next move count.</em></h2></div><a class="round-arrow" href="{{ url_for('home') }}#contact" aria-label="Contact WeTakeFWD">↗</a></div>
+      <div class="footer-mid"><a class="brand footer-brand" href="{{ url_for('home') }}" aria-label="WeTakeFWD home"><span class="brand-icon" aria-hidden="true">↗</span><span>we<span>take</span>fwd<span class="brand-period">.</span></span></a><p>Useful digital experiences. Smarter systems. Measurable forward motion.</p><div><a href="{{ url_for('services_index') }}">Services</a><a href="{{ url_for('home') }}#approach">Approach</a><a href="mailto:wetakefwd@gmail.com">Email</a></div></div>
+      <div class="footer-bottom"><span>© {{ current_year }} WeTakeFWD · AI Automation &amp; Digital Growth Company</span><div><a href="https://www.linkedin.com/company/wetakefwd-369/" rel="noopener noreferrer">LinkedIn ↗</a><a href="https://www.instagram.com/weta_kefwd" rel="noopener noreferrer">Instagram ↗</a></div><span>Built to move forward ↗</span></div>
+    </div>
+  </footer>
+  <script src="{{ url_for('static', filename='js/site.js') }}" defer></script>
 </body>
 </html>
