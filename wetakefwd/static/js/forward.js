@@ -1,4 +1,26 @@
 const menuButton = document.querySelector('.menu-button');
+const intro = document.getElementById('brand-intro');
+if (intro && document.documentElement.classList.contains('intro-pending')) {
+  let closed = false;
+  const pageParts = [document.querySelector('.site-header'), document.querySelector('.site-footer'), ...document.querySelectorAll('#main > :not(.brand-intro)')].filter(Boolean);
+  pageParts.forEach(part => { part.inert = true; });
+  const finishIntro = () => {
+    if (closed) return;
+    closed = true;
+    document.documentElement.classList.add('intro-leaving');
+    window.setTimeout(() => {
+      document.documentElement.classList.remove('intro-pending', 'intro-leaving');
+      pageParts.forEach(part => { part.inert = false; });
+      if (intro.contains(document.activeElement)) document.querySelector('#main')?.focus({ preventScroll: true });
+      try { sessionStorage.setItem('wtf-intro-seen', '1'); } catch (e) {}
+    }, 450);
+  };
+  intro.querySelector('.intro-skip').addEventListener('click', finishIntro);
+  intro.addEventListener('animationend', event => {
+    if (event.target.classList.contains('intro-progress')) finishIntro();
+  });
+  window.setTimeout(finishIntro, 3500);
+}
 const nav = document.getElementById('primary-nav');
 const servicesMenu = document.querySelector('.nav-services');
 document.addEventListener('click', event => {

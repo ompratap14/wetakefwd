@@ -3,7 +3,19 @@
 {% block description %}WeTakeFWD connects websites, marketing, lead generation and automation to help businesses get noticed, win trust and grow with less guesswork.{% endblock %}
 {% block canonical %}{{ site_url }}/{% endblock %}
 {% block schema %}<script type="application/ld+json">{{ organization_schema|tojson }}</script><script type="application/ld+json">{{ home_faq_schema|tojson }}</script>{% endblock %}
+{% block intro_boot %}<script>try{if(!sessionStorage.getItem('wtf-intro-seen')&&!location.hash&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('intro-pending')}catch(e){}</script>{% endblock %}
 {% block content %}
+<div class="brand-intro" id="brand-intro" aria-label="WeTakeFWD introduction">
+  <div class="intro-grid" aria-hidden="true"></div>
+  <div class="intro-glow" aria-hidden="true"></div>
+  <div class="intro-stage">
+    <div class="intro-emblem" aria-hidden="true"><span class="intro-emblem-face"><img src="{{ url_for('static', filename='images/brand-mark.svg') }}" width="180" height="130" alt=""></span></div>
+    <div class="intro-wordmark"><span>WE TAKE</span><strong>FWD<span>.</span></strong></div>
+    <p>Taking your business forward.</p>
+  </div>
+  <button class="intro-skip" type="button">Skip intro <span aria-hidden="true">↗</span></button>
+  <div class="intro-progress" aria-hidden="true"><i></i></div>
+</div>
 <section class="next-hero">
   <div class="shell hero-layout">
     <div class="hero-message">
