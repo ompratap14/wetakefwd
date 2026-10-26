@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-site-verification" content="CXXuRvBb4bJCw89ys9N3htZO2YMjT73-PeIGxL4zHOQ">
-  <meta name="theme-color" content="#08090d">
+  <meta name="theme-color" content="#ffffff">
   <meta name="robots" content="{% block robots %}index,follow,max-image-preview:large{% endblock %}">
   <title>{% block title %}{% endblock %}</title>
   <meta name="description" content="{% block description %}{% endblock %}">
@@ -14,6 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/forward.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/next.css') }}">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="WeTakeFWD">
   <meta property="og:title" content="{{ self.title()|striptags|trim }}">
@@ -33,10 +34,12 @@
     <div class="shell header-row">
       <a class="brand" href="{{ url_for('home') }}" aria-label="WeTakeFWD home"><img src="{{ url_for('static', filename='images/brand-mark.svg') }}" alt="" width="58" height="46"><span>WE TAKE<br>FWD<span class="brand-dot">.</span></span></a>
       <nav class="site-nav" id="primary-nav" aria-label="Main navigation">
-        <a href="{{ url_for('home') }}#what-we-solve">The idea</a>
-        <a href="{{ url_for('services_index') }}">What we do</a>
-        <a href="{{ url_for('home') }}#how-we-work">How we work</a>
-        <a class="nav-cta" href="{{ url_for('home') }}#contact">Start a project <span aria-hidden="true">↗</span></a>
+        <details class="nav-services"><summary>Services <span>⌄</span></summary><div class="mega-menu"><div><span class="eyebrow">BUILD. AUTOMATE. GROW.</span><h3>The right expertise.<br>One connected team.</h3><a href="{{ url_for('services_index') }}">Explore all services →</a></div><div class="mega-links">{% for service in services %}<a href="{{ url_for('service_page', slug=service.slug) }}">{{ service.short_title }} <span>↗</span></a>{% endfor %}</div></div></details>
+        <a href="{{ url_for('home') }}#solutions">Solutions</a>
+        <a href="{{ url_for('home') }}#what-we-solve">Company</a>
+        <a href="{{ url_for('home') }}#how-we-work">Our process</a>
+        <a href="{{ url_for('home') }}#faq">FAQs</a>
+        <a class="nav-cta" href="{{ url_for('home') }}#contact">Discuss your project <span aria-hidden="true">↗</span></a>
       </nav>
       <button class="menu-button" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu"><span></span><span></span></button>
     </div>

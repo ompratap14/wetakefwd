@@ -1,8 +1,19 @@
 const menuButton = document.querySelector('.menu-button');
 const nav = document.getElementById('primary-nav');
+const servicesMenu = document.querySelector('.nav-services');
+document.addEventListener('click', event => {
+  if (servicesMenu && !servicesMenu.contains(event.target)) servicesMenu.open = false;
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && servicesMenu?.open) {
+    servicesMenu.open = false;
+    servicesMenu.querySelector('summary').focus();
+  }
+});
 function closeMenu() {
   if (!menuButton || !nav) return;
   nav.classList.remove('open');
+  if (servicesMenu) servicesMenu.open = false;
   menuButton.setAttribute('aria-expanded', 'false');
   menuButton.setAttribute('aria-label', 'Open menu');
 }

@@ -4,32 +4,41 @@
 {% block canonical %}{{ site_url }}/{% endblock %}
 {% block schema %}<script type="application/ld+json">{{ organization_schema|tojson }}</script><script type="application/ld+json">{{ home_faq_schema|tojson }}</script>{% endblock %}
 {% block content %}
-<section class="launch">
-  <div class="shell launch-top"><span><span class="live-dot"></span> A DIGITAL GROWTH COMPANY</span><span>STRATEGY × DESIGN × TECHNOLOGY</span></div>
-  <div class="shell launch-grid">
-    <div class="launch-copy">
-      <h1>MAKE<br>BUSINESS<br><span class="type-accent">MOVE<span class="accent-period">.</span></span></h1>
-      <p>Good growth is more than being visible. It happens when people find you, understand you, choose you—and your systems are ready to keep up.</p>
-      <div class="launch-actions"><a class="button button-coral" href="#contact">Tell us your goal <span>↗</span></a><a class="inline-link" href="#what-we-solve">See the thinking <span>↓</span></a></div>
+<section class="next-hero">
+  <div class="shell hero-layout">
+    <div class="hero-message">
+      <span class="hero-badge"><i></i> YOUR PARTNER IN DIGITAL GROWTH</span>
+      <h1>Intelligent technology.<br><span>Real business</span><br><mark>forward.</mark></h1>
+      <p>We build websites, AI systems and automation that move your business ahead. From your first digital presence to a connected growth engine — <strong>WeTakeFWD brings it all together.</strong></p>
+      <div class="hero-actions"><a class="button button-coral" href="#contact">Tell us your goal <span>↗</span></a><a class="hero-secondary" href="#services"><span>↓</span> Explore our services</a></div>
+      <div class="hero-assurance"><span>✓ Business-first thinking</span><span>✓ Built around your goals</span><span>✓ Support beyond launch</span></div>
     </div>
-    <div class="launch-art" aria-label="Three colored paths combine into one forward direction">
-      <div class="art-top"><span>WT / FWD</span><span>01 — 04</span></div>
-      <div class="art-strokes" aria-hidden="true"><i></i><i></i><i></i></div>
-      <div class="art-caption"><span>NOT JUST A WEBSITE.<br>NOT JUST A CAMPAIGN.</span><strong>ONE SYSTEM<br>THAT MOVES.</strong></div>
-      <div class="art-bottom"><span>FROM FIRST IMPRESSION</span><span>TO NEXT OPPORTUNITY ↗</span></div>
+    <div class="hero-visual" aria-label="WeTakeFWD connects websites, AI, automation and growth">
+      <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orb"><div class="orb-core"><img src="{{ url_for('static', filename='images/brand-mark.svg') }}" width="130" height="100" alt="WeTakeFWD"></div></div>
+      <div class="float-tag tag-one"><b>✧</b><div>AI & automation<small>Less busywork. More possibility.</small></div></div>
+      <div class="float-tag tag-two"><b>⌘</b><div>Websites & apps<small>Designed to move people.</small></div></div>
+      <div class="float-tag tag-three"><b>↗</b><div>Digital growth<small>Connect interest to opportunity.</small></div></div>
+      <div class="visual-caption"><i></i> THE NEXT MOVE STARTS HERE</div>
     </div>
   </div>
-  <div class="launch-tail"><div class="shell"><span>GROWTH IS CONNECTED</span><span class="tail-line"></span><span>SCROLL TO EXPLORE ↓</span></div></div>
 </section>
+<section class="capability-strip" aria-label="Our capabilities"><div class="shell"><span>ONE PARTNER.<br><b>EVERY NEXT STEP.</b></span><strong>AI & Automation</strong><strong>Web & Apps</strong><strong>SEO & Marketing</strong><strong>CRM & Software</strong></div></section>
+
+<section class="next-services section-space" id="services"><div class="shell">
+  <div class="center-heading"><span class="eyebrow">WHAT WE DO</span><h2>Everything you need to<br><em>move your business forward.</em></h2><p>Strategy, design and technology, working together. Choose a focused solution or connect the whole journey.</p></div>
+  <div class="service-cards">{% for service in featured_services %}<a class="service-card" href="{{ url_for('service_page', slug=service.slug) }}"><span class="service-icon" aria-hidden="true">{{ ['⚡','✧','◎','↗','⌘','◈'][loop.index0] }}</span><small>{{ service.category }}</small><h3>{{ service.short_title }}</h3><p>{{ service.summary }}</p><span class="card-link">Explore service <b>→</b></span></a>{% endfor %}</div>
+  <div class="section-action"><a class="button button-dark" href="{{ url_for('services_index') }}">View all services <span>→</span></a></div>
+</div></section>
+<section class="consult-banner"><div class="shell"><div><span class="eyebrow">LET'S FIND YOUR NEXT MOVE</span><h2>A business goal.<br>A clear way forward.</h2><p>Bring your idea or your biggest bottleneck. Let's work out what to build first.</p></div><a class="button button-coral" href="#contact">Discuss your project <span>↗</span></a></div></section>
 
 <section class="idea section-space" id="what-we-solve"><div class="shell">
-  <div class="section-head"><span class="eyebrow">01 / THE IDEA</span><span class="eyebrow">BUSINESS GROWTH, CONNECTED</span></div>
+  <div class="section-head"><span class="eyebrow">WHY WETAKEFWD</span><span class="eyebrow">BUSINESS GROWTH, CONNECTED</span></div>
   <div class="idea-grid"><h2>More traffic isn't<br>the whole <em>answer.</em></h2><div><p class="big-copy">A business grows when every step works together.</p><p>People need to discover you. Your story needs to make sense. The next step needs to feel easy. And once someone reaches out, your team needs a way to respond and keep the conversation moving.</p><p>We find the breaks in that journey and build what moves it forward.</p></div></div>
   <div class="journey" aria-label="The four connected stages of a customer journey"><div><b>01</b><span>DISCOVER</span><strong>Get seen.</strong><small>Search, content and campaigns.</small></div><div><b>02</b><span>UNDERSTAND</span><strong>Get clear.</strong><small>Sites and experiences that explain.</small></div><div><b>03</b><span>CONNECT</span><strong>Get chosen.</strong><small>Enquiries and easier next steps.</small></div><div><b>04</b><span>CONTINUE</span><strong>Keep moving.</strong><small>Follow-up, systems and automation.</small></div></div>
 </div></section>
 
 <section class="signal" id="growth-path"><div class="shell signal-grid">
-  <div class="signal-intro"><span class="eyebrow">02 / YOUR STARTING POINT</span><h2>What's holding<br>your business <em>back?</em></h2><p>Choose the challenge that feels familiar. The best first move starts with the real bottleneck.</p><div class="signal-key"><span class="key-dot"></span> SELECT A CHALLENGE →</div></div>
+  <div class="signal-intro"><span class="eyebrow">FIND YOUR SOLUTION</span><h2>What's holding<br>your business <em>back?</em></h2><p>Choose the challenge that feels familiar. The best first move starts with the real bottleneck.</p><div class="signal-key"><span class="key-dot"></span> SELECT A CHALLENGE →</div></div>
   <div class="signal-tool">
     <div class="signal-toolbar"><span>GROWTH SIGNAL / 001</span><span>● LIVE</span></div>
     <div class="signal-options" role="tablist" aria-label="Choose your growth challenge">
@@ -45,30 +54,23 @@
   </div>
 </div></section>
 
-<section class="work section-space" id="services"><div class="shell">
-  <div class="section-head"><span class="eyebrow">03 / THE WORK</span><span class="eyebrow">DIFFERENT SKILLS. ONE DIRECTION.</span></div>
-  <div class="work-title"><h2>Whatever the gap,<br><em>we build the bridge.</em></h2><a class="inline-link" href="{{ url_for('services_index') }}">See every service <span>↗</span></a></div>
-  <div class="work-list">{% for service in featured_services %}<a class="work-row" href="{{ url_for('service_page', slug=service.slug) }}"><span class="work-index">{{ "%02d"|format(loop.index) }}</span><div><small>{{ service.category }}</small><h3>{{ service.short_title }}</h3><p>{{ service.summary }}</p></div><span class="work-arrow" aria-hidden="true">↗</span></a>{% endfor %}</div>
-  <div class="work-bottom"><p>You don't need everything at once. You need the right first move—and a plan for what comes after it.</p><a href="{{ url_for('services_index') }}">Explore the full toolkit <span>↗</span></a></div>
-</div></section>
-
-<section class="scenario"><div class="shell scenario-grid">
-  <div class="scenario-copy"><span class="eyebrow">04 / SEE THE CONNECTION</span><h2>Imagine the<br><em>whole journey.</em></h2><p>A local service business gets visits but few conversations. A new ad alone won't fix that. The answer may be a better sequence from discovery to follow-up.</p><small>Illustrative scenario, not a client result.</small></div>
+<section class="scenario" id="solutions"><div class="shell scenario-grid">
+  <div class="scenario-copy"><span class="eyebrow">SOLUTIONS THAT CONNECT</span><h2>Imagine the<br><em>whole journey.</em></h2><p>A local service business gets visits but few conversations. A new ad alone won't fix that. The answer may be a better sequence from discovery to follow-up.</p><small>Illustrative scenario, not a client result.</small></div>
   <div class="scenario-route"><div><span>01 / ATTRACT</span><strong>Get in front of the right people.</strong><small>Search + relevant campaigns</small></div><div><span>02 / EXPLAIN</span><strong>Make the value easy to see.</strong><small>Website + clear messaging</small></div><div><span>03 / INVITE</span><strong>Give people a natural next step.</strong><small>Landing page + lead capture</small></div><div><span>04 / CONTINUE</span><strong>Respond while interest is warm.</strong><small>CRM + follow-up</small></div></div>
 </div></section>
 
 <section class="method section-space" id="how-we-work"><div class="shell">
-  <div class="section-head"><span class="eyebrow">05 / HOW WE WORK</span><span class="eyebrow">LESS GUESSWORK. MORE MOMENTUM.</span></div>
+  <div class="section-head"><span class="eyebrow">OUR PROCESS</span><span class="eyebrow">LESS GUESSWORK. MORE MOMENTUM.</span></div>
   <div class="method-intro"><h2>Clarity first.<br><em>Then movement.</em></h2><p>We don't arrive with a fixed package. We learn how your business works, identify the most useful first change and build from there.</p></div>
   <div class="method-steps"><div><span>01 / DIAGNOSE</span><h3>Find the friction.</h3><p>Map the customer journey and the internal work behind it. See what's working and where momentum disappears.</p></div><div><span>02 / DESIGN</span><h3>Choose the move.</h3><p>Agree on a focused scope, a clear outcome and the tools needed to get there.</p></div><div><span>03 / DELIVER</span><h3>Build and improve.</h3><p>Launch useful work, measure what happens and keep making the system better.</p></div></div>
 </div></section>
 
 <section class="statement"><div class="shell"><span class="eyebrow">THE WETAKEFWD POINT OF VIEW</span><p>Good design makes things <em>clearer.</em> Good marketing brings the <em>right people.</em> Good technology gives your team <em>room to grow.</em></p><img src="{{ url_for('static', filename='images/brand-mark.svg') }}" alt="" width="180" height="130"></div></section>
 
-<section class="questions section-space" id="faq"><div class="shell questions-grid"><div><span class="eyebrow">06 / FAQ</span><h2>Before we<br><em>begin.</em></h2><p>If your question isn't here, ask us directly.</p></div><div class="faq-list">{% for item in home_faq %}<details><summary><span>{{ "%02d"|format(loop.index) }}</span>{{ item.question }}<b aria-hidden="true">+</b></summary><p>{{ item.answer }}</p></details>{% endfor %}</div></div></section>
+<section class="questions section-space" id="faq"><div class="shell questions-grid"><div><span class="eyebrow">GOOD QUESTIONS</span><h2>Before we<br><em>begin.</em></h2><p>If your question isn't here, ask us directly.</p></div><div class="faq-list">{% for item in home_faq %}<details><summary><span>{{ "%02d"|format(loop.index) }}</span>{{ item.question }}<b aria-hidden="true">+</b></summary><p>{{ item.answer }}</p></details>{% endfor %}</div></div></section>
 
 <section class="contact section-space" id="contact"><div class="shell contact-grid">
-  <div><span class="eyebrow">07 / YOUR NEXT MOVE</span><h2>Tell us what<br>you want to <em>grow.</em></h2><p>Have a clear brief or just a problem you can't quite name? Start with a conversation. We'll help identify a useful first step.</p><div class="contact-links"><a href="mailto:wetakefwd@gmail.com">wetakefwd@gmail.com <span>↗</span></a><a href="https://wa.me/918191904121" rel="noopener noreferrer">WhatsApp +91 81919 04121 <span>↗</span></a></div></div>
+  <div><span class="eyebrow">GET IN TOUCH</span><h2>Tell us what<br>you want to <em>grow.</em></h2><p>Have a clear brief or just a problem you can't quite name? Start with a conversation. We'll help identify a useful first step.</p><div class="contact-links"><a href="mailto:wetakefwd@gmail.com">wetakefwd@gmail.com <span>↗</span></a><a href="https://wa.me/918191904121" rel="noopener noreferrer">WhatsApp +91 81919 04121 <span>↗</span></a></div></div>
   <form class="lead-form" action="{{ url_for('contact') }}" method="post"><div class="form-head"><span>PROJECT INQUIRY</span><span>WT / FWD ↗</span></div><h3>Let's make a move.</h3><div class="form-pair"><label>Your name<input name="name" autocomplete="name" required maxlength="100" placeholder="What should we call you?"></label><label>Work email<input name="email" type="email" autocomplete="email" required maxlength="254" placeholder="you@company.com"></label></div><div class="form-pair"><label>Company<input name="company" autocomplete="organization" maxlength="120" placeholder="Your business name"></label><label>What do you need?<select name="service"><option value="Not sure yet">Not sure yet</option>{% for service in services %}<option value="{{ service.title }}">{{ service.title }}</option>{% endfor %}</select></label></div><label>Tell us about your goal<textarea name="message" required maxlength="5000" rows="4" placeholder="Where are things getting stuck?"></textarea></label><button type="submit">Send your note <span>↗</span></button><p>We'll only use these details to respond to your enquiry.</p></form>
 </div></section>
 {% endblock %}
