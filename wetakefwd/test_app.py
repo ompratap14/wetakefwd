@@ -47,7 +47,7 @@ class WebsiteTests(unittest.TestCase):
                 self.assertNotIn(title, titles)
                 titles.add(title)
         home = self.client.get('/').get_data(as_text=True)
-        self.assertIn('We build the websites, software and intelligent workflows', home)
+        self.assertIn('We connect design, software and AI', home)
         self.assertIn('"@type": "Organization"', home)
         sitemap = self.client.get('/sitemap.xml').get_data(as_text=True)
         self.assertEqual(sitemap.count('<url>'), len(paths))

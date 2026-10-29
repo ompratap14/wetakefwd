@@ -1,0 +1,44 @@
+/* The three paths in the brand mark become a simple visual story: signal, intelligence, action. */
+.v2-hero{background:radial-gradient(ellipse at 78% 36%,#192b52 0,#0b1222 43%,#080b11 73%)}
+.v2-hero-grid{grid-template-columns:1.03fr .97fr;gap:28px}
+.v2-hero-copy h1{font-size:clamp(56px,5.5vw,82px);max-width:640px}
+.v2-hero-copy h1 em{background:linear-gradient(95deg,#ffb400 5%,#ff4758 50%,#37c8ef 100%);background-clip:text}
+.forward-scene{position:relative;min-height:520px;perspective:900px;transform-style:preserve-3d;isolation:isolate;--tilt-x:0deg;--tilt-y:0deg;transform:rotateX(var(--tilt-x)) rotateY(var(--tilt-y));transition:transform .45s ease}
+.scene-grid{position:absolute;inset:18px 0 28px;transform:rotateX(63deg) rotateZ(-25deg) translateY(70px);background:linear-gradient(#6a92d529 1px,transparent 1px),linear-gradient(90deg,#6a92d529 1px,transparent 1px);background-size:45px 45px;mask-image:radial-gradient(ellipse at center,#000 23%,transparent 74%)}
+.scene-orbit{position:absolute;left:50%;top:49%;width:345px;height:345px;border:1px solid #60b8e735;border-radius:50%;transform:translate(-50%,-50%) rotateX(68deg);box-shadow:0 0 0 37px #37c8ef08,0 0 0 75px #8457e706}
+.orbit-two{width:245px;height:245px;border-style:dashed;border-color:#ffb40050;animation:orbit-turn 18s linear infinite}
+.scene-path{position:absolute;left:13%;top:47%;width:76%;height:32px;transform:rotate(-27deg) translateZ(12px);filter:drop-shadow(0 0 18px #37c8ef5e)}
+.scene-path i{display:block;position:absolute;left:0;right:0;height:11px;border-radius:20px;background:linear-gradient(90deg,transparent 0,#ffb400 20%,#ff4758 49%,#8457e7 68%,#37c8ef 93%,transparent 100%);background-size:180% 100%;animation:flow-forward 3s ease-in-out infinite}
+.scene-path i:nth-child(1){top:0}.scene-path i:nth-child(2){top:14px;left:9%;animation-delay:.18s}.scene-path i:nth-child(3){top:28px;left:18%;animation-delay:.36s}
+.scene-card{position:absolute;z-index:3;background:#111b2ceb;border:1px solid #6b86aa94;border-radius:16px;box-shadow:0 22px 45px #0009,inset 0 1px #fff2;padding:20px 22px;color:#fff;backdrop-filter:blur(15px);transform-style:preserve-3d}
+.scene-card small{display:block;font-size:10px;letter-spacing:.18em;font-weight:900;color:var(--cyan)}
+.scene-card strong{display:block;font:700 24px 'Space Grotesk',sans-serif;margin:14px 0;letter-spacing:-.04em}
+.scene-card span{display:flex;align-items:center;gap:8px;font-size:11px;color:#aebed4;white-space:nowrap}
+.scene-in{left:0;top:42px;transform:rotateY(12deg) rotateX(5deg) translateZ(38px);animation:card-float 5s ease-in-out infinite}
+.scene-out{right:-7px;bottom:53px;transform:rotateY(-12deg) rotateX(-5deg) translateZ(55px);animation:card-float 5s 1s ease-in-out infinite}
+.scene-out span{justify-content:space-between;border-top:1px solid #ffffff23;padding-top:9px;margin-top:8px}.scene-out span b{color:var(--cyan);font-size:15px}
+.pulse-dot{width:7px;height:7px;border-radius:50%;background:var(--yellow);box-shadow:0 0 0 4px #ffb40027;animation:pulse-dot 2s infinite}
+.scene-core{position:absolute;z-index:4;left:50%;top:49%;width:182px;height:182px;transform-style:preserve-3d;transform:translate(-50%,-50%) rotateX(-12deg) rotateY(-26deg);animation:core-float 6s ease-in-out infinite}
+.core-face{position:absolute;inset:0;border-radius:25px;display:flex;align-items:center;justify-content:center;flex-direction:column;background:linear-gradient(150deg,#244982,#172744 50%,#0c1425);border:2px solid #7cc8f0;box-shadow:inset 0 0 38px #37c8ef2c,0 0 45px #37c8ef43,20px 25px 35px #0009;transform:translateZ(28px)}
+.core-face:after{content:'';position:absolute;inset:13px;border:1px solid #ffffff2d;border-radius:17px}
+.core-face b{font:800 56px 'Space Grotesk',sans-serif;letter-spacing:-.09em;color:#fff;line-height:1}.core-face small{text-align:center;font-size:9px;line-height:1.4;letter-spacing:.15em;color:#b6d8f5;margin-top:12px;font-weight:800}.core-spark{position:absolute;left:20px;top:15px;color:var(--yellow);font-size:22px}
+.core-side{position:absolute;inset:0;border-radius:25px;background:linear-gradient(145deg,#8457e7,#1a5b91);transform:translateZ(-25px);box-shadow:27px 22px 0 #13213a}
+.scene-caption{position:absolute;bottom:11px;left:15px;font-size:10px;letter-spacing:.18em;font-weight:800;color:#8ca1be}
+.v2-card{position:relative;overflow:hidden;border-radius:0 18px 0 18px}.v2-card:before{content:'';position:absolute;left:0;top:0;width:100%;height:4px;background:linear-gradient(90deg,#ffb400,#ff4758,#8457e7,#37c8ef);transform:scaleX(.16);transform-origin:left;transition:transform .45s cubic-bezier(.2,.8,.2,1)}.v2-card:hover:before,.v2-card:focus-visible:before{transform:scaleX(1)}
+.v2-card-symbol{position:relative;overflow:hidden;background:#111b2d!important;font-size:0;transform:skew(-8deg)}.v2-card-symbol:before,.v2-card-symbol:after{content:'';position:absolute;width:9px;height:31px;top:11px;border-radius:9px;transform:rotate(36deg)}.v2-card-symbol:before{left:15px;background:linear-gradient(#ffb400,#ff4758)}.v2-card-symbol:after{left:29px;background:linear-gradient(#8457e7,#37c8ef)}
+.v2-process-grid{position:relative}.v2-process-grid:before{content:'';position:absolute;left:5%;right:5%;top:0;height:3px;background:linear-gradient(90deg,#ffb400,#ff4758,#37c8ef);z-index:2}.v2-process-grid>div{border-radius:0 0 18px 0;padding-top:42px}.v2-process-grid span{color:#185b91}.v2-process-grid>div:nth-child(2) span{color:#d33d62}.v2-process-grid>div:nth-child(3) span{color:#087f9d}
+.intro-stage{width:min(760px,90vw)}.intro-kicker{font:800 11px 'DM Sans',sans-serif;letter-spacing:.22em;color:#b5c7e5;animation:intro-name .7s both}.intro-trajectory{position:relative;width:min(500px,76vw);height:170px;margin:18px auto -5px;transform-style:preserve-3d;transform:rotateX(24deg) rotateY(-18deg)}
+.intro-trajectory i{position:absolute;left:6%;width:77%;height:26px;border-radius:30px;transform:rotate(-34deg);box-shadow:inset 0 5px 7px #ffffff44,0 14px 22px #0009;animation:beam-assemble 2.2s cubic-bezier(.16,.84,.2,1) both}
+.intro-trajectory i:nth-child(1){top:66px;background:linear-gradient(90deg,#ffb400,#ff8d00);animation-delay:.08s}.intro-trajectory i:nth-child(2){top:83px;left:14%;background:linear-gradient(90deg,#ff4758,#8457e7);animation-delay:.22s}.intro-trajectory i:nth-child(3){top:100px;left:22%;background:linear-gradient(90deg,#8457e7,#37c8ef);animation-delay:.36s}.intro-destination{position:absolute;right:0;top:9px;font-size:56px;color:#37c8ef;filter:drop-shadow(0 0 20px #37c8ef);animation:intro-destination 1s 1.45s both}
+.intro-full-logo{width:min(520px,78vw);animation:intro-lock 1.1s 1.65s both}.intro-stage p{font-size:13px;letter-spacing:.15em;animation:intro-name .7s 2s both}
+@keyframes beam-assemble{from{opacity:0;transform:translate3d(-420px,150px,-350px) rotate(-34deg) rotateY(-80deg)}to{opacity:1;transform:translate3d(0,0,0) rotate(-34deg)}}
+@keyframes intro-destination{from{opacity:0;transform:translate(-80px,80px) scale(.3)}to{opacity:1;transform:translate(0,0) scale(1)}}
+@keyframes intro-lock{from{opacity:0;transform:translateY(45px) rotateX(45deg) scale(.7)}to{opacity:1;transform:translateY(0) rotateX(0) scale(1)}}
+@keyframes orbit-turn{to{transform:translate(-50%,-50%) rotateX(68deg) rotateZ(360deg)}}
+@keyframes flow-forward{0%,100%{background-position:100% 0;opacity:.72}50%{background-position:0 0;opacity:1}}
+@keyframes core-float{0%,100%{transform:translate(-50%,-50%) rotateX(-12deg) rotateY(-26deg) translateY(0)}50%{transform:translate(-50%,-50%) rotateX(-7deg) rotateY(-15deg) translateY(-12px)}}
+@keyframes card-float{0%,100%{translate:0 0}50%{translate:0 -9px}}
+@keyframes pulse-dot{50%{box-shadow:0 0 0 8px #ffb40008}}
+@media(max-width:1050px){.v2-hero-grid{grid-template-columns:1fr}.forward-scene{width:min(620px,100%);margin:auto}}
+@media(max-width:580px){.v2-hero-copy h1{font-size:clamp(47px,12vw,64px)}.forward-scene{min-height:440px}.scene-card{padding:13px 14px}.scene-card strong{font-size:17px;margin:9px 0}.scene-card span{font-size:9px}.scene-in{left:0;top:24px}.scene-out{right:0;bottom:40px}.scene-core{width:135px;height:135px}.core-face b{font-size:42px}.core-face small{font-size:7px}.scene-path{top:45%}.scene-caption{font-size:8px;bottom:0}.scene-orbit{width:260px;height:260px}.orbit-two{width:190px;height:190px}.intro-trajectory{height:130px}.intro-trajectory i{height:18px}.intro-trajectory i:nth-child(1){top:48px}.intro-trajectory i:nth-child(2){top:63px}.intro-trajectory i:nth-child(3){top:78px}.intro-destination{font-size:40px}}
+@media(prefers-reduced-motion:reduce){.forward-scene,.scene-card,.scene-core,.scene-path i,.scene-orbit,.pulse-dot,.intro-trajectory i,.intro-destination,.intro-full-logo,.intro-kicker,.intro-stage p{animation:none!important;transition:none!important}}
