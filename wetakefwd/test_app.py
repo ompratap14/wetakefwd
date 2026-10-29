@@ -41,7 +41,7 @@ class WebsiteTests(unittest.TestCase):
                 html = self.client.get(path).get_data(as_text=True)
                 self.assertIn(f'<link rel="canonical" href="{site.SITE_URL}{path}">', html)
                 self.assertIn('<meta name="description" content="', html)
-                self.assertIn('/static/images/official-logo.png', html)
+                self.assertIn('/static/images/wetakefwd-lockup.svg', html)
                 self.assertEqual(html.count('<h1'), 1)
                 title = html.split('<title>', 1)[1].split('</title>', 1)[0]
                 self.assertNotIn(title, titles)
