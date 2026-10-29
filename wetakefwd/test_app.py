@@ -33,6 +33,25 @@ class WebsiteTests(unittest.TestCase):
         self.assertIn(b"/services/ongoing-support", self.client.get("/services").data)
         self.assertEqual(self.client.get("/services/unknown").status_code, 404)
 
+    def test_public_pages_have_distinct_seo_metadata_and_brand_logo(self):
+        paths = ["/", "/services"] + ["/services/" + s["slug"] for s in site.SERVICES]
+        titles = set()
+        for path in paths:
+            with self.subTest(path=path):
+                html = self.client.get(path).get_data(as_text=True)
+                self.assertIn(f'<link rel="canonical" href="{site.SITE_URL}{path}">', html)
+                self.assertIn('<meta name="description" content="', html)
+                self.assertIn('/static/images/logo.png', html)
+                self.assertEqual(html.count('<h1'), 1)
+                title = html.split('<title>', 1)[1].split('</title>', 1)[0]
+                self.assertNotIn(title, titles)
+                titles.add(title)
+        home = self.client.get('/').get_data(as_text=True)
+        self.assertIn('We build the websites, software and intelligent workflows', home)
+        self.assertIn('"@type": "Organization"', home)
+        sitemap = self.client.get('/sitemap.xml').get_data(as_text=True)
+        self.assertEqual(sitemap.count('<url>'), len(paths))
+
     def test_old_database_preserved_and_contact_saved(self):
         with closing(sqlite3.connect(site.DB_PATH)) as db, db:
             db.execute("CREATE TABLE leads (id INTEGER PRIMARY KEY, name TEXT, email TEXT, company TEXT, service TEXT, message TEXTn)")

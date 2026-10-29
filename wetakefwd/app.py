@@ -76,7 +76,7 @@ def breadcrumb(items):
 ORGANIZATION_SCHEMA = {
     "@context": "https://schema.org", "@type": "Organization", "@id": f"{SITE_URL}/#organization",
     "name": "WeTakeFWD", "alternateName": "We Take Forward", "url": SITE_URL,
-    "logo": f"{SITE_URL}/static/app-icon.svg", "description": "AI Automation & Digital Growth Company serving businesses in India.",
+    "logo": f"{SITE_URL}/static/images/logo.png", "description": "AI Automation & Digital Growth Company serving businesses in India.",
     "email": "wetakefwd@gmail.com", "telephone": "+91-8191904121",
     "areaServed": {"@type": "Country", "name": "India"},
     "sameAs": ["https://www.linkedin.com/company/wetakefwd-369/", "https://www.instagram.com/weta_kefwd", "https://x.com/wetakefwd"],
@@ -94,7 +94,7 @@ def home():
         {"@type": "Question", "name": item["question"], "acceptedAnswer": {"@type": "Answer", "text": item["answer"]}}
         for item in HOME_FAQ
     ]}
-    return render_template("home.html", organization_schema=ORGANIZATION_SCHEMA, home_faq=HOME_FAQ,
+    return render_template("home_v2.html", organization_schema=ORGANIZATION_SCHEMA, home_faq=HOME_FAQ,
                            home_faq_schema=faq_schema, featured_services=[SERVICE_BY_SLUG[slug] for slug in FEATURED_SLUGS])
 
 
@@ -117,6 +117,7 @@ def service_page(slug):
         for question, answer in service["faq"]
     ]}
     return render_template("service.html", service=service, service_schema=service_schema, service_faq_schema=faq_schema,
+                           related_services=[SERVICES[(SERVICES.index(service) + offset) % len(SERVICES)] for offset in (1, 2, 3)],
                            breadcrumb_schema=breadcrumb([("Home", f"{SITE_URL}/"), ("Services", f"{SITE_URL}/services"), (service["title"], canonical)]))
 
 

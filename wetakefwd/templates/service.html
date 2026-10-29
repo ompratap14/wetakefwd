@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
-{% block title %}{{ service.title }} in India | WeTakeFWD{% endblock %}
-{% block description %}{{ service.summary }} Learn how WeTakeFWD plans and delivers {{ service.title|lower }} for businesses in India.{% endblock %}
+{% block title %}{{ service.title }} Services in India | WeTakeFWD{% endblock %}
+{% block description %}{{ service.summary }} Explore WeTakeFWD's practical approach to {{ service.title|lower }} for Indian businesses.{% endblock %}
 {% block canonical %}{{ site_url }}/services/{{ service.slug }}{% endblock %}
 {% block schema %}<script type="application/ld+json">{{ breadcrumb_schema|tojson }}</script><script type="application/ld+json">{{ service_schema|tojson }}</script><script type="application/ld+json">{{ service_faq_schema|tojson }}</script>{% endblock %}
 {% block content %}
@@ -9,5 +9,6 @@
 <section class="service-scope section-space"><div class="shell"><div class="section-head"><span class="eyebrow">02 / THE BUILDING BLOCKS</span><span class="eyebrow">SHAPED AROUND YOUR BUSINESS</span></div><div class="scope-intro"><h2>What this can<br><em>look like.</em></h2><p>Every scope starts with your goal, your team and what you already use. These are common parts of the work.</p></div><div class="scope-list">{% for item in service.includes %}<div><span>{{ "%02d"|format(loop.index) }}</span><h3>{{ item }}</h3><b aria-hidden="true">↗</b></div>{% endfor %}</div></div></section>
 <section class="service-example"><div class="shell example-grid"><div><span class="eyebrow">03 / IN PRACTICE</span><h2>Picture the<br><em>difference.</em></h2></div><div><span class="eyebrow">ILLUSTRATIVE USE CASE</span><p>{{ service.use_case }}</p><small>Scope and outcomes depend on your business and tools.</small></div></div></section>
 <section class="questions section-space"><div class="shell questions-grid"><div><span class="eyebrow">04 / GOOD TO KNOW</span><h2>Before we<br><em>begin.</em></h2></div><div class="faq-list">{% for question, answer in service.faq %}<details><summary><span>{{ "%02d"|format(loop.index) }}</span>{{ question }}<b aria-hidden="true">+</b></summary><p>{{ answer }}</p></details>{% endfor %}</div></div></section>
+<section class="related-services section-space"><div class="shell"><div class="section-head"><span class="eyebrow">KEEP EXPLORING</span><span class="eyebrow">CONNECTED CAPABILITIES</span></div><h2>Explore more ways<br><em>to move forward.</em></h2><div class="related-grid">{% for item in related_services %}<a href="{{ url_for('service_page', slug=item.slug) }}"><small>{{ item.category }}</small><h3>{{ item.title }}</h3><span>Explore service ↗</span></a>{% endfor %}</div><a class="related-all" href="{{ url_for('services_index') }}">View all services ↗</a></div></section>
 <section class="interior-cta"><div class="shell"><span class="eyebrow">YOUR NEXT MOVE</span><h2>Have a challenge<br><em>in mind?</em></h2><a class="button button-dark" href="{{ url_for('home') }}#contact">Tell us about it <span>↗</span></a></div></section>
 {% endblock %}
