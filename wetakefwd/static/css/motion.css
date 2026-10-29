@@ -51,7 +51,7 @@
 .brand-intro{background:radial-gradient(circle at 50% 50%,#172847 0,#080d1a 52%,#05070d 100%)!important}
 .intro-trajectory{display:none}.intro-stage{transform:translateY(-2%);perspective:1100px}
 .intro-logo-3d{position:relative;width:min(700px,86vw);aspect-ratio:310/160;transform-style:preserve-3d;animation:logo-turn-in 2.35s cubic-bezier(.13,.8,.2,1) both}
-.intro-logo-3d:before,.intro-logo-3d:after{content:'';position:absolute;inset:0;background:url('../images/wetakefwd-lockup.svg') center/contain no-repeat;pointer-events:none}
+.intro-logo-3d:before,.intro-logo-3d:after{content:none}
 .intro-logo-3d:before{opacity:.48;filter:blur(7px) saturate(1.5);transform:translate3d(22px,18px,-35px)}
 .intro-logo-3d:after{opacity:.18;filter:blur(15px) saturate(1.6);transform:translate3d(38px,30px,-70px)}
 .intro-full-logo{position:relative;display:block;width:100%!important;height:auto!important;animation:none!important;transform:translateZ(45px);filter:drop-shadow(0 25px 30px #0009)}
@@ -60,3 +60,14 @@
 @keyframes logo-turn-in{0%{opacity:0;transform:translateZ(-450px) rotateY(-75deg) rotateX(22deg) scale(.55)}55%{opacity:1}76%{transform:translateZ(45px) rotateY(8deg) rotateX(-5deg) scale(1.03)}100%{transform:translateZ(0) rotateY(0) rotateX(0) scale(1)}}
 @media(max-width:580px){.site-header .brand{width:140px;height:62px;flex-basis:140px}.site-header .brand img{width:140px!important}.intro-logo-3d{width:92vw}}
 @media(prefers-reduced-motion:reduce){.intro-logo-3d{animation:none!important}}
+
+/* Preserve the supplied artwork. Screen blending lets its black surround merge into the dark site. */
+.site-header .brand,.site-footer .brand,.intro-logo-3d,.service-art img{mix-blend-mode:screen}
+.site-header .brand{position:relative;overflow:hidden;height:70px}
+.site-header .brand img{position:absolute;top:-38px;left:0;width:160px!important;height:160px!important}
+.site-footer .brand{position:relative;overflow:hidden;height:100px}
+.site-footer .brand img{position:relative;margin-top:-45px;width:205px!important;height:205px!important}
+.intro-logo-3d{width:min(680px,88vw);aspect-ratio:1;max-height:70vh}
+.intro-full-logo{width:100%!important;height:100%!important;object-fit:contain;filter:none;transform:none}
+.intro-stage p{margin-top:-12%}
+@media(max-width:580px){.site-header .brand img{top:-32px;width:140px!important;height:140px!important}.intro-logo-3d{width:92vw}}
