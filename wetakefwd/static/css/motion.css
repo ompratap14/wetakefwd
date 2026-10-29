@@ -65,8 +65,8 @@
 .site-header .brand,.site-footer .brand,.intro-logo-3d,.service-art img{mix-blend-mode:normal}
 .site-header .brand{position:relative;overflow:hidden;height:70px}
 .site-header .brand img{position:absolute;top:-38px;left:0;width:160px!important;height:160px!important}
-.site-footer .brand{position:relative;overflow:hidden;height:100px}
-.site-footer .brand img{position:relative;margin-top:-45px;width:205px!important;height:205px!important}
+.site-footer .brand{position:relative;display:block;overflow:hidden;width:240px;height:112px;max-width:100%;flex:none;margin:0 0 8px}
+.site-footer .brand img{position:absolute;top:-70px;left:-10px;margin:0;width:260px!important;height:260px!important;max-width:none;max-height:none;object-fit:contain;transform:none}
 .intro-logo-3d{width:min(680px,88vw);aspect-ratio:1;max-height:70vh}
 .intro-full-logo{width:100%!important;height:100%!important;object-fit:contain;transform:none}
 .intro-stage p{margin-top:-12%}
