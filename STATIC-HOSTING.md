@@ -8,6 +8,8 @@ https://www.wetakefwd.online (not a GitHub project subdirectory).
 ## Hosting settings
 
 - Repository: the existing wetakefwd GitHub repository; branch: main.
+- Root directory: the repository root. The committed `vercel.json` sets Vercel
+  to the Other framework and serves `dist` without a Python build.
 - Publish directory: `dist` (relative to repository root).
 - Build command: leave blank when publishing the committed `dist` files.
 - On hosts that require a build command, use `echo Static files are ready`.
