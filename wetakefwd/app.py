@@ -86,7 +86,7 @@ ORGANIZATION_SCHEMA = {
 @app.context_processor
 def site_context():
     return {"site_url": SITE_URL, "services": SERVICES,
-            "web3forms_access_key": os.getenv("WEB3FORMS_ACCESS_KEY", "f7c47c0e-43d9-4a01-8478-9801d4310c9d"),
+            "web3forms_access_key": os.getenv("WEB3FORMS_ACCESS_KEY", "f8858610-b7af-44d5-9073-b2eeefbca47f"),
             "current_year": datetime.now(timezone.utc).year}
 
 
