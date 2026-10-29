@@ -126,6 +126,11 @@ def robots():
     return send_from_directory(APP_DIR / "static", "robots.txt", mimetype="text/plain")
 
 
+@app.route("/thank-you/")
+def thank_you():
+    return render_template("thank_you.html")
+
+
 @app.route("/sitemap.xml")
 def sitemap():
     urls = [f"{SITE_URL}/", f"{SITE_URL}/services"] + [f"{SITE_URL}/services/{s['slug']}" for s in SERVICES]

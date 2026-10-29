@@ -1,5 +1,11 @@
 # WeTakeFWD website
 
+**Current deployment: static hosting.** Publish the repository's `dist` folder.
+The enquiry form now sends through FormSubmit to wetakefwd@gmail.com; no app server
+or admin panel is required. See [STATIC-HOSTING.md](../STATIC-HOSTING.md) for hosting,
+one-time email activation, and rebuild instructions. The sections below describe
+the older Flask deployment and are only relevant if maintaining that installation.
+
 Flask website for WeTakeFWD, redesigned around its AI Automation & Digital Growth Company positioning.
 
 ## Run locally

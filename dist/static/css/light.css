@@ -1,0 +1,44 @@
+/* Light content surfaces; dark brand areas preserve the original white wordmark. */
+:root{color-scheme:light;--light-ink:#152137;--light-copy:#526178;--light-line:#d8e0eb;--light-blue:#edf5fc;--light-accent:#087595}
+body{background:#fff;color:var(--light-ink)}
+.site-header,.site-footer,.detail-art{color:#fff}
+.service-art,.detail-art{box-shadow:15px 15px 0 #d7e5f2}
+.success-page p a{color:#087595}
+.v2-hero{background:radial-gradient(ellipse at 78% 40%,#dceffc 0,#f5f8fc 43%,#fff 78%)}
+.v2-hero-copy h1{color:#142039}.v2-hero-copy h1 em{background:linear-gradient(95deg,#ae6800,#d32755 48%,#087a9b);background-clip:text;color:transparent}
+.v2-eyebrow{color:#40536e}.v2-eyebrow i{background:#1296b9;box-shadow:0 0 0 4px #1296b914}
+.v2-hero-copy>p,.v2-section p,.v2-contact-grid>div>p{color:var(--light-copy)}
+.v2-hero-foot{color:#5e7088}.v2-hero-foot b{color:#087595}.v2-link{color:#172b48;border-color:#8498b1}.v2-link:hover{color:#087595}
+.v2-label,.v2-underlink,.v2-pillars b,.v2-solution-list span{color:var(--light-accent)}
+.v2-underlink{border-color:#087595}.v2-underlink:hover{color:#b84900}
+.v2-intro,.v2-solutions,.v2-faq{background:#fff}.v2-intro .v2-lead{color:#172944}
+.v2-services,.v2-process,.v2-finder{background:#f4f7fb}.v2-section h2 em,.v2-contact h2 em{color:#c82d50}
+.v2-pillars>div{border-color:#b9cadc}.v2-solution-list,.v2-solution-list>div{border-color:var(--light-line)}
+.v2-card{border-color:#d9e2ee;box-shadow:0 5px 18px #254c7210}.v2-card:hover{box-shadow:0 18px 40px #254c7220}
+.v2-card-top{color:#596b82}.v2-card p{color:#526178}.v2-card strong{color:#225884}
+.v2-section-bottom .v2-button{color:#fff}.v2-process-grid>div{border-color:#d9e2ee;box-shadow:0 5px 18px #254c720a}
+.v2-process-grid p,.v2-process .v2-heading p{color:#526178}
+.v2-finder-grid{background:#fff;border-color:#d7e1ed;box-shadow:0 18px 50px #254c720b}
+.v2-finder-tabs button{color:#172944;border-color:#dce5ee}.v2-finder-tabs button.active,.v2-finder-tabs button:hover{background:#e6f2fc}
+.v2-finder-tabs button span{color:#087595}.v2-finder-tabs button b{color:#a56600}.v2-finder-results{background:#eef5fb}
+.v2-faq-list details,.v2-faq-list details:first-child{border-color:#d2dce8}.v2-faq-list summary span{color:#087595}.v2-faq-list summary b{color:#ae6800}.v2-faq-list details p{color:#526178}
+.v2-contact{background:radial-gradient(ellipse at 0% 30%,#e0f2fb,#f2f6fb 60%,#fff);color:#152137}
+.v2-contact-links a,.v2-contact-links a:last-child{color:#203d5e;border-color:#bccddb}.v2-contact-links a:hover{color:#087595}
+.v2-form{box-shadow:0 20px 65px #304d7514;border:1px solid #dce4ee;border-top:5px solid var(--yellow)}
+.scene-grid{background:linear-gradient(#385f8d25 1px,transparent 1px),linear-gradient(90deg,#385f8d25 1px,transparent 1px);background-size:45px 45px}
+.scene-orbit{border-color:#2988b548;box-shadow:0 0 0 37px #37c8ef09,0 0 0 75px #8457e707}.orbit-two{border-color:#bf8b2066}
+.scene-card{background:#fffffff2;border-color:#b3c9df;color:#182d49;box-shadow:0 20px 45px #294a7526,inset 0 1px #fff}
+.scene-card small{color:#087595}.scene-card span{color:#52667d}.scene-out span{border-color:#dbe5ee}.scene-out span b{color:#087595}
+.core-face{background:linear-gradient(145deg,#fff,#e5f0fc 60%,#cbdff5);border-color:#6fb2cf;box-shadow:inset 0 0 38px #fff,0 0 45px #37c8ef20,20px 25px 35px #294a7530}
+.core-face:after{border-color:#a5bfd8}.core-face b{color:#15355c}.core-face small{color:#345e83}.core-spark{color:#c37a00}
+.core-side{background:linear-gradient(145deg,#a894e6,#80c9e9);box-shadow:27px 22px 0 #a8c4df}.scene-caption{color:#506b87}
+.interior-hero{background:radial-gradient(ellipse at 85% 35%,#e0f0fb,#f4f8fc 50%,#fff);color:#152137}
+.interior-hero h1 em{color:#b86e00}.interior-grid>div:first-child>p,.breadcrumb{color:#526178}
+.breadcrumb a{color:#185b87}.directory,.service-scope,.questions{background:#f5f8fc}.service-story{background:#fff}
+.service-example{background:#eaf4fc;color:#152137}.service-example h2 em{color:#087595}.service-example .example-grid small{color:#526178}.service-example .example-grid>div:last-child{border-color:#bfd1e1}
+.related-services{background:#f3f7fc;color:#152137}.related-services h2 em{color:#b56e00}.related-grid a{background:#fff;border-color:#d7e2ef;color:#152137;box-shadow:0 8px 25px #294a750a}
+.related-grid a:hover{background:#e9f4fd}.related-grid small,.related-grid span,.related-all{color:#087595}.related-all{border-color:#087595}
+.interior-cta{background:linear-gradient(105deg,#e0effb,#f8fafc);color:#152137}.interior-cta h2 em{color:#b56e00}
+.success-page{background:#f3f8fc;color:#152137}.success-page h1 em{color:#b56e00}.success-page p{color:#526178}
+:focus-visible{outline:3px solid #0786ab;outline-offset:4px}
+@media(prefers-reduced-motion:reduce){.v2-card,.related-grid a{transition:none}}
