@@ -15,22 +15,24 @@ https://www.wetakefwd.online (not a GitHub project subdirectory).
 - On hosts that require a build command, use `echo Static files are ready`.
 - Do not configure an SPA catch-all rewrite; service pages have their own index.html.
 
-## Activate email delivery once
+## Email delivery
 
-The public form posts to https://formsubmit.co/wetakefwd@gmail.com. FormSubmit is
-the external service that receives the form and forwards it by email. It uses
-the visitor's email as the reply-to address and keeps its spam check enabled.
+The public form posts to https://api.web3forms.com/submit with the Web3Forms
+access key for wetakefwd@gmail.com. Web3Forms forwards the enquiry by email and
+uses the visitor's email as the reply-to address. The access key is public by
+design; it is not an email password. To rotate it, change the default value in
+wetakefwd/app.py, rebuild, and redeploy.
 
-After deployment, submit a controlled test enquiry from the live website.
-Open the activation email in wetakefwd@gmail.com (check Spam) and confirm the
-form. Then submit another enquiry and verify it reaches the inbox. Delivery has
-not been verified by the local build. Viewing a file directly is not a delivery test.
+After deployment, submit a controlled test enquiry from the live website and
+verify it arrives in wetakefwd@gmail.com (check Promotions and Spam too). The
+thank-you page at https://www.wetakefwd.online/thank-you/ is shown only after
+the form service accepts the submission. Delivery has not been verified by the
+local build. Viewing a file directly is not a delivery test.
 
-The return URL is https://www.wetakefwd.online/thank-you/. If the domain changes,
-update SITE_URL in wetakefwd/content.py and rebuild.
+If the domain changes, update SITE_URL in wetakefwd/content.py and rebuild.
 
-FormSubmit processes submissions externally; no website admin login is required.
-Documentation: https://formsubmit.co/documentation and https://formsubmit.co/help
+Web3Forms processes submissions externally; no website admin login is required.
+Documentation: https://docs.web3forms.com/getting-started/installation
 
 ## Future source edits
 

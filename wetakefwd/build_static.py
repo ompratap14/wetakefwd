@@ -1,6 +1,7 @@
 """Render public pages to dist/. No application server is needed after export."""
 from pathlib import Path
 import shutil
+import re
 from html.parser import HTMLParser
 from urllib.parse import urlsplit
 
@@ -56,8 +57,10 @@ def build():
             if not target.is_file() and not (target / 'index.html').is_file():
                 raise RuntimeError(f'Missing target {link} in {page}')
     home = (OUTPUT / 'index.html').read_text(encoding='utf-8')
-    assert 'action="https://formsubmit.co/wetakefwd@gmail.com"' in home
-    assert 'name="_honey"' in home
+    assert 'action="https://api.web3forms.com/submit"' in home
+    assert re.search(r'name="access_key" value="[0-9a-f-]{36}"', home)
+    assert 'name="redirect" value="https://www.wetakefwd.online/thank-you/"' in home
+    assert 'name="botcheck"' in home
     assert not (OUTPUT / 'admin').exists()
     assert not (OUTPUT / 'contact').exists()
     print(f'Exported and checked {len(routes) + 1} public HTML pages in {OUTPUT}')
