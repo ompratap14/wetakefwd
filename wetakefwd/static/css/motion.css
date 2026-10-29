@@ -61,13 +61,14 @@
 @media(max-width:580px){.site-header .brand{width:140px;height:62px;flex-basis:140px}.site-header .brand img{width:140px!important}.intro-logo-3d{width:92vw}}
 @media(prefers-reduced-motion:reduce){.intro-logo-3d{animation:none!important}}
 
-/* Preserve the supplied artwork. Screen blending lets its black surround merge into the dark site. */
-.site-header .brand,.site-footer .brand,.intro-logo-3d,.service-art img{mix-blend-mode:screen}
+/* Preserve original colour pixels; the SVG alpha mask removes the dark surround. */
+.site-header .brand,.site-footer .brand,.intro-logo-3d,.service-art img{mix-blend-mode:normal}
 .site-header .brand{position:relative;overflow:hidden;height:70px}
 .site-header .brand img{position:absolute;top:-38px;left:0;width:160px!important;height:160px!important}
 .site-footer .brand{position:relative;overflow:hidden;height:100px}
 .site-footer .brand img{position:relative;margin-top:-45px;width:205px!important;height:205px!important}
 .intro-logo-3d{width:min(680px,88vw);aspect-ratio:1;max-height:70vh}
-.intro-full-logo{width:100%!important;height:100%!important;object-fit:contain;filter:none;transform:none}
+.intro-full-logo{width:100%!important;height:100%!important;object-fit:contain;transform:none}
 .intro-stage p{margin-top:-12%}
 @media(max-width:580px){.site-header .brand img{top:-32px;width:140px!important;height:140px!important}.intro-logo-3d{width:92vw}}
+.site-header .brand img,.site-footer .brand img,.intro-full-logo,.service-art img{filter:url(#logo-transparent)!important}
