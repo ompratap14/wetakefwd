@@ -42,3 +42,12 @@
 @media(max-width:1050px){.v2-hero-grid{grid-template-columns:1fr}.forward-scene{width:min(620px,100%);margin:auto}}
 @media(max-width:580px){.v2-hero-copy h1{font-size:clamp(47px,12vw,64px)}.forward-scene{min-height:440px}.scene-card{padding:13px 14px}.scene-card strong{font-size:17px;margin:9px 0}.scene-card span{font-size:9px}.scene-in{left:0;top:24px}.scene-out{right:0;bottom:40px}.scene-core{width:135px;height:135px}.core-face b{font-size:42px}.core-face small{font-size:7px}.scene-path{top:45%}.scene-caption{font-size:8px;bottom:0}.scene-orbit{width:260px;height:260px}.orbit-two{width:190px;height:190px}.intro-trajectory{height:130px}.intro-trajectory i{height:18px}.intro-trajectory i:nth-child(1){top:48px}.intro-trajectory i:nth-child(2){top:63px}.intro-trajectory i:nth-child(3){top:78px}.intro-destination{font-size:40px}}
 @media(prefers-reduced-motion:reduce){.forward-scene,.scene-card,.scene-core,.scene-path i,.scene-orbit,.pulse-dot,.intro-trajectory i,.intro-destination,.intro-full-logo,.intro-kicker,.intro-stage p{animation:none!important;transition:none!important}}
+
+/* Show the supplied square lockup at useful sizes without altering its artwork. */
+.site-header .brand{position:relative;display:block;width:155px;height:68px;overflow:hidden;flex:0 0 155px}
+.site-header .brand img{position:absolute;left:0;top:-37px;width:155px!important;height:155px!important;max-height:none!important;object-fit:contain}
+.site-footer .brand{position:relative;display:block;width:190px;height:90px;overflow:hidden}
+.site-footer .brand img{position:absolute;left:0;top:-43px;width:190px!important;height:190px!important;max-height:none!important;object-fit:contain}
+.brand-intro{background:#000!important}.intro-trajectory{display:none}.intro-full-logo{width:min(490px,80vw);height:auto;animation:intro-lock 1.1s .3s both}.intro-stage p{animation:intro-name .7s .95s both}.intro-stage{transform:translateY(-2%)}
+.service-art{background:#000}.service-art img{width:min(78%,370px)}
+@media(max-width:580px){.site-header .brand{width:135px;height:62px;flex-basis:135px}.site-header .brand img{width:135px!important;height:135px!important;top:-31px}}
