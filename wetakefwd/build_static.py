@@ -26,8 +26,13 @@ class Links(HTMLParser):
 
 
 def build():
+    if OUTPUT.resolve().parent != ROOT.parent.resolve():
+        raise RuntimeError('Static output must stay beside the source directory')
+    if OUTPUT.exists():
+        shutil.rmtree(OUTPUT)
     OUTPUT.mkdir(exist_ok=True)
     shutil.copytree(ROOT / 'static', OUTPUT / 'static', dirs_exist_ok=True)
+    shutil.copy2(ROOT / 'static' / 'favicon.ico', OUTPUT / 'favicon.ico')
     routes = ['/','/services'] + ['/services/' + item['slug'] for item in SERVICES]
     with app.test_client() as client:
         for route in routes:

@@ -9,7 +9,7 @@
   <div class="intro-grid" aria-hidden="true"></div>
   <div class="intro-glow" aria-hidden="true"></div>
   <div class="intro-stage">
-    <div class="intro-lockup"><img src="{{ url_for('static', filename='images/brand-mark.svg') }}" width="180" height="130" alt=""><div class="intro-lockup-name"><span>WE TAKE</span><strong>FWD</strong></div></div>
+    <div class="intro-lockup"><img src="{{ url_for('static', filename='images/profile-picture.png') }}" width="180" height="130" alt=""><div class="intro-lockup-name"><span>WE TAKE</span><strong>FWD</strong></div></div>
     <p>Taking your business forward.</p>
   </div>
   <button class="intro-skip" type="button">Skip intro <span aria-hidden="true">↗</span></button>
@@ -25,7 +25,7 @@
       <div class="hero-assurance"><span>✓ Business-first thinking</span><span>✓ Built around your goals</span><span>✓ Support beyond launch</span></div>
     </div>
     <div class="hero-visual" aria-label="WeTakeFWD connects websites, AI, automation and growth">
-      <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orb"><div class="orb-core"><img src="{{ url_for('static', filename='images/brand-mark.svg') }}" width="130" height="100" alt="WeTakeFWD"></div></div>
+      <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orb"><div class="orb-core"><img src="{{ url_for('static', filename='images/profile-picture.png') }}" width="130" height="100" alt="WeTakeFWD"></div></div>
       <div class="float-tag tag-one"><b>✧</b><div>AI & automation<small>Less busywork. More possibility.</small></div></div>
       <div class="float-tag tag-two"><b>⌘</b><div>Websites & apps<small>Designed to move people.</small></div></div>
       <div class="float-tag tag-three"><b>↗</b><div>Digital growth<small>Connect interest to opportunity.</small></div></div>
@@ -76,7 +76,7 @@
   <div class="method-steps"><div><span>01 / DIAGNOSE</span><h3>Find the friction.</h3><p>Map the customer journey and the internal work behind it. See what's working and where momentum disappears.</p></div><div><span>02 / DESIGN</span><h3>Choose the move.</h3><p>Agree on a focused scope, a clear outcome and the tools needed to get there.</p></div><div><span>03 / DELIVER</span><h3>Build and improve.</h3><p>Launch useful work, measure what happens and keep making the system better.</p></div></div>
 </div></section>
 
-<section class="statement"><div class="shell"><span class="eyebrow">THE WETAKEFWD POINT OF VIEW</span><p>Good design makes things <em>clearer.</em> Good marketing brings the <em>right people.</em> Good technology gives your team <em>room to grow.</em></p><img src="{{ url_for('static', filename='images/brand-mark.svg') }}" alt="" width="180" height="130"></div></section>
+<section class="statement"><div class="shell"><span class="eyebrow">THE WETAKEFWD POINT OF VIEW</span><p>Good design makes things <em>clearer.</em> Good marketing brings the <em>right people.</em> Good technology gives your team <em>room to grow.</em></p><img src="{{ url_for('static', filename='images/profile-picture.png') }}" alt="" width="180" height="130"></div></section>
 
 <section class="questions section-space" id="faq"><div class="shell questions-grid"><div><span class="eyebrow">GOOD QUESTIONS</span><h2>Before we<br><em>begin.</em></h2><p>If your question isn't here, ask us directly.</p></div><div class="faq-list">{% for item in home_faq %}<details><summary><span>{{ "%02d"|format(loop.index) }}</span>{{ item.question }}<b aria-hidden="true">+</b></summary><p>{{ item.answer }}</p></details>{% endfor %}</div></div></section>
 
