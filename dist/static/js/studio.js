@@ -74,4 +74,47 @@ filters.forEach(button => button.addEventListener('click', () => {
   const selected = button.dataset.filter;
   filters.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
   serviceRows.forEach(row => { row.hidden = selected !== 'all' && !categories[selected].includes(row.dataset.category); });
+  const visible = serviceRows.filter(row => !row.hidden).length;
+  const heading = document.querySelector('[data-filter-heading]');
+  const count = document.querySelector('[data-filter-count]');
+  const headings = { all: 'Explore every capability', visibility: 'Make your business easier to find', conversion: 'Turn interest into conversations', systems: 'Connect the work behind growth' };
+  if (heading) heading.textContent = headings[selected];
+  if (count) count.textContent = `${visible} service${visible === 1 ? '' : 's'}`;
 }));
+
+const exampleTabs = [...document.querySelectorAll('[data-example-tab]')];
+const examplePanels = [...document.querySelectorAll('[data-example-panel]')];
+function selectExample(tab, focus = false) {
+  exampleTabs.forEach(item => {
+    const active = item === tab;
+    item.setAttribute('aria-selected', String(active));
+    item.tabIndex = active ? 0 : -1;
+  });
+  examplePanels.forEach(panel => { panel.hidden = panel.dataset.examplePanel !== tab.dataset.exampleTab; });
+  if (focus) tab.focus();
+}
+exampleTabs.forEach((tab, index) => {
+  tab.addEventListener('click', () => selectExample(tab));
+  tab.addEventListener('keydown', event => {
+    if (!['ArrowRight', 'ArrowLeft'].includes(event.key)) return;
+    event.preventDefault();
+    selectExample(exampleTabs[(index + (event.key === 'ArrowRight' ? 1 : -1) + exampleTabs.length) % exampleTabs.length], true);
+  });
+});
+
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+  const motionItems = document.querySelectorAll('.friction-grid article,.solution-card,.process-grid article,.about-grid>div,.directory-row,.scope-list>div,.related-grid a');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: .08 });
+  motionItems.forEach((item, index) => {
+    item.classList.add('reveal-motion');
+    item.style.setProperty('--reveal-delay', `${Math.min(index % 4, 3) * 70}ms`);
+    observer.observe(item);
+  });
+}

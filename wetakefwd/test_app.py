@@ -51,6 +51,13 @@ class WebsiteTests(unittest.TestCase):
         self.assertIn('action="https://api.web3forms.com/submit"', home)
         self.assertIn('name="redirect" value="https://www.wetakefwd.online/thank-you/"', home)
         self.assertIn('"@type": "Organization"', home)
+        self.assertIn('/static/images/profile-picture-transparent.png', home)
+        directory = self.client.get('/services').get_data(as_text=True)
+        self.assertIn('data-filter="systems"', directory)
+        self.assertIn('data-filter-count', directory)
+        service = self.client.get('/services/ai-business-automation').get_data(as_text=True)
+        self.assertIn('data-example-tab="future"', service)
+        self.assertIn('data-example-panel="future" hidden', service)
         sitemap = self.client.get('/sitemap.xml').get_data(as_text=True)
         self.assertEqual(sitemap.count('<url>'), len(paths))
 

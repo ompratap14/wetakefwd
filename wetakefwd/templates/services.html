@@ -1,10 +1,34 @@
 {% extends 'base.html' %}
-{% block title %}Web, AI, Automation & Marketing Services | WeTakeFWD{% endblock %}
-{% block description %}Explore WeTakeFWD services: website and app development, AI agents, business automation, lead generation, SEO, digital marketing and custom software in India.{% endblock %}
+{% block title %}AI Automation, Web & Growth Services | WeTakeFWD{% endblock %}
+{% block description %}Explore WeTakeFWD's AI automation, AI agents, connected customer journeys, websites, marketing and software services for growing businesses in India.{% endblock %}
 {% block canonical %}{{ site_url }}/services{% endblock %}
 {% block schema %}<script type="application/ld+json">{{ breadcrumb_schema|tojson }}</script>{% endblock %}
 {% block content %}
-<section class="interior-hero services-hero"><div class="shell"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a><span>/</span>Services</nav><div class="interior-grid"><div><span class="eyebrow">WETAKEFWD / OUR SERVICES</span><h1>Build what's<br><em>next.</em></h1><p>From websites and custom software to AI automation and marketing, we connect the right skills around your business goal.</p><a class="button button-coral" href="{{ url_for('home') }}#contact">Talk about your goal <span>↗</span></a></div><div class="service-art" aria-label="WeTakeFWD connected services"><div class="service-art-ring"><span>BUILD</span><span>AUTOMATE</span><span>GROW</span></div><img src="{{ url_for('static', filename='images/profile-picture.png') }}" width="800" height="800" alt="WeTakeFWD logo"></div></div></div></section>
-<section class="directory section-space"><div class="shell"><div class="section-head"><span class="eyebrow">THE CAPABILITIES</span><span class="eyebrow">10 WAYS TO MOVE FORWARD</span></div><div class="directory-intro"><h2>Find your<br><em>starting point.</em></h2><p>Browse the full toolkit, or narrow it by the kind of challenge you're facing.</p></div><div class="filter-row" role="group" aria-label="Filter services"><button type="button" class="active" data-filter="all" aria-pressed="true">All work</button><button type="button" data-filter="visibility" aria-pressed="false">Get found</button><button type="button" data-filter="conversion" aria-pressed="false">Win enquiries</button><button type="button" data-filter="systems" aria-pressed="false">Work smarter</button></div><div class="directory-list">{% for service in services %}<a class="directory-row" data-category="{{ service.category|lower }}" href="{{ url_for('service_page', slug=service.slug) }}"><span class="directory-num">{{ "%02d"|format(loop.index) }}</span><div><small>{{ service.category }}</small><h3>{{ service.title }}</h3><p>{{ service.summary }}</p></div><span class="directory-arrow" aria-hidden="true">↗</span></a>{% endfor %}</div></div></section>
+<section class="interior-hero services-hero">
+  <div class="shell">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a><span>/</span>Services</nav>
+    <div class="interior-grid">
+      <div><span class="eyebrow">WETAKEFWD / THE CAPABILITIES</span><h1>Build your<br><em>next move.</em></h1><p>From a smarter first response to a connected growth engine, choose the challenge you want to solve. We'll shape the right mix of AI, design and technology around it.</p><a class="button button-coral" href="#explore-services">Explore the services <span>↓</span></a></div>
+      <div class="service-network" aria-label="A connected journey from business challenge to better outcomes">
+        <span class="network-label">ONE CONNECTED JOURNEY</span>
+        <div class="network-ring network-ring-one"></div><div class="network-ring network-ring-two"></div>
+        <div class="network-node network-input"><small>01 / START</small><strong>Your challenge</strong><span>What slows growth?</span></div>
+        <div class="network-core"><span>WETAKEFWD</span><strong>AI <i>×</i><br>HUMAN</strong><small>DESIGN • BUILD • IMPROVE</small></div>
+        <div class="network-node network-output"><small>02 / MOVE</small><strong>Useful progress</strong><span>A clearer way forward</span></div>
+        <span class="network-line network-line-one"></span><span class="network-line network-line-two"></span>
+        <span class="network-foot">STRATEGY → SYSTEMS → GROWTH</span>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="directory section-space" id="explore-services">
+  <div class="shell">
+    <div class="section-head"><span class="eyebrow">EXPLORE WHAT WE DO</span><span class="eyebrow">10 WAYS TO MOVE FORWARD</span></div>
+    <div class="directory-intro"><h2>What are you trying<br><em>to change?</em></h2><p>Choose a goal to see the most relevant capabilities. Every service can work on its own or connect to a wider plan.</p></div>
+    <div class="filter-row" role="group" aria-label="Filter services by goal"><button type="button" data-filter="all" aria-pressed="true">All capabilities <span>10</span></button><button type="button" data-filter="visibility" aria-pressed="false">Get found <span>↗</span></button><button type="button" data-filter="conversion" aria-pressed="false">Win enquiries <span>↗</span></button><button type="button" data-filter="systems" aria-pressed="false">Work smarter <span>↗</span></button></div>
+    <div class="directory-status" aria-live="polite"><span class="status-pulse"></span><strong data-filter-heading>Explore every capability</strong><span data-filter-count>10 services</span></div>
+    <div class="directory-list">{% for service in services %}<a class="directory-row reveal" data-category="{{ service.category|lower }}" href="{{ url_for('service_page', slug=service.slug) }}"><span class="directory-num">{{ "%02d"|format(loop.index) }}</span><div class="directory-copy"><small>{{ service.category }}</small><h3>{{ service.title }}</h3><p>{{ service.summary }}</p></div><span class="directory-arrow" aria-hidden="true">↗</span></a>{% endfor %}</div>
+  </div>
+</section>
 <section class="interior-cta"><div class="shell"><span class="eyebrow">NOT SURE WHERE TO START?</span><h2>Tell us the challenge.<br><em>We'll find the first move.</em></h2><a class="button button-dark" href="{{ url_for('home') }}#contact">Start a conversation <span>↗</span></a></div></section>
 {% endblock %}
