@@ -52,6 +52,8 @@ class WebsiteTests(unittest.TestCase):
         self.assertIn('name="redirect" value="https://www.wetakefwd.online/thank-you/"', home)
         self.assertIn('"@type": "Organization"', home)
         self.assertIn('/static/images/profile-picture-transparent.png', home)
+        self.assertIn('/static/images/official-logo-transparent.png', home)
+        self.assertIn('class="intro-skip"', home)
         directory = self.client.get('/services').get_data(as_text=True)
         self.assertIn('data-filter="systems"', directory)
         self.assertIn('data-filter-count', directory)
