@@ -1,0 +1,5 @@
+import { requireDb } from "@/lib/db";
+import { requireUser } from "@/lib/security";
+import { SubscriberActions } from "@/components/subscriber-actions";
+import Link from "next/link";
+export default async function SubscribersAdmin() { const [user, subscribers] = await Promise.all([requireUser(), requireDb().newsletterSubscriber.findMany({ orderBy: { createdAt: "desc" }, take: 200, select: { id: true, email: true, status: true, createdAt: true } })]); return <div><span className="eyebrow">NEWSLETTER</span><h1>Subscribers</h1><p>Only confirmed active subscribers should receive newsletters.</p>{user.role === "ADMIN" && <Link className="admin-primary" href="/api/admin/subscribers/export">Export active CSV ↗</Link>}<div className="admin-table">{subscribers.map((item) => <div className="admin-table-row" key={item.id}><strong>{item.email}</strong><span>{item.status}</span><span>{item.createdAt.toLocaleDateString("en-IN")}</span>{user.role === "ADMIN" && <SubscriberActions id={item.id} csrf={user.csrfToken} status={item.status} />}</div>)}</div></div>; }

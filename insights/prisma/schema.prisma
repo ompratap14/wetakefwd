@@ -1,0 +1,207 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "esm"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  EDITOR
+}
+
+enum ArticleStatus {
+  DRAFT
+  PUBLISHED
+  SCHEDULED
+  ARCHIVED
+}
+
+enum SubscriberStatus {
+  PENDING
+  ACTIVE
+  UNSUBSCRIBED
+}
+
+enum SubmissionStatus {
+  PENDING
+  REVIEWED
+  DECLINED
+}
+
+model User {
+  id           String         @id @default(cuid())
+  email        String         @unique
+  passwordHash String
+  role         Role           @default(EDITOR)
+  authorId     String?
+  author       Author?        @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  sessions     AdminSession[]
+  media        Media[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
+
+model AdminSession {
+  id        String   @id @default(cuid())
+  tokenHash String   @unique
+  csrfToken String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model Author {
+  id           String    @id @default(cuid())
+  slug         String    @unique
+  name         String
+  bio          String    @db.Text
+  expertise    String[]
+  photoUrl     String?
+  linkedinUrl  String?
+  xUrl         String?
+  websiteUrl   String?
+  articles     Article[]
+  users        User[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model Category {
+  id             String    @id @default(cuid())
+  slug           String    @unique
+  name           String
+  description    String    @db.Text
+  seoTitle       String?
+  seoDescription String?   @db.Text
+  articles       Article[]
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+model Article {
+  id                String        @id @default(cuid())
+  slug              String        @unique
+  title             String
+  subtitle          String?       @db.Text
+  summary           String        @db.Text
+  body              Json
+  coverImageUrl     String?
+  coverImageAlt     String?
+  status            ArticleStatus @default(DRAFT)
+  isFeatured        Boolean       @default(false)
+  publishedAt       DateTime?
+  scheduledFor      DateTime?
+  seoTitle          String?
+  seoDescription    String?       @db.Text
+  canonicalOverride String?
+  sources           Json?
+  authorId          String
+  author            Author        @relation(fields: [authorId], references: [id], onDelete: Restrict)
+  categoryId        String
+  category          Category      @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  articleTags       ArticleTag[]
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  @@index([status, publishedAt(sort: Desc)])
+  @@index([status, scheduledFor])
+  @@index([categoryId, status, publishedAt(sort: Desc)])
+  @@index([authorId, status, publishedAt(sort: Desc)])
+  @@index([isFeatured, status, publishedAt(sort: Desc)])
+}
+
+model Tag {
+  id          String       @id @default(cuid())
+  slug        String       @unique
+  name        String
+  articleTags ArticleTag[]
+  createdAt   DateTime     @default(now())
+}
+
+model ArticleTag {
+  articleId String
+  tagId     String
+  article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  tag       Tag     @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([articleId, tagId])
+  @@index([tagId])
+}
+
+model NewsletterSubscriber {
+  id                    String           @id @default(cuid())
+  email                 String           @unique
+  status                SubscriberStatus @default(PENDING)
+  confirmationTokenHash String?          @unique
+  confirmationExpiresAt DateTime?
+  unsubscribeTokenHash  String           @unique
+  confirmedAt           DateTime?
+  createdAt             DateTime         @default(now())
+  updatedAt             DateTime         @updatedAt
+
+  @@index([status, createdAt(sort: Desc)])
+}
+
+model ContributorSubmission {
+  id         String           @id @default(cuid())
+  name       String
+  email      String
+  background String           @db.Text
+  title      String
+  summary    String           @db.Text
+  draft      String           @db.Text
+  references String[]
+  consent    Boolean
+  status     SubmissionStatus @default(PENDING)
+  reviewedAt DateTime?
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+
+  @@index([status, createdAt(sort: Desc)])
+  @@index([email])
+}
+
+model Media {
+  id               String   @id @default(cuid())
+  pathname         String   @unique
+  url              String   @unique
+  alt              String
+  mimeType         String
+  bytes            Int
+  uploadedByUserId String
+  uploadedBy       User     @relation(fields: [uploadedByUserId], references: [id], onDelete: Restrict)
+  createdAt        DateTime @default(now())
+
+  @@index([createdAt(sort: Desc)])
+}
+
+model SiteSettings {
+  id                  String   @id @default("primary")
+  publicationName     String   @default("Insights by WeTakeFwd")
+  tagline             String   @default("Explore. Understand. Innovate.")
+  logoUrl             String?
+  contactEmail        String?
+  linkedinUrl         String?
+  instagramUrl        String?
+  xUrl                String?
+  seoDefaultTitle     String   @default("Insights by WeTakeFwd | Technology & Innovation")
+  seoDefaultDescription String @default("Explore technology, artificial intelligence, innovation and the ideas shaping the digital future.") @db.Text
+  updatedAt           DateTime @updatedAt
+}
+
+model RateLimitEvent {
+  id        String   @id @default(cuid())
+  ipHash    String
+  action    String
+  createdAt DateTime @default(now())
+
+  @@index([ipHash, action, createdAt])
+}

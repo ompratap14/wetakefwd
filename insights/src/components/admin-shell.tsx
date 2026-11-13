@@ -1,0 +1,4 @@
+"use client";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+export function AdminShell({ children, csrf, role }: { children: React.ReactNode; csrf: string; role: string }) { const router = useRouter(); async function logout() { await fetch("/api/admin/logout", { method: "POST", headers: { "x-csrf-token": csrf } }); router.push("/admin/login"); router.refresh(); } return <div className="admin-shell"><aside className="admin-nav"><strong>INSIGHTS / CMS</strong><Link href="/admin">Overview</Link><Link href="/admin/articles">Articles</Link><Link href="/admin/authors">Authors</Link><Link href="/admin/categories">Categories</Link><Link href="/admin/media">Media</Link><Link href="/admin/submissions">Submissions</Link><Link href="/admin/subscribers">Subscribers</Link>{role === "ADMIN" && <Link href="/admin/settings">Settings</Link>}<button onClick={logout}>Sign out</button></aside><div className="admin-main">{children}</div></div>; }

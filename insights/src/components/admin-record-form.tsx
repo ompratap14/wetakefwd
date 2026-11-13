@@ -1,0 +1,10 @@
+"use client";
+import { useState, type FormEvent } from "react";
+import { useRouter } from "next/navigation";
+type Field = { name: string; label: string; type?: "text" | "url" | "email" | "textarea"; required?: boolean };
+export function AdminRecordForm({ endpoint, csrf, fields, initial, transform }: { endpoint: string; csrf: string; fields: Field[]; initial?: Record<string, unknown>; transform?: "author" | "settings" }) {
+  const [message, setMessage] = useState(""); const [busy, setBusy] = useState(false); const router = useRouter();
+  async function submit(event: FormEvent<HTMLFormElement>) { event.preventDefault(); setBusy(true); const data = new FormData(event.currentTarget); const payload: Record<string, unknown> = { ...(initial?.id ? { id: initial.id } : {}) }; for (const field of fields) payload[field.name] = String(data.get(field.name) || "").trim() || (field.required ? "" : null); if (transform === "author") payload.expertise = String(payload.expertise || "").split(",").map((x) => x.trim()).filter(Boolean); try { const response = await fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json", "x-csrf-token": csrf }, body: JSON.stringify(payload) }); const result = await response.json(); setMessage(response.ok ? "Saved successfully." : result.message || "Could not save."); if (response.ok) router.refresh(); } catch { setMessage("Could not save."); } finally { setBusy(false); } }
+  return <form className="admin-form admin-record-form" method="post" action={endpoint} onSubmit={submit}>{fields.map((field) => <label key={field.name}>{field.label}{field.type === "textarea" ? <textarea name={field.name} required={field.required} defaultValue={String(initial?.[field.name] || "")} /> : <input name={field.name} type={field.type || "text"} required={field.required} defaultValue={Array.isArray(initial?.[field.name]) ? (initial?.[field.name] as string[]).join(", ") : String(initial?.[field.name] || "")} />}</label>)}<button className="admin-primary" disabled={busy}>{busy ? "Saving…" : "Save"}</button><span aria-live="polite">{message}</span></form>;
+}
+

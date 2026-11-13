@@ -1,0 +1,2 @@
+import { requireDb } from "@/lib/db";
+export async function GET(request: Request) { const secret = process.env.CRON_SECRET; if (!secret || request.headers.get("authorization") !== `Bearer ${secret}`) return Response.json({ message: "Unauthorized" }, { status: 401 }); const result = await requireDb().article.updateMany({ where: { status: "SCHEDULED", scheduledFor: { lte: new Date() } }, data: { status: "PUBLISHED", publishedAt: new Date(), scheduledFor: null } }); return Response.json({ published: result.count }); }

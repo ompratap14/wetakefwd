@@ -1,0 +1,5 @@
+import { z } from "zod";
+import { requireDb } from "@/lib/db";
+import { apiError, authorizeWrite } from "@/lib/security";
+const schema = z.object({ publicationName: z.string().min(2).max(120), tagline: z.string().min(2).max(180), logoUrl: z.url().nullable().optional(), contactEmail: z.email().nullable().optional(), linkedinUrl: z.url().nullable().optional(), instagramUrl: z.url().nullable().optional(), xUrl: z.url().nullable().optional(), seoDefaultTitle: z.string().min(5).max(200), seoDefaultDescription: z.string().min(20).max(500) });
+export async function POST(request: Request) { try { await authorizeWrite(request, true); const parsed = schema.safeParse(await request.json()); if (!parsed.success) return Response.json({ message: "Check the settings fields." }, { status: 400 }); await requireDb().siteSettings.upsert({ where: { id: "primary" }, create: { id: "primary", ...parsed.data }, update: parsed.data }); return Response.json({ ok: true }); } catch (error) { return apiError(error); } }

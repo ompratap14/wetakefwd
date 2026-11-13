@@ -1,0 +1,4 @@
+import { z } from "zod";
+import { requireDb } from "@/lib/db";
+import { apiError, authorizeWrite } from "@/lib/security";
+export async function POST(request: Request) { try { await authorizeWrite(request, true); const parsed = z.object({ id: z.string(), status: z.enum(["ACTIVE", "UNSUBSCRIBED"]) }).safeParse(await request.json()); if (!parsed.success) return Response.json({ message: "Invalid request." }, { status: 400 }); const subscriber = await requireDb().newsletterSubscriber.findUnique({ where: { id: parsed.data.id } }); if (!subscriber || (parsed.data.status === "ACTIVE" && !subscriber.confirmedAt)) return Response.json({ message: "An unconfirmed address cannot be activated." }, { status: 400 }); await requireDb().newsletterSubscriber.update({ where: { id: parsed.data.id }, data: { status: parsed.data.status } }); return Response.json({ ok: true }); } catch (error) { return apiError(error); } }

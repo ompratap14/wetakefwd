@@ -1,0 +1,6 @@
+import { z } from "zod";
+import { requireDb } from "@/lib/db";
+import { apiError, authorizeWrite } from "@/lib/security";
+const schema = z.object({ id: z.string().optional(), name: z.string().min(2).max(100), slug: z.string().min(2).max(100), bio: z.string().min(20).max(3000), expertise: z.array(z.string()).max(20), photoUrl: z.url().nullable().optional(), linkedinUrl: z.url().nullable().optional(), xUrl: z.url().nullable().optional(), websiteUrl: z.url().nullable().optional() });
+export async function POST(request: Request) { try { await authorizeWrite(request); const parsed = schema.safeParse(await request.json()); if (!parsed.success) return Response.json({ message: "Check author details." }, { status: 400 }); const { id, ...data } = parsed.data; const record = id ? await requireDb().author.update({ where: { id }, data }) : await requireDb().author.create({ data }); return Response.json({ ok: true, id: record.id }); } catch (error) { return apiError(error); } }
+export async function DELETE(request: Request) { try { await authorizeWrite(request, true); const { id } = await request.json(); await requireDb().author.delete({ where: { id } }); return Response.json({ ok: true }); } catch (error) { return apiError(error); } }

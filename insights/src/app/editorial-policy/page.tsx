@@ -1,0 +1,5 @@
+import Link from "next/link";
+export const metadata = { title: "Editorial Policy" };
+export default function EditorialPolicy() { return <section className="content-page"><div className="page-width reading-width"><span className="eyebrow">HOW WE WORK</span><h1>Editorial policy<em>.</em></h1><h2>Accuracy and sources</h2><p>We aim to verify factual claims against primary sources where possible and clearly attribute information from third parties. Analysis and opinion are labelled and presented separately from factual reporting.</p><h2>Independence</h2><p>Insights is published by WeTakeFwd. Commercial relationships do not determine editorial conclusions. Sponsored work, if introduced, will be clearly labelled.</p><h2>Corrections</h2><p>We correct material mistakes as soon as they are identified. A correction note should explain the change and its date. Contact us through the <Link href="/contact">contact page</Link> if you spot an error.</p><h2>Contributors</h2><p>Contributors must disclose relevant conflicts, identify original sources and confirm that submitted work is their own. The editorial team may edit, decline or request revisions.</p></div></section>; }
+
+

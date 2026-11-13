@@ -1,0 +1,4 @@
+import Link from "next/link";
+export const metadata = { title: "Terms of Use" };
+export default function TermsPage() { return <section className="content-page"><div className="page-width reading-width"><h1>Terms of use<em>.</em></h1><p>Insights by WeTakeFwd provides editorial material for general information. We aim for accuracy, but articles are not professional legal, financial or technical advice.</p><p>You may link to articles and share short excerpts with attribution and a link to the original. Republishing full articles or images requires written permission from the rights holder.</p><p>Contributor submissions remain yours until publication terms are agreed. Submitting a pitch does not guarantee publication. We may decline content that is unlawful, misleading, plagiarised or outside our editorial scope.</p><p>For questions, use our <Link href="/contact">contact page</Link>.</p></div></section>; }
+

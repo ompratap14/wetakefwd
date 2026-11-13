@@ -1,0 +1,6 @@
+import { redirect } from "next/navigation";
+import { AdminRecordForm } from "@/components/admin-record-form";
+import { requireDb } from "@/lib/db";
+import { requireUser } from "@/lib/security";
+const fields = [{ name: "publicationName", label: "Publication name", required: true }, { name: "tagline", label: "Tagline", required: true }, { name: "logoUrl", label: "Logo URL", type: "url" as const }, { name: "contactEmail", label: "Contact email", type: "email" as const }, { name: "linkedinUrl", label: "LinkedIn", type: "url" as const }, { name: "instagramUrl", label: "Instagram", type: "url" as const }, { name: "xUrl", label: "X", type: "url" as const }, { name: "seoDefaultTitle", label: "Default SEO title", required: true }, { name: "seoDefaultDescription", label: "Default SEO description", type: "textarea" as const, required: true }];
+export default async function SettingsAdmin() { const user = await requireUser(); if (user.role !== "ADMIN") redirect("/admin"); const settings = await requireDb().siteSettings.findUnique({ where: { id: "primary" } }); return <div><span className="eyebrow">PUBLICATION</span><h1>Settings</h1><AdminRecordForm endpoint="/api/admin/settings" csrf={user.csrfToken} fields={fields} initial={settings || undefined} transform="settings" /></div>; }

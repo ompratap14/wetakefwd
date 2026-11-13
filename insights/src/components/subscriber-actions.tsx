@@ -1,0 +1,3 @@
+"use client";
+import { useRouter } from "next/navigation";
+export function SubscriberActions({ id, csrf, status }: { id: string; csrf: string; status: string }) { const router = useRouter(); async function update() { const response = await fetch("/api/admin/subscribers", { method: "POST", headers: { "Content-Type": "application/json", "x-csrf-token": csrf }, body: JSON.stringify({ id, status: status === "ACTIVE" ? "UNSUBSCRIBED" : "ACTIVE" }) }); if (response.ok) router.refresh(); } return <button className="admin-inline-button" onClick={update}>{status === "ACTIVE" ? "Unsubscribe" : "Reactivate"}</button>; }
