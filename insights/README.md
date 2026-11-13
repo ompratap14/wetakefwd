@@ -26,17 +26,17 @@ The seed creates the eight categories and default settings. Add genuine authors 
 | `SITE_URL` | Canonical publication origin; use `https://insights.wetakefwd.online` in production. |
 | `RESEND_API_KEY` | Resend API key for newsletter confirmation emails. |
 | `NEWSLETTER_FROM_EMAIL` | Verified sender address on a domain you control. |
-| `BLOB_READ_WRITE_TOKEN` | Vercel Blob token for media uploads. |
+| `BLOB_READ_WRITE_TOKEN` | Blob token if the connected store uses token authentication. Newer Vercel stores may use OIDC automatically. |
 | `RATE_LIMIT_SECRET` | Long random secret for hashing IPs used in public form limits. |
 | `CRON_SECRET` | Vercel Cron bearer token for scheduled publishing. |
 | `BOOTSTRAP_ADMIN_EMAIL`, `BOOTSTRAP_ADMIN_PASSWORD` | Temporary one-time admin creation. Remove after bootstrap. |
 
-Without Resend configuration, the newsletter form reports that subscriptions are unavailable; it does not claim mail was sent. Without Blob, media upload reports a configuration error. Without a database, public empty states render, but admin and forms require PostgreSQL.
+Without Resend configuration, the newsletter form reports that subscriptions are unavailable; it does not claim mail was sent. Media upload requires a connected Blob store and will report an error if authentication is unavailable. Without a database, public empty states render, but admin and forms require PostgreSQL.
 
 ## Deploy on Vercel
 
 1. Import the same GitHub repository as a **new** Vercel project. Set **Root Directory** to `insights`. Keep the existing marketing-site project untouched.
-2. Provision PostgreSQL and set both database URLs in the new project's environment variables. Connect Vercel Blob and add its token. Verify a sending domain with Resend and set its key and sender address.
+2. Provision PostgreSQL and set both database URLs in the new project's environment variables. Connect a public Vercel Blob store; use its automatic OIDC connection or add its token if the store uses token authentication. Verify a sending domain with Resend and set its key and sender address.
 3. Set `SITE_URL`, `RATE_LIMIT_SECRET` and `CRON_SECRET`. The Vercel configuration runs scheduled publishing daily at 06:00 UTC; adjust the schedule for editorial needs.
 4. Deploy. Run `npm run db:migrate` and `npm run db:seed` against the production database from a trusted environment. Run `npm run admin:bootstrap` once with temporary admin credentials. Remove the bootstrap password afterward.
 5. Add `insights.wetakefwd.online` to the new Vercel project and create the DNS record specified by Vercel at your domain registrar. Verify the domain and HTTPS in Vercel.

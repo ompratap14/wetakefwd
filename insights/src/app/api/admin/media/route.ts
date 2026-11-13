@@ -4,7 +4,6 @@ import { apiError, authorizeWrite } from "@/lib/security";
 export async function POST(request: Request) {
   try {
     const user = await authorizeWrite(request);
-    if (!process.env.BLOB_READ_WRITE_TOKEN) return Response.json({ message: "Media storage is not configured." }, { status: 503 });
     const form = await request.formData(); const file = form.get("file"); const alt = String(form.get("alt") || "").trim();
     if (!(file instanceof File) || !file.type.startsWith("image/") || !["image/png", "image/jpeg", "image/webp", "image/avif"].includes(file.type) || file.size > 5 * 1024 * 1024 || !alt) return Response.json({ message: "Choose a PNG, JPEG, WebP or AVIF image under 5 MB and provide alt text." }, { status: 400 });
     const cleanName = file.name.replace(/[^a-zA-Z0-9._-]/g, "-").slice(-100);
