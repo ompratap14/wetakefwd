@@ -10,7 +10,7 @@ Next.js App Router, TypeScript, Tailwind CSS, PostgreSQL, Prisma, Tiptap, Vercel
 
 1. Use Node.js 20.19 or newer and a PostgreSQL database.
 2. In this directory, run `npm ci`.
-3. Copy `.env.example` to `.env.local` and set `DATABASE_URL` and `DIRECT_DATABASE_URL` (they may be the same for a local database). Never commit the values.
+3. Copy `.env.example` to `.env` and set `DATABASE_URL` and `DIRECT_DATABASE_URL` (they may be the same for a local database). Never commit the values.
 4. Run `npm run db:migrate`, then `npm run db:seed`.
 5. Set `BOOTSTRAP_ADMIN_EMAIL` and a unique `BOOTSTRAP_ADMIN_PASSWORD` of at least 16 characters. Run `npm run admin:bootstrap` **once**, then remove the bootstrap password from the environment.
 6. Run `npm run dev` and visit `http://localhost:3000`. Sign in at `/admin/login`.
