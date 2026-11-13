@@ -40,6 +40,7 @@ Without Resend configuration, the newsletter form reports that subscriptions are
 2. Provision PostgreSQL. The Prisma Postgres Vercel integration sets `DATABASE_URL` and `DATABASE_URL_POOLED` automatically; `DIRECT_DATABASE_URL` may be set to the direct URL for CLI setup, but the CLI also falls back to `DATABASE_URL`. Connect a public Vercel Blob store; use its automatic OIDC connection or add its token if the store uses token authentication. Verify a sending domain with Resend and set its key and sender address.
 3. Set `SITE_URL`, `RATE_LIMIT_SECRET` and `CRON_SECRET`. The Vercel configuration runs scheduled publishing daily at 06:00 UTC; adjust the schedule for editorial needs.
 4. Deploy. Run `npm run db:migrate` and `npm run db:seed` against the production database from a trusted environment. Run `npm run admin:bootstrap` once with temporary admin credentials. Remove the bootstrap password afterward.
+   The first deployment can build before the database tables exist; the layout uses default branding in that case. Run the migration and seed promptly before using public article pages or the admin dashboard.
 5. Add `insights.wetakefwd.online` to the new Vercel project and create the DNS record specified by Vercel at your domain registrar. Verify the domain and HTTPS in Vercel.
 6. Add the sitemap `https://insights.wetakefwd.online/sitemap.xml` to Google Search Console after domain verification. Search indexing and Google News inclusion are not guaranteed.
 
