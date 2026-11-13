@@ -4,7 +4,7 @@ import { PrismaClient } from "@/generated/prisma/client";
 const globalDb = globalThis as unknown as { insightsPrisma?: PrismaClient };
 
 export function getDb(): PrismaClient | null {
-  const connectionString = process.env.DATABASE_URL;
+  const connectionString = process.env.DATABASE_URL_POOLED || process.env.DATABASE_URL;
   if (!connectionString) return null;
   if (!globalDb.insightsPrisma) {
     const adapter = new PrismaPg({ connectionString });

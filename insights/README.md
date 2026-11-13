@@ -21,7 +21,8 @@ The seed creates the eight categories and default settings. Add genuine authors 
 
 | Variable | Purpose |
 | --- | --- |
-| `DATABASE_URL` | PostgreSQL runtime connection, preferably pooled in production. |
+| `DATABASE_URL` | Direct PostgreSQL connection supplied by the Prisma Postgres Vercel integration; also works as a fallback runtime connection. |
+| `DATABASE_URL_POOLED` | Pooled PostgreSQL connection for runtime traffic when supplied by the provider. |
 | `DIRECT_DATABASE_URL` | Direct PostgreSQL connection for Prisma migrations, seed and bootstrap. |
 | `SITE_URL` | Canonical publication origin; use `https://insights.wetakefwd.online` in production. |
 | `RESEND_API_KEY` | Resend API key for newsletter confirmation emails. |
@@ -36,7 +37,7 @@ Without Resend configuration, the newsletter form reports that subscriptions are
 ## Deploy on Vercel
 
 1. Import the same GitHub repository as a **new** Vercel project. Set **Root Directory** to `insights`. Keep the existing marketing-site project untouched.
-2. Provision PostgreSQL and set both database URLs in the new project's environment variables. Connect a public Vercel Blob store; use its automatic OIDC connection or add its token if the store uses token authentication. Verify a sending domain with Resend and set its key and sender address.
+2. Provision PostgreSQL. The Prisma Postgres Vercel integration sets `DATABASE_URL` and `DATABASE_URL_POOLED` automatically; `DIRECT_DATABASE_URL` may be set to the direct URL for CLI setup, but the CLI also falls back to `DATABASE_URL`. Connect a public Vercel Blob store; use its automatic OIDC connection or add its token if the store uses token authentication. Verify a sending domain with Resend and set its key and sender address.
 3. Set `SITE_URL`, `RATE_LIMIT_SECRET` and `CRON_SECRET`. The Vercel configuration runs scheduled publishing daily at 06:00 UTC; adjust the schedule for editorial needs.
 4. Deploy. Run `npm run db:migrate` and `npm run db:seed` against the production database from a trusted environment. Run `npm run admin:bootstrap` once with temporary admin credentials. Remove the bootstrap password afterward.
 5. Add `insights.wetakefwd.online` to the new Vercel project and create the DNS record specified by Vercel at your domain registrar. Verify the domain and HTTPS in Vercel.
