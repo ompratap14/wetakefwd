@@ -1,39 +1,54 @@
 import Link from "next/link";
-import Image from "next/image";
 import { ArticleCard } from "@/components/article-card";
+import { CategoryTag } from "@/components/category-tag";
+import { CoverImage } from "@/components/cover-image";
 import { EmptyState } from "@/components/empty-state";
-import { NewsletterForm } from "@/components/newsletter-form";
-import { categoryDefinitions, TAGLINE } from "@/lib/site";
+import { NewsletterSection } from "@/components/newsletter-section";
+import { NumberedList } from "@/components/numbered-list";
 import { categoryRecord, featuredArticle, latestArticles } from "@/lib/queries";
+import { plainText } from "@/lib/article-content";
 
 export const dynamic = "force-dynamic";
 
 const editorialSections = [
-  { title: "Artificial Intelligence", slug: "artificial-intelligence", label: "UNDERSTAND THE INTELLIGENCE" },
-  { title: "Technology", slug: "technology", label: "THE DIGITAL WORLD" },
-  { title: "Innovation Spotlight", slug: "innovation", label: "IDEAS WORTH WATCHING" },
-  { title: "Future Technology", slug: "future-tech", label: "WHAT COMES NEXT" },
-  { title: "Startups & Business", slug: "startups", label: "BUILDERS AND BUSINESS" },
-  { title: "Research & Analysis", slug: "research", label: "THE DEEPER VIEW" },
+  { title: "Artificial Intelligence", slug: "artificial-intelligence" },
+  { title: "Technology", slug: "technology" },
+  { title: "Innovation", slug: "innovation" },
+  { title: "Future Tech", slug: "future-tech" },
+  { title: "Startups", slug: "startups" },
+  { title: "Research & Analysis", slug: "research" },
 ];
 
 export default async function HomePage() {
   const [featured, latest, sections] = await Promise.all([
-    featuredArticle(), latestArticles(6),
+    featuredArticle(),
+    latestArticles(6),
     Promise.all(editorialSections.map(async (section) => {
       const category = await categoryRecord(section.slug);
-      return { ...section, articles: category?.id ? await latestArticles(2, 0, category.id) : [] };
+      return { ...section, articles: category?.id ? await latestArticles(4, 0, category.id) : [] };
     })),
   ]);
-  const editorsPicks = latest.filter((item) => item.isFeatured).slice(0, 3);
+  const featuredReadingTime = featured ? Math.max(1, Math.ceil(plainText(featured.body).split(/\s+/).length / 220)) : 0;
+
   return <>
-    <section className={`editorial-hero modern-lead ${featured ? "has-lead-story" : ""}`}><div className="page-width hero-inner"><div className="hero-copy"><span className="eyebrow">{featured ? `${featured.category.name} / Featured story` : `INSIGHTS BY WETAKEFWD / ${TAGLINE}`}</span><p className="hero-edition">Issue 01 <span>—</span> The digital future, thoughtfully considered</p><h1>{featured ? featured.title : <>The Future Doesn&apos;t Wait. <em>Neither Should We.</em></>}</h1><p>{featured ? featured.summary : "Discover the ideas, technologies and innovations shaping tomorrow — with the context to understand what matters."}</p><div className="hero-bottom"><Link className="text-arrow" href={featured ? `/article/${featured.slug}` : "#featured"}>{featured ? "Read the story" : "Explore the stories"} <span>↗</span></Link><span>{featured ? `By ${featured.author.name}` : "Independent perspective. Better questions."}</span></div></div>{featured?.coverImageUrl ? <Link href={`/article/${featured.slug}`} className="lead-image"><Image src={featured.coverImageUrl} alt={featured.coverImageAlt || featured.title} fill sizes="(max-width: 900px) 100vw, 48vw" priority/><span>{featured.category.name} · Read now ↗</span></Link> : <aside className="hero-note"><div className="hero-note-mark">✳</div><span className="eyebrow">From the desk</span><h2>Ideas deserve more than a headline.</h2><p>Insights is a place to slow down, look closer and make sense of the change around us.</p><div className="hero-note-footer"><span>EXPLORE</span><span>UNDERSTAND</span><span>INNOVATE</span></div></aside>}</div><div className="page-width issue-rule"><span>ISSUE NO. 001</span><i></i><span>{new Date().getFullYear()}</span></div></section>
-    <div className="topic-ticker"><div className="page-width"><span>Technology with context</span><span>Artificial intelligence</span><span>Research and analysis</span><span>Ideas shaping tomorrow</span></div></div>
-    {!featured && <section className="section-space featured-section" id="featured"><div className="page-width"><div className="section-rule"><h2>Featured story</h2><span className="eyebrow">01 / THE LEAD</span></div><div className="feature-empty"><EmptyState /></div></div></section>}
-    <section className="section-space latest-section"><div className="page-width"><div className="section-rule"><h2>Latest articles</h2><Link href="/search">Browse the archive ↗</Link></div>{latest.length ? <div className="latest-list">{latest.map((article) => <ArticleCard article={article} key={article.id} />)}</div> : <EmptyState compact category="the latest desk" />}</div></section>
-    <section className="section-space topics-section" id="topics"><div className="page-width"><div className="topics-heading"><div><span className="eyebrow">EIGHT LENSES / ONE CURIOUS WORLD</span><h2>Follow the<br/>important questions.</h2></div><p>Move between the technology itself, the people building it, and the wider effect it has on business and society.</p></div><div className="topics-grid">{categoryDefinitions.map((category, index) => <Link href={`/${category.slug}`} className="topic-card" key={category.slug}><span>{String(index + 1).padStart(2, "0")} / TOPIC</span><div><h3>{category.name}</h3><p>{category.description}</p></div><b>↗</b></Link>)}</div></div></section>
-    <section className="section-space topic-columns-section"><div className="page-width"><div className="section-kicker">THE SUBJECTS WE FOLLOW</div><h2 className="section-title">From signal to <em>understanding.</em></h2><div className="topic-columns">{sections.map((section) => <div className="topic-column" key={section.slug}><div className="topic-column-head"><h3>{section.title}</h3><Link href={`/${section.slug}`} aria-label={`View ${section.title}`}>↗</Link></div><p>{section.label}</p>{section.articles.length ? section.articles.map((article) => <ArticleCard article={article} key={article.id} />) : <EmptyState compact category={section.title} />}</div>)}</div></div></section>
-    <section className="section-space editors-section"><div className="page-width editors-inner"><div><span className="section-kicker">CHOSEN WITH CARE</span><h2>Editor&apos;s<br/><em>picks.</em></h2></div><div>{editorsPicks.length ? editorsPicks.map((article) => <ArticleCard article={article} key={article.id} />) : <EmptyState compact category="the editor's picks" />}</div></div></section>
-    <section className="newsletter-section" id="newsletter"><div className="page-width newsletter-inner"><div><span className="eyebrow">THE INSIGHTS LETTER</span><h2>Stay curious.<br/><em>Stay ahead.</em></h2><p>A considered update on technology, innovation and the developments worth understanding.</p></div><NewsletterForm /></div></section>
+    <section className="home-featured"><div className="page-width">
+      {featured ? <div className="home-featured-grid">
+        <CoverImage article={featured} priority sizes="(max-width: 800px) 100vw, 58vw" />
+        <div className="home-featured-copy"><CategoryTag name={featured.category.name} slug={featured.category.slug} suffix="Featured" /><h1><Link href={`/article/${featured.slug}`}>{featured.title}</Link></h1><p>{featured.summary}</p><div className="featured-meta">By <Link href={`/author/${featured.author.slug}`}>{featured.author.name}</Link> · {featuredReadingTime} min read</div></div>
+      </div> : <EmptyState />}
+    </div></section>
+
+    <section className="publication-section latest-section"><div className="page-width">
+      <div className="editorial-heading"><h2>Latest</h2><Link href="/search">See all →</Link></div>
+      {latest.length ? <div className="article-grid">{latest.map((article) => <ArticleCard article={article} key={article.id} />)}</div> : <EmptyState compact category="the latest desk" />}
+    </div></section>
+
+    <section className="publication-section category-rows" id="topics"><div className="page-width">
+      {sections.map((section) => <div className="category-row" key={section.slug}>
+        <div className="editorial-heading"><h2><CategoryTag name={section.title} slug={section.slug} /></h2><Link href={`/${section.slug}`}>More in {section.title} →</Link></div>
+        {section.articles.length ? <NumberedList articles={section.articles} /> : <EmptyState compact category={section.title} />}
+      </div>)}
+    </div></section>
+    <NewsletterSection />
   </>;
 }

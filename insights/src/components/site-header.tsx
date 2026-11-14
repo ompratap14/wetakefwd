@@ -2,27 +2,24 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, Search, X } from "lucide-react";
-import { useState } from "react";
-import Image from "next/image";
-import { primaryNav, PARENT_URL } from "@/lib/site";
+import { Search } from "lucide-react";
+import { categoryDefinitions, PARENT_URL } from "@/lib/site";
 
 export function SiteHeader({ logoUrl }: { logoUrl?: string | null }) {
-  const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  void logoUrl;
+  if (pathname.startsWith("/article/")) return <header className="compact-header"><div className="page-width">
+    <Link href="/" className="compact-wordmark">Insights <span>by wetakefwd</span></Link>
+    <Link className="subscribe-pill" href="/#newsletter">Subscribe →</Link>
+  </div></header>;
   return <>
-    <div className="ownership-strip"><div className="page-width">A publication by <a href={PARENT_URL} target="_blank" rel="noopener noreferrer">WeTakeFwd ↗</a><span>Explore. Understand. Innovate.</span></div></div>
-    <header className="site-header">
-      <div className="page-width header-main">
-        <Link className="wordmark" href="/" aria-label="Insights by WeTakeFwd home" onClick={() => setOpen(false)}>{logoUrl ? <Image unoptimized className="publication-logo" src={logoUrl} alt="Insights by WeTakeFwd" width={280} height={52} /> : <><span>INSIGHTS <i>BY WETAKEFWD</i></span><small>TECHNOLOGY · AI · INNOVATION</small></>}</Link>
-        <nav className="desktop-nav" aria-label="Primary navigation">
-          {primaryNav.map((item) => <Link className={pathname === `/${item.slug}` ? "current" : ""} href={`/${item.slug}`} key={item.slug}>{item.name === "Artificial Intelligence" ? "AI" : item.name}</Link>)}
-          <Link className={pathname === "/research" ? "current" : ""} href="/research">Research</Link>
-          <Link className={pathname === "/about" ? "current" : ""} href="/about">About</Link>
-        </nav>
-        <div className="header-actions"><Link className="search-link" href="/search" aria-label="Search articles"><Search size={19} strokeWidth={1.8} /><span>Search</span></Link><Link className="subscribe-link" href="/#newsletter">Subscribe <span>↗</span></Link><button className="mobile-menu-button" type="button" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="mobile-navigation" onClick={() => setOpen(!open)}>{open ? <X size={24} /> : <Menu size={24} />}</button></div>
+    <header className="site-header masthead">
+      <div className="masthead-strip"><div className="page-width"><span>Technology, AI &amp; innovation — explained clearly</span><a href={PARENT_URL} target="_blank" rel="noopener noreferrer">A publication by wetakefwd</a></div></div>
+      <div className="page-width masthead-main">
+        <Link className="masthead-logo" href="/" aria-label="Insights by WeTakeFwd home"><strong>Insights</strong><span>by <b>wetakefwd</b></span></Link>
+        <div className="masthead-actions"><Link className="search-button" href="/search" aria-label="Search"><Search size={18} strokeWidth={1.6} /></Link><Link className="subscribe-pill" href="/#newsletter">Subscribe</Link></div>
       </div>
-      {open && <nav className="mobile-nav" id="mobile-navigation" aria-label="Mobile navigation"><div className="page-width"><Link href="/" onClick={() => setOpen(false)}>Home</Link>{primaryNav.map((item) => <Link href={`/${item.slug}`} key={item.slug} onClick={() => setOpen(false)}>{item.name}</Link>)}<Link href="/research" onClick={() => setOpen(false)}>Research &amp; Analysis</Link><Link href="/business-technology" onClick={() => setOpen(false)}>Business &amp; Technology</Link><Link href="/opinions" onClick={() => setOpen(false)}>Opinions</Link><Link href="/search" onClick={() => setOpen(false)}>Search articles</Link><Link className="mobile-subscribe" href="/#newsletter" onClick={() => setOpen(false)}>Subscribe ↗</Link></div></nav>}
+      <nav className="category-nav page-width" aria-label="Primary navigation">{categoryDefinitions.map((item) => <Link className={pathname === `/${item.slug}` ? "current" : ""} href={`/${item.slug}`} key={item.slug}>{item.name}</Link>)}</nav>
     </header>
   </>;
 }
