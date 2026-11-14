@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getDb } from "@/lib/db";
 import { hashToken, newToken } from "@/lib/security";
 import { absoluteUrl } from "@/lib/site";
+import { brandedEmail } from "@/lib/email-template";
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Confirm subscription", robots: { index: false, follow: false } };
 export default async function ConfirmPage({ searchParams }: { searchParams: Promise<{ token?: string }> }) {
@@ -12,7 +13,8 @@ export default async function ConfirmPage({ searchParams }: { searchParams: Prom
     const unsubscribe = newToken();
     await getDb()!.newsletterSubscriber.update({ where: { id: subscriber.id }, data: { status: "ACTIVE", confirmedAt: new Date(), confirmationTokenHash: null, confirmationExpiresAt: null, unsubscribeTokenHash: hashToken(unsubscribe) } });
     if (process.env.RESEND_API_KEY && process.env.NEWSLETTER_FROM_EMAIL) {
-      const response = await fetch("https://api.resend.com/emails", { method: "POST", headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, "Content-Type": "application/json" }, body: JSON.stringify({ from: process.env.NEWSLETTER_FROM_EMAIL, to: [subscriber.email], subject: "Welcome to Insights by WeTakeFwd", html: `<p>Your Insights subscription is confirmed. We’ll write when there is something worth understanding.</p><p><a href="${absoluteUrl(`/newsletter/unsubscribe?token=${unsubscribe}`)}">Unsubscribe</a></p>` }) });
+      const unsubscribeUrl = absoluteUrl(`/newsletter/unsubscribe?token=${unsubscribe}`);
+      const response = await fetch("https://api.resend.com/emails", { method: "POST", headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, "Content-Type": "application/json" }, body: JSON.stringify({ from: process.env.NEWSLETTER_FROM_EMAIL, to: [subscriber.email], subject: "Welcome to Insights by WeTakeFwd", html: brandedEmail({ eyebrow: "Subscription confirmed", title: "You’re on the list.", message: "Welcome to Insights by WeTakeFwd. We’ll write when there is something worth understanding—clear analysis of technology, AI and the ideas shaping business.", actionLabel: "Explore Insights", actionUrl: absoluteUrl("/"), footer: `You can <a href="${unsubscribeUrl}" style="color:#2f5bea">unsubscribe at any time</a>.` }) }) });
       if (!response.ok) console.error("Newsletter welcome email failed", response.status);
     }
   }
