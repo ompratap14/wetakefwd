@@ -79,3 +79,80 @@ html[data-theme="dark"] .footer-brand small{color:#A7AEBB}
 @media(max-width:600px){.footer-brand b{font-size:30px}.footer-brand>img{width:48px;height:48px}}
 @media(max-width:600px){.theme-toggle{width:42px;height:42px}.compact-actions .subscribe-pill{padding-inline:14px}}
 
+/* Responsive hardening across the publication and editorial CMS. */
+html,body{max-width:100%;overflow-x:hidden}
+img,svg,video,canvas{max-width:100%}
+.article-content,.content-page,.page-hero,.admin-main{overflow-wrap:anywhere}
+.article-content iframe,.article-content video{width:100%;max-width:100%;aspect-ratio:16/9;height:auto}
+.article-content table{display:block;width:100%;max-width:100%;overflow-x:auto;border-collapse:collapse;-webkit-overflow-scrolling:touch}
+.article-content pre{max-width:100%;-webkit-overflow-scrolling:touch}
+input,textarea,select,button{max-width:100%}
+
+@media(max-width:600px){
+  .category-nav{width:100%;padding-inline:16px;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .category-nav::-webkit-scrollbar{display:none}
+  .category-nav a{flex:0 0 auto;min-height:44px;display:flex;align-items:center;margin-right:22px;padding:0}
+  .masthead-main{gap:14px}
+  .masthead-logo{min-width:0}
+  .masthead-logo strong{font-size:38px}
+  .masthead-actions{flex:0 0 auto}
+  .breadcrumb{flex-wrap:wrap;line-height:1.5}
+  .editorial-heading{gap:14px}
+  .editorial-heading h2{min-width:0}
+  .form-panel{padding:22px 18px}
+  .success-panel{padding:76px 0}
+  .success-panel h1{font-size:42px}
+  .footer-simple nav a{display:inline-flex;align-items:center;min-height:40px}
+  .article-content h2{font-size:29px}
+  .article-content h3{font-size:24px}
+  .article-content img{height:auto}
+  .key-takeaways{padding:21px 20px}
+  .admin-main{padding:26px 16px}
+  .admin-form{padding:18px 15px}
+  .admin-form-actions{align-items:flex-start;flex-wrap:wrap}
+  .admin-table-row{gap:10px;padding:14px}
+  .admin-table-row>*{min-width:0;overflow-wrap:anywhere}
+  .rich-editor-content{min-height:300px;padding:13px}
+  .media-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+}
+
+@media(max-width:430px){
+  .page-width{width:min(calc(100% - 28px),1240px)}
+  .masthead-main{min-height:88px}
+  .masthead-logo strong{font-size:34px}
+  .masthead-logo span{margin-top:6px;font-size:11px}
+  .masthead-actions .subscribe-pill{display:none}
+  .compact-header .page-width{gap:10px}
+  .compact-wordmark{font-size:19px}
+  .compact-wordmark span{display:block;font-size:9px}
+  .compact-actions .subscribe-pill{min-height:40px;padding-inline:12px;font-size:12px}
+  .newsletter-form>div{flex-direction:column}
+  .newsletter-form input,.newsletter-form button{width:100%}
+  .article-byline{align-items:flex-start}
+  .article-byline>div{min-width:0}
+  .article-byline a{line-height:1.35}
+  .author-bio{align-items:flex-start;flex-direction:column}
+  .article-newsletter-card{padding:24px 20px}
+  .article-newsletter-card h2{font-size:26px}
+  .empty-state>div:last-child{padding:24px 20px}
+  .footer-simple nav{display:grid;grid-template-columns:1fr 1fr;width:100%;gap:4px 18px}
+  .footer-simple nav a{justify-content:flex-start}
+  .pagination{gap:7px}
+  .pagination a,.pagination span{min-width:36px;height:36px}
+  .admin-nav{position:sticky;top:0;z-index:50;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .admin-nav::-webkit-scrollbar{display:none}
+  .admin-nav strong{width:auto;flex:0 0 auto;margin:0 10px 0 0;align-self:center}
+  .admin-nav a,.admin-nav button{flex:0 0 auto;min-height:42px;margin:0}
+  .admin-table-row{grid-template-columns:1fr}
+  .admin-table-row strong{grid-column:auto}
+  .admin-stats{grid-template-columns:1fr 1fr}
+}
+
+@media(max-width:350px){
+  .compact-actions .subscribe-pill{display:none}
+  .masthead-strip .page-width{font-size:10px}
+  .masthead-logo strong{font-size:32px}
+  .search-button,.theme-toggle{width:40px;height:40px}
+  .admin-stats{grid-template-columns:1fr}
+}
+
