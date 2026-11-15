@@ -12,7 +12,7 @@ import requests
 from flask import Flask, abort, redirect, render_template, request, send_from_directory, session, url_for
 from werkzeug.security import check_password_hash
 
-from content import HOME_FAQ, SEO_PAGES, SERVICES, SITE_URL
+from content import HOME_FAQ, LOCATION_MARKETING_PAGES, SEO_PAGES, SERVICES, SITE_URL
 
 APP_DIR = Path(__file__).resolve().parent
 
@@ -95,6 +95,7 @@ ORGANIZATION_SCHEMA = {
 @app.context_processor
 def site_context():
     return {"site_url": SITE_URL, "services": SERVICES, "seo_pages": SEO_PAGES,
+            "location_marketing_pages": LOCATION_MARKETING_PAGES,
             "web3forms_access_key": os.getenv("WEB3FORMS_ACCESS_KEY", "f8858610-b7af-44d5-9073-b2eeefbca47f"),
             "current_year": datetime.now(timezone.utc).year}
 
@@ -140,10 +141,16 @@ def seo_service_page(slug):
     if service is None:
         abort(404)
     canonical = f"{SITE_URL}{service['path']}"
+    if not service.get("location"):
+        area_served = {"@type": "Country", "name": "India"}
+    elif service["location"] == "Delhi NCR":
+        area_served = {"@type": "AdministrativeArea", "name": "Delhi NCR"}
+    else:
+        area_served = {"@type": "City", "name": service["location"]}
     service_schema = {"@context": "https://schema.org", "@type": "Service", "name": service["title"],
                       "description": service["summary"], "url": canonical,
                       "provider": {"@id": f"{SITE_URL}/#organization"},
-                      "areaServed": {"@type": "Country", "name": "India"}}
+                      "areaServed": area_served}
     faq_schema = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
         {"@type": "Question", "name": question, "acceptedAnswer": {"@type": "Answer", "text": answer}}
         for question, answer in service["faq"]

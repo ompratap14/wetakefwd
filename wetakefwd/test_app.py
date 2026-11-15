@@ -76,6 +76,20 @@ class WebsiteTests(unittest.TestCase):
                 self.assertIn('"@type": "Service"', html)
                 self.assertIn('"@type": "FAQPage"', html)
 
+    def test_local_marketing_pages_are_unique_and_discoverable(self):
+        self.assertEqual(len(site.LOCATION_MARKETING_PAGES), 9)
+        titles = {page["meta_title"] for page in site.LOCATION_MARKETING_PAGES}
+        descriptions = {page["meta_description"] for page in site.LOCATION_MARKETING_PAGES}
+        self.assertEqual(len(titles), 9)
+        self.assertEqual(len(descriptions), 9)
+        directory = self.client.get("/services").get_data(as_text=True)
+        for page in site.LOCATION_MARKETING_PAGES:
+            with self.subTest(path=page["path"]):
+                self.assertIn(f'href="{page["path"]}"', directory)
+                html = self.client.get(page["path"]).get_data(as_text=True)
+                self.assertIn(page["location"], html)
+                self.assertIn('"areaServed"', html)
+
     def test_legacy_keyword_urls_redirect_permanently(self):
         for old_slug, new_slug in site.LEGACY_SEO_REDIRECTS.items():
             with self.subTest(old_slug=old_slug):
