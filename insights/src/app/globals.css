@@ -156,3 +156,102 @@ input,textarea,select,button{max-width:100%}
   .admin-stats{grid-template-columns:1fr}
 }
 
+/* Complete high-contrast dark theme. Keep this after component and responsive rules. */
+html[data-theme="dark"]{
+  --paper:#0D1117;
+  --white:#11161D;
+  --ink:#F2F4F7;
+  --muted:#B3BDCA;
+  --line:#343C49;
+  --blue:#7EA2FF;
+  --blue-soft:#18254A;
+  --dark:#070B11;
+  --cover-light:#DCE6FA;
+  --cover-deep:#3159BF;
+  --sky-on-navy:#BCD0FF;
+}
+html[data-theme="dark"] ::selection{background:#8FB0FF;color:#07101F}
+html[data-theme="dark"] body,
+html[data-theme="dark"] .masthead,
+html[data-theme="dark"] .site-footer,
+html[data-theme="dark"] .home-featured,
+html[data-theme="dark"] .category-rows,
+html[data-theme="dark"] .page-hero,
+html[data-theme="dark"] .content-page,
+html[data-theme="dark"] .article-head{background:var(--paper);color:var(--ink)}
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4,
+html[data-theme="dark"] .masthead-logo strong,
+html[data-theme="dark"] .masthead-logo b,
+html[data-theme="dark"] .compact-wordmark,
+html[data-theme="dark"] .footer-brand,
+html[data-theme="dark"] .article-card h3,
+html[data-theme="dark"] .numbered-list strong,
+html[data-theme="dark"] .article-content,
+html[data-theme="dark"] .article-content h2,
+html[data-theme="dark"] .article-content h3,
+html[data-theme="dark"] .author-bio h3{color:var(--ink)}
+html[data-theme="dark"] .home-featured-copy>p,
+html[data-theme="dark"] .page-hero p,
+html[data-theme="dark"] .article-dek,
+html[data-theme="dark"] .key-takeaways p,
+html[data-theme="dark"] .article-content p,
+html[data-theme="dark"] .article-content li,
+html[data-theme="dark"] .content-page p,
+html[data-theme="dark"] .content-page li,
+html[data-theme="dark"] .article-card>p,
+html[data-theme="dark"] .featured-meta,
+html[data-theme="dark"] .article-card-reading,
+html[data-theme="dark"] .article-card-meta time,
+html[data-theme="dark"] .article-card-meta>span,
+html[data-theme="dark"] .article-byline span,
+html[data-theme="dark"] .author-bio p,
+html[data-theme="dark"] .empty-state p,
+html[data-theme="dark"] .empty-compact,
+html[data-theme="dark"] .footer-brand small,
+html[data-theme="dark"] .footer-simple>small,
+html[data-theme="dark"] .breadcrumb{color:var(--muted)!important}
+html[data-theme="dark"] .article-card,
+html[data-theme="dark"] .key-takeaways,
+html[data-theme="dark"] .form-panel,
+html[data-theme="dark"] .empty-state,
+html[data-theme="dark"] .search-button,
+html[data-theme="dark"] .theme-toggle,
+html[data-theme="dark"] .admin-form,
+html[data-theme="dark"] .admin-stats a,
+html[data-theme="dark"] .admin-table,
+html[data-theme="dark"] .admin-detail,
+html[data-theme="dark"] .media-grid>div{background:#151B24;border-color:var(--line);color:var(--ink)}
+html[data-theme="dark"] .key-takeaways strong,
+html[data-theme="dark"] .category-tag,
+html[data-theme="dark"] .article-byline a,
+html[data-theme="dark"] .article-content strong,
+html[data-theme="dark"] .article-content b,
+html[data-theme="dark"] .author-links span,
+html[data-theme="dark"] .section-rule span{color:#F7F9FC}
+html[data-theme="dark"] .article-content blockquote{color:#DCE6FF;border-color:var(--blue)}
+html[data-theme="dark"] .article-content :not(pre)>code{background:#222A36;color:#E6EDFF}
+html[data-theme="dark"] .form-panel input,
+html[data-theme="dark"] .form-panel textarea,
+html[data-theme="dark"] .form-panel select,
+html[data-theme="dark"] .admin-form input,
+html[data-theme="dark"] .admin-form textarea,
+html[data-theme="dark"] .admin-form select,
+html[data-theme="dark"] .search-form input,
+html[data-theme="dark"] .rich-editor-content{background:#0F151E;border-color:#465063;color:#F2F4F7}
+html[data-theme="dark"] .search-form{border-color:#D7DDE7}
+html[data-theme="dark"] .category-nav a,
+html[data-theme="dark"] .footer-simple nav a{color:#DDE3EC}
+html[data-theme="dark"] .category-nav a:hover,
+html[data-theme="dark"] .category-nav a.current,
+html[data-theme="dark"] a.text-arrow,
+html[data-theme="dark"] .article-content a,
+html[data-theme="dark"] .author-bio a,
+html[data-theme="dark"] .breadcrumb a{color:var(--blue)}
+html[data-theme="dark"] .brand-author-avatar{background:#F7F9FC;border-color:#566176}
+html[data-theme="dark"] .latest-section,
+html[data-theme="dark"] .related-section{background:#10151C}
+html[data-theme="dark"] .article-cover figcaption{color:#C2CAD5}
+
