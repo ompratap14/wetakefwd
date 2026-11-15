@@ -12,7 +12,7 @@ import requests
 from flask import Flask, abort, redirect, render_template, request, send_from_directory, session, url_for
 from werkzeug.security import check_password_hash
 
-from content import HOME_FAQ, LOCATION_MARKETING_PAGES, SEO_PAGES, SERVICES, SITE_URL
+from content import AI_LOCATION_PAGES, HOME_FAQ, LOCATION_MARKETING_PAGES, SEO_PAGES, SERVICES, SITE_URL
 
 APP_DIR = Path(__file__).resolve().parent
 
@@ -96,6 +96,7 @@ ORGANIZATION_SCHEMA = {
 def site_context():
     return {"site_url": SITE_URL, "services": SERVICES, "seo_pages": SEO_PAGES,
             "location_marketing_pages": LOCATION_MARKETING_PAGES,
+            "ai_location_pages": AI_LOCATION_PAGES,
             "web3forms_access_key": os.getenv("WEB3FORMS_ACCESS_KEY", "f8858610-b7af-44d5-9073-b2eeefbca47f"),
             "current_year": datetime.now(timezone.utc).year}
 
