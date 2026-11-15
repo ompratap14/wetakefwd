@@ -25,7 +25,9 @@ class WebsiteTests(unittest.TestCase):
         self.values = dict(name="Test visitor", email="test@example.com", company="", service="Not sure yet", message="Test enquiry")
 
     def test_pages_and_primary_contact_link(self):
-        for path in ["/", "/services", "/robots.txt", "/sitemap.xml"] + ["/services/" + s["slug"] for s in site.SERVICES]:
+        for path in (["/", "/services", "/robots.txt", "/sitemap.xml"] +
+                     ["/services/" + s["slug"] for s in site.SERVICES] +
+                     [page["path"] for page in site.SEO_PAGES]):
             with self.subTest(path=path):
                 with self.client.get(path) as response:
                     self.assertEqual(response.status_code, 200)
@@ -34,7 +36,8 @@ class WebsiteTests(unittest.TestCase):
         self.assertEqual(self.client.get("/services/unknown").status_code, 404)
 
     def test_public_pages_have_distinct_seo_metadata_and_brand_logo(self):
-        paths = ["/", "/services"] + ["/services/" + s["slug"] for s in site.SERVICES]
+        paths = (["/", "/services"] + ["/services/" + s["slug"] for s in site.SERVICES] +
+                 [page["path"] for page in site.SEO_PAGES])
         titles = set()
         for path in paths:
             with self.subTest(path=path):
@@ -47,13 +50,14 @@ class WebsiteTests(unittest.TestCase):
                 self.assertNotIn(title, titles)
                 titles.add(title)
         home = self.client.get('/').get_data(as_text=True)
-        self.assertIn('We build AI systems, websites and connected workflows', home)
+        self.assertIn('We build practical AI applications, agents, software and connected workflows', home)
         self.assertIn('action="https://api.web3forms.com/submit"', home)
         self.assertIn('name="redirect" value="https://www.wetakefwd.online/thank-you/"', home)
         self.assertIn('"@type": "Organization"', home)
         self.assertIn('/static/images/profile-picture-transparent.png', home)
         self.assertIn('/static/images/official-logo-transparent.png', home)
         self.assertIn('class="intro-skip"', home)
+        self.assertIn('AI development<br><em>company in India.', home)
         directory = self.client.get('/services').get_data(as_text=True)
         self.assertIn('data-filter="systems"', directory)
         self.assertIn('data-filter-count', directory)
@@ -62,6 +66,15 @@ class WebsiteTests(unittest.TestCase):
         self.assertIn('data-example-panel="future" hidden', service)
         sitemap = self.client.get('/sitemap.xml').get_data(as_text=True)
         self.assertEqual(sitemap.count('<url>'), len(paths))
+
+    def test_keyword_landing_pages_own_their_search_intent(self):
+        for page in site.SEO_PAGES:
+            with self.subTest(path=page["path"]):
+                html = self.client.get(page["path"]).get_data(as_text=True)
+                self.assertIn(page["primary_keyword"], html)
+                self.assertIn(f'<link rel="canonical" href="{site.SITE_URL}{page["path"]}">', html)
+                self.assertIn('"@type": "Service"', html)
+                self.assertIn('"@type": "FAQPage"', html)
 
     def test_old_database_preserved_and_contact_saved(self):
         with closing(sqlite3.connect(site.DB_PATH)) as db, db:

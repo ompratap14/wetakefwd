@@ -12,7 +12,7 @@ import requests
 from flask import Flask, abort, redirect, render_template, request, send_from_directory, session, url_for
 from werkzeug.security import check_password_hash
 
-from content import HOME_FAQ, SERVICES, SITE_URL
+from content import HOME_FAQ, SEO_PAGES, SERVICES, SITE_URL
 
 APP_DIR = Path(__file__).resolve().parent
 
@@ -45,6 +45,7 @@ if os.getenv("FLASK_ENV") == "production":
     app.config["SESSION_COOKIE_SECURE"] = True
 
 SERVICE_BY_SLUG = {service["slug"]: service for service in SERVICES}
+SEO_PAGE_BY_SLUG = {page["slug"]: page for page in SEO_PAGES}
 FEATURED_SLUGS = ["ai-business-automation", "ai-agents-chatbots", "whatsapp-crm-automation", "lead-generation", "website-app-development", "meta-google-ads"]
 
 
@@ -85,7 +86,7 @@ ORGANIZATION_SCHEMA = {
 
 @app.context_processor
 def site_context():
-    return {"site_url": SITE_URL, "services": SERVICES,
+    return {"site_url": SITE_URL, "services": SERVICES, "seo_pages": SEO_PAGES,
             "web3forms_access_key": os.getenv("WEB3FORMS_ACCESS_KEY", "f8858610-b7af-44d5-9073-b2eeefbca47f"),
             "current_year": datetime.now(timezone.utc).year}
 
@@ -123,6 +124,27 @@ def service_page(slug):
                            breadcrumb_schema=breadcrumb([("Home", f"{SITE_URL}/"), ("Services", f"{SITE_URL}/services"), (service["title"], canonical)]))
 
 
+@app.route("/<slug>")
+def seo_service_page(slug):
+    service = SEO_PAGE_BY_SLUG.get(slug)
+    if service is None:
+        abort(404)
+    canonical = f"{SITE_URL}{service['path']}"
+    service_schema = {"@context": "https://schema.org", "@type": "Service", "name": service["title"],
+                      "description": service["summary"], "url": canonical,
+                      "provider": {"@id": f"{SITE_URL}/#organization"},
+                      "areaServed": {"@type": "Country", "name": "India"}}
+    faq_schema = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+        {"@type": "Question", "name": question, "acceptedAnswer": {"@type": "Answer", "text": answer}}
+        for question, answer in service["faq"]
+    ]}
+    index = SEO_PAGES.index(service)
+    related = [SEO_PAGES[(index + offset) % len(SEO_PAGES)] for offset in (1, 2, 3)]
+    return render_template("service.html", service=service, service_schema=service_schema,
+                           service_faq_schema=faq_schema, related_services=related,
+                           breadcrumb_schema=breadcrumb([("Home", f"{SITE_URL}/"), (service["title"], canonical)]))
+
+
 @app.route("/robots.txt")
 def robots():
     return send_from_directory(APP_DIR / "static", "robots.txt", mimetype="text/plain")
@@ -135,7 +157,9 @@ def thank_you():
 
 @app.route("/sitemap.xml")
 def sitemap():
-    urls = [f"{SITE_URL}/", f"{SITE_URL}/services"] + [f"{SITE_URL}/services/{s['slug']}" for s in SERVICES]
+    urls = ([f"{SITE_URL}/", f"{SITE_URL}/services"] +
+            [f"{SITE_URL}/services/{s['slug']}" for s in SERVICES] +
+            [f"{SITE_URL}{page['path']}" for page in SEO_PAGES])
     body = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(f"<url><loc>{url}</loc></url>\n" for url in urls) + "</urlset>"
     return app.response_class(body, mimetype="application/xml")
 
