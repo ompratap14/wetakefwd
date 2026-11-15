@@ -76,6 +76,13 @@ class WebsiteTests(unittest.TestCase):
                 self.assertIn('"@type": "Service"', html)
                 self.assertIn('"@type": "FAQPage"', html)
 
+    def test_legacy_keyword_urls_redirect_permanently(self):
+        for old_slug, new_slug in site.LEGACY_SEO_REDIRECTS.items():
+            with self.subTest(old_slug=old_slug):
+                response = self.client.get(f"/{old_slug}")
+                self.assertEqual(response.status_code, 301)
+                self.assertEqual(response.headers["Location"], f"/{new_slug}")
+
     def test_old_database_preserved_and_contact_saved(self):
         with closing(sqlite3.connect(site.DB_PATH)) as db, db:
             db.execute("CREATE TABLE leads (id INTEGER PRIMARY KEY, name TEXT, email TEXT, company TEXT, service TEXT, message TEXTn)")

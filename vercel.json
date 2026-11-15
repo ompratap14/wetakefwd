@@ -3,5 +3,13 @@
   "framework": null,
   "outputDirectory": "dist",
   "installCommand": "echo Static site: no dependencies to install",
-  "buildCommand": "echo Static site: using committed dist directory"
+  "buildCommand": "echo Static site: using committed dist directory",
+  "redirects": [
+    { "source": "/ai-development", "destination": "/ai-development-company-india", "permanent": true },
+    { "source": "/ai-automation", "destination": "/best-ai-automation-company-india", "permanent": true },
+    { "source": "/ai-agents", "destination": "/ai-agent-development", "permanent": true },
+    { "source": "/business-automation", "destination": "/business-automation-services", "permanent": true },
+    { "source": "/software-development", "destination": "/custom-software-development", "permanent": true },
+    { "source": "/chatbot-development", "destination": "/ai-chatbot-development", "permanent": true }
+  ]
 }

@@ -46,6 +46,14 @@ if os.getenv("FLASK_ENV") == "production":
 
 SERVICE_BY_SLUG = {service["slug"]: service for service in SERVICES}
 SEO_PAGE_BY_SLUG = {page["slug"]: page for page in SEO_PAGES}
+LEGACY_SEO_REDIRECTS = {
+    "ai-development": "ai-development-company-india",
+    "ai-automation": "best-ai-automation-company-india",
+    "ai-agents": "ai-agent-development",
+    "chatbot-development": "ai-chatbot-development",
+    "software-development": "custom-software-development",
+    "business-automation": "business-automation-services",
+}
 FEATURED_SLUGS = ["ai-business-automation", "ai-agents-chatbots", "whatsapp-crm-automation", "lead-generation", "website-app-development", "meta-google-ads"]
 
 
@@ -126,6 +134,8 @@ def service_page(slug):
 
 @app.route("/<slug>")
 def seo_service_page(slug):
+    if slug in LEGACY_SEO_REDIRECTS:
+        return redirect(url_for("seo_service_page", slug=LEGACY_SEO_REDIRECTS[slug]), code=301)
     service = SEO_PAGE_BY_SLUG.get(slug)
     if service is None:
         abort(404)
