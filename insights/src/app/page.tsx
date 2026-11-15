@@ -5,7 +5,7 @@ import { CoverImage } from "@/components/cover-image";
 import { EmptyState } from "@/components/empty-state";
 import { NewsletterSection } from "@/components/newsletter-section";
 import { NumberedList } from "@/components/numbered-list";
-import { categoryRecord, featuredArticle, latestArticles } from "@/lib/queries";
+import { categoryRecord, latestArticles } from "@/lib/queries";
 import { plainText } from "@/lib/article-content";
 
 export const dynamic = "force-dynamic";
@@ -20,21 +20,22 @@ const editorialSections = [
 ];
 
 export default async function HomePage() {
-  const [featured, latest, sections] = await Promise.all([
-    featuredArticle(),
-    latestArticles(6),
+  const [latestPublished, sections] = await Promise.all([
+    latestArticles(7),
     Promise.all(editorialSections.map(async (section) => {
       const category = await categoryRecord(section.slug);
       return { ...section, articles: category?.id ? await latestArticles(4, 0, category.id) : [] };
     })),
   ]);
+  const featured = latestPublished[0] ?? null;
+  const latest = latestPublished.slice(1);
   const featuredReadingTime = featured ? Math.max(1, Math.ceil(plainText(featured.body).split(/\s+/).length / 220)) : 0;
 
   return <>
     <section className="home-featured"><div className="page-width">
       {featured ? <div className="home-featured-grid">
         <CoverImage article={featured} priority sizes="(max-width: 800px) 100vw, 58vw" />
-        <div className="home-featured-copy"><CategoryTag name={featured.category.name} slug={featured.category.slug} suffix="Featured" /><h1><Link href={`/article/${featured.slug}`}>{featured.title}</Link></h1><p>{featured.summary}</p><div className="featured-meta">By <Link href={`/author/${featured.author.slug}`}>{featured.author.name}</Link> · {featuredReadingTime} min read</div></div>
+        <div className="home-featured-copy"><CategoryTag name={featured.category.name} slug={featured.category.slug} suffix="Latest story" /><h1><Link href={`/article/${featured.slug}`}>{featured.title}</Link></h1><p>{featured.summary}</p><div className="featured-meta">By <Link href={`/author/${featured.author.slug}`}>{featured.author.name}</Link> · {featuredReadingTime} min read</div></div>
       </div> : <EmptyState />}
     </div></section>
 
