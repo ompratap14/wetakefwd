@@ -35,6 +35,7 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+{% block site_intro %}{% endblock %}
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="{{ url_for('home') }}" aria-label="WeTakeFWD home"><img src="{{ url_for('static', filename='images/official-logo-transparent.png') }}" width="2560" height="640" alt="WeTakeFWD"></a>
