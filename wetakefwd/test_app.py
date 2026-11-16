@@ -68,6 +68,8 @@ class WebsiteTests(unittest.TestCase):
         self.assertIn('/static/video/wetakefwd-intro.mp4', home)
         self.assertIn('playsinline', home)
         self.assertIn('/static/js/premium.js', home)
+        self.assertIn('We can only see a short distance ahead', home)
+        self.assertIn('/static/images/alan-turing-1951.jpg', home)
         self.assertIn('<meta name="viewport" content="width=device-width,initial-scale=1">', home)
         directory = self.client.get('/services').get_data(as_text=True)
         self.assertIn('data-filter="systems"', directory)
