@@ -25,7 +25,7 @@ class WebsiteTests(unittest.TestCase):
         self.values = dict(name="Test visitor", email="test@example.com", company="", service="Not sure yet", message="Test enquiry")
 
     def test_pages_and_primary_contact_link(self):
-        for path in (["/", "/services", "/robots.txt", "/sitemap.xml"] +
+        for path in (["/", "/services", "/robots.txt", "/sitemap.xml", "/llms.txt"] +
                      ["/services/" + s["slug"] for s in site.SERVICES] +
                      [page["path"] for page in site.SEO_PAGES]):
             with self.subTest(path=path):
@@ -54,6 +54,8 @@ class WebsiteTests(unittest.TestCase):
         self.assertIn('action="https://api.web3forms.com/submit"', home)
         self.assertIn('name="redirect" value="https://www.wetakefwd.online/thank-you/"', home)
         self.assertIn('"@type": "Organization"', home)
+        self.assertIn('"@type": "WebSite"', home)
+        self.assertIn('/ai-development-company-india', home)
         self.assertNotIn('class="intro-skip"', home)
         self.assertIn('WeTakeFWD turns ambitious businesses', home)
         self.assertIn('<em>AI-powered operators.</em>', home)
@@ -65,6 +67,8 @@ class WebsiteTests(unittest.TestCase):
         self.assertIn('data-example-panel="future" hidden', service)
         sitemap = self.client.get('/sitemap.xml').get_data(as_text=True)
         self.assertEqual(sitemap.count('<url>'), len(paths))
+        self.assertEqual(sitemap.count('<lastmod>2026-11-16</lastmod>'), len(paths))
+        self.assertIn('<priority>1.0</priority>', sitemap)
 
     def test_keyword_landing_pages_own_their_search_intent(self):
         for page in site.SEO_PAGES:

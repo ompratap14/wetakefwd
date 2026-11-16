@@ -89,6 +89,15 @@ ORGANIZATION_SCHEMA = {
     "email": "wetakefwd@gmail.com", "telephone": "+91-8191904121",
     "areaServed": {"@type": "Country", "name": "India"},
     "sameAs": ["https://www.linkedin.com/company/wetakefwd-369/", "https://www.instagram.com/weta_kefwd", "https://x.com/wetakefwd"],
+    "knowsAbout": ["AI development", "AI automation", "AI agents", "business process automation", "custom software development", "AI chatbots"],
+    "contactPoint": {"@type": "ContactPoint", "telephone": "+91-8191904121", "email": "wetakefwd@gmail.com", "contactType": "sales", "areaServed": "IN", "availableLanguage": ["English", "Hindi"]},
+}
+
+WEBSITE_SCHEMA = {
+    "@context": "https://schema.org", "@type": "WebSite", "@id": f"{SITE_URL}/#website",
+    "url": SITE_URL, "name": "WeTakeFWD", "alternateName": "We Take Forward",
+    "description": "AI development, automation and custom software for businesses in India.",
+    "publisher": {"@id": f"{SITE_URL}/#organization"}, "inLanguage": "en-IN",
 }
 
 
@@ -107,7 +116,7 @@ def home():
         {"@type": "Question", "name": item["question"], "acceptedAnswer": {"@type": "Answer", "text": item["answer"]}}
         for item in HOME_FAQ
     ]}
-    return render_template("home_v2.html", organization_schema=ORGANIZATION_SCHEMA, home_faq=HOME_FAQ,
+    return render_template("home_v2.html", organization_schema=ORGANIZATION_SCHEMA, website_schema=WEBSITE_SCHEMA, home_faq=HOME_FAQ,
                            home_faq_schema=faq_schema, featured_services=[SERVICE_BY_SLUG[slug] for slug in FEATURED_SLUGS])
 
 
@@ -168,6 +177,11 @@ def robots():
     return send_from_directory(APP_DIR / "static", "robots.txt", mimetype="text/plain")
 
 
+@app.route("/llms.txt")
+def llms():
+    return send_from_directory(APP_DIR / "static", "llms.txt", mimetype="text/plain")
+
+
 @app.route("/thank-you/")
 def thank_you():
     return render_template("thank_you.html")
@@ -178,7 +192,17 @@ def sitemap():
     urls = ([f"{SITE_URL}/", f"{SITE_URL}/services"] +
             [f"{SITE_URL}/services/{s['slug']}" for s in SERVICES] +
             [f"{SITE_URL}{page['path']}" for page in SEO_PAGES])
-    body = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(f"<url><loc>{url}</loc></url>\n" for url in urls) + "</urlset>"
+    updated = "2026-11-16"
+    entries = []
+    for url in urls:
+        if url == f"{SITE_URL}/":
+            priority, frequency = "1.0", "weekly"
+        elif url == f"{SITE_URL}/services":
+            priority, frequency = "0.9", "monthly"
+        else:
+            priority, frequency = "0.8", "monthly"
+        entries.append(f"<url><loc>{url}</loc><lastmod>{updated}</lastmod><changefreq>{frequency}</changefreq><priority>{priority}</priority></url>\n")
+    body = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(entries) + "</urlset>"
     return app.response_class(body, mimetype="application/xml")
 
 

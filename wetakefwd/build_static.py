@@ -43,7 +43,7 @@ def build():
             destination = OUTPUT / route.strip('/') / 'index.html'
             destination.parent.mkdir(parents=True, exist_ok=True)
             destination.write_bytes(response.data)
-        for name in ('robots.txt', 'sitemap.xml'):
+        for name in ('robots.txt', 'sitemap.xml', 'llms.txt'):
             response = client.get('/' + name)
             if response.status_code != 200:
                 raise RuntimeError(f'Cannot export {name}')
