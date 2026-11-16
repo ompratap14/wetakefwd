@@ -31,7 +31,7 @@ class WebsiteTests(unittest.TestCase):
             with self.subTest(path=path):
                 with self.client.get(path) as response:
                     self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Design your first workflow', self.client.get("/").data)
+        self.assertIn(b'Start a project', self.client.get("/").data)
         self.assertIn(b"/services/ongoing-support", self.client.get("/services").data)
         self.assertEqual(self.client.get("/services/unknown").status_code, 404)
 
@@ -50,15 +50,14 @@ class WebsiteTests(unittest.TestCase):
                 self.assertNotIn(title, titles)
                 titles.add(title)
         home = self.client.get('/').get_data(as_text=True)
-        self.assertIn('We build practical AI applications, agents, software and connected workflows', home)
+        self.assertIn('remove repetitive work, respond faster and build connected systems', home)
         self.assertIn('action="https://api.web3forms.com/submit"', home)
         self.assertIn('name="redirect" value="https://www.wetakefwd.online/thank-you/"', home)
         self.assertIn('"@type": "Organization"', home)
         self.assertIn('/static/images/profile-picture-transparent.png', home)
-        self.assertIn('/static/images/official-logo-transparent.png', home)
-        self.assertIn('class="intro-skip"', home)
-        self.assertIn('Build a business', home)
-        self.assertIn('that moves <em>forward.</em>', home)
+        self.assertNotIn('class="intro-skip"', home)
+        self.assertIn('WeTakeFWD turns growing businesses', home)
+        self.assertIn('<em>AI-powered operators.</em>', home)
         directory = self.client.get('/services').get_data(as_text=True)
         self.assertIn('data-filter="systems"', directory)
         self.assertIn('data-filter-count', directory)
