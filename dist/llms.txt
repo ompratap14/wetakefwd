@@ -11,6 +11,7 @@
 - [Business Automation Services](https://www.wetakefwd.online/business-automation-services): Connected business processes and handoffs
 - [Custom Software Development](https://www.wetakefwd.online/custom-software-development): Purpose-built business software
 - [AI Chatbot Development](https://www.wetakefwd.online/ai-chatbot-development): Customer and internal conversational systems
+- [AI Automation for Clinics in Delhi NCR](https://www.wetakefwd.online/ai-automation-for-clinics-delhi-ncr): Free 20-minute workflow audit for clinics and diagnostic centres
 - [Insights](https://insights.wetakefwd.online/): Practical articles on AI and automation
 
 ## Contact

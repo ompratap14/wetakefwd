@@ -161,6 +161,8 @@ def seo_service_page(slug):
                       "description": service["summary"], "url": canonical,
                       "provider": {"@id": f"{SITE_URL}/#organization"},
                       "areaServed": area_served}
+    if service.get("offer"):
+        service_schema["offers"] = {"@type": "Offer", "name": service["offer"], "price": "0", "priceCurrency": "INR", "availability": "https://schema.org/InStock", "url": canonical}
     faq_schema = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
         {"@type": "Question", "name": question, "acceptedAnswer": {"@type": "Answer", "text": answer}}
         for question, answer in service["faq"]

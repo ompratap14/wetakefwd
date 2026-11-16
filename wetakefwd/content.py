@@ -62,3 +62,23 @@ AI_LOCATION_PAGES = [
 ]
 
 SEO_PAGES.extend(AI_LOCATION_PAGES)
+
+CLINIC_AUTOMATION_PAGE = dict(
+    slug="ai-automation-for-clinics-delhi-ncr", path="/ai-automation-for-clinics-delhi-ncr",
+    location="Delhi NCR", primary_keyword="AI Automation for Clinics in Delhi NCR",
+    title="AI Automation for Clinics in Delhi NCR", short_title="clinic AI automation",
+    category="HEALTHCARE / DELHI NCR", offer="Free 20-minute AI Automation Audit",
+    summary="Find one practical way to reduce repetitive enquiry, appointment and follow-up work while keeping clinic staff in control.",
+    intro="Clinics and diagnostic centres often manage appointment questions, reminders, reports and follow-ups across calls, WhatsApp and reception desks. WeTakeFWD's free 20-minute AI Automation Audit maps one high-friction workflow and identifies a sensible first improvement without forcing a large technology project.",
+    detail="The audit focuses on operations rather than clinical decisions. We review how a request arrives, who handles it, where information is repeated, what requires consent and when a person must step in. You receive a concise first-step recommendation covering the workflow, possible tools, safeguards and what would need to be verified before implementation.",
+    includes=["20-minute workflow discovery call", "One prioritised automation opportunity", "Suggested human checkpoints and safeguards", "A concise recommended first step"],
+    use_case="A clinic receiving appointment requests through WhatsApp can acknowledge the request, collect non-clinical booking details and alert reception, while changes, sensitive questions and exceptions remain with authorised staff.",
+    meta_title="AI Automation for Clinics in Delhi NCR | Free Audit",
+    meta_description="Book a free 20-minute AI automation audit for clinics and diagnostic centres in Delhi NCR. Identify a practical first workflow with human oversight.",
+    faq=[
+        ("What happens during the free clinic automation audit?", "We map one repeated administrative workflow, identify the main delay or duplication and discuss a practical first improvement. It is a discovery conversation, not a medical or compliance assessment."),
+        ("Will AI communicate medical advice to patients?", "That is not the purpose of this offer. We focus on administrative workflows such as enquiry handling, appointment coordination, reminders and routing, with clear human control and appropriate professional review."),
+        ("Do we need to replace our existing software?", "Not necessarily. We first review the tools and channels already in use. Any integration, privacy, consent or security dependency must be confirmed before implementation."),
+    ],
+)
+SEO_PAGES.append(CLINIC_AUTOMATION_PAGE)
