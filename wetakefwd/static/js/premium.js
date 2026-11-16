@@ -6,7 +6,7 @@ const videoIntro=document.querySelector('[data-video-intro]'),introVideo=documen
 if(videoIntro){
   let seen=false;
   try{seen=sessionStorage.getItem('wetakefwd-intro-seen')==='1'}catch(error){}
-  const closeIntro=()=>{if(videoIntro.classList.contains('is-closing'))return;videoIntro.classList.add('is-closing');document.body.classList.remove('intro-active');try{sessionStorage.setItem('wetakefwd-intro-seen','1')}catch(error){}setTimeout(()=>videoIntro.remove(),500)};
+  const closeIntro=()=>{if(videoIntro.classList.contains('is-closing'))return;videoIntro.classList.add('is-closing');document.body.classList.remove('intro-active');try{sessionStorage.setItem('wetakefwd-intro-seen','1')}catch(error){}window.dispatchEvent(new CustomEvent('wetakefwd:intro-complete'));setTimeout(()=>videoIntro.remove(),500)};
   if(seen||window.matchMedia('(prefers-reduced-motion: reduce)').matches){videoIntro.remove()}else{
     document.body.classList.add('intro-active');
     introSkip?.addEventListener('click',closeIntro);
@@ -16,3 +16,17 @@ if(videoIntro){
     setTimeout(closeIntro,6500);
   }
 }
+
+const setupFlyingText=()=>{
+  const home=document.querySelector('.neo-home');
+  if(!home||home.dataset.flyReady||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  home.dataset.flyReady='true';
+  const directions=['left','right','up','down'];
+  const items=[...home.querySelectorAll('section h1,section h2,section h3,section p,.neo-eyebrow,.neo-card-link,.neo-method-grid span,.neo-authority-grid span')].filter(item=>!item.closest('.neo-form'));
+  items.forEach((item,index)=>{item.classList.add('fly-text');item.dataset.flyDir=directions[index%directions.length];item.style.setProperty('--fly-delay',`${Math.min((index%5)*55,220)}ms`)});
+  const settle=item=>item.classList.add('is-settled');
+  if(!('IntersectionObserver'in window)){items.forEach(settle);return}
+  const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){settle(entry.target);observer.unobserve(entry.target)}}),{threshold:.12,rootMargin:'0px 0px -7%'});
+  items.forEach(item=>observer.observe(item));
+};
+if(document.querySelector('[data-video-intro]')&&!document.querySelector('[data-video-intro]').classList.contains('is-closing'))window.addEventListener('wetakefwd:intro-complete',setupFlyingText,{once:true});else setupFlyingText();
