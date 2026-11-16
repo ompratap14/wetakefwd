@@ -11,7 +11,7 @@ if (intro && document.documentElement.classList.contains('intro-pending')) {
       document.documentElement.classList.remove('intro-pending', 'intro-leaving');
       background.forEach(node => { node.inert = false; });
       if (intro.contains(document.activeElement)) document.getElementById('main')?.focus({ preventScroll: true });
-      try { sessionStorage.setItem('wtf-intro-seen', '1'); sessionStorage.setItem('wtf-intro-v3', '1'); } catch (_) {}
+      try { sessionStorage.setItem('wtf-intro-seen', '1'); sessionStorage.setItem('wtf-intro-v3', '1'); sessionStorage.setItem('wtf-intro-v4', '1'); } catch (_) {}
     }, 400);
   };
   intro.querySelector('.intro-skip')?.addEventListener('click', finish);
