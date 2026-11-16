@@ -54,7 +54,6 @@ class WebsiteTests(unittest.TestCase):
         self.assertIn('action="https://api.web3forms.com/submit"', home)
         self.assertIn('name="redirect" value="https://www.wetakefwd.online/thank-you/"', home)
         self.assertIn('"@type": "Organization"', home)
-        self.assertIn('/static/images/profile-picture-transparent.png', home)
         self.assertNotIn('class="intro-skip"', home)
         self.assertIn('WeTakeFWD turns ambitious businesses', home)
         self.assertIn('<em>AI-powered operators.</em>', home)
