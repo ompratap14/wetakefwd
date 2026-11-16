@@ -32,6 +32,7 @@ class WebsiteTests(unittest.TestCase):
                 with self.client.get(path) as response:
                     self.assertEqual(response.status_code, 200)
         self.assertIn(b'Start a project', self.client.get("/").data)
+        self.assertIn(b'class="floating-project-cta"', self.client.get("/").data)
         self.assertIn(b"/services/ongoing-support", self.client.get("/services").data)
         self.assertEqual(self.client.get("/services/unknown").status_code, 404)
 
