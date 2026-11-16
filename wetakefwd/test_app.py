@@ -31,7 +31,7 @@ class WebsiteTests(unittest.TestCase):
             with self.subTest(path=path):
                 with self.client.get(path) as response:
                     self.assertEqual(response.status_code, 200)
-        self.assertIn(b'href="#contact">Tell us your goal', self.client.get("/").data)
+        self.assertIn(b'href="#contact">Design your first workflow', self.client.get("/").data)
         self.assertIn(b"/services/ongoing-support", self.client.get("/services").data)
         self.assertEqual(self.client.get("/services/unknown").status_code, 404)
 
@@ -57,7 +57,8 @@ class WebsiteTests(unittest.TestCase):
         self.assertIn('/static/images/profile-picture-transparent.png', home)
         self.assertIn('/static/images/official-logo-transparent.png', home)
         self.assertIn('class="intro-skip"', home)
-        self.assertIn('AI development<br><em>company in India.', home)
+        self.assertIn('Put AI to work.', home)
+        self.assertIn('Keep people in control.', home)
         directory = self.client.get('/services').get_data(as_text=True)
         self.assertIn('data-filter="systems"', directory)
         self.assertIn('data-filter-count', directory)
