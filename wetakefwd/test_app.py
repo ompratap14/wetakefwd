@@ -151,6 +151,39 @@ class WebsiteTests(unittest.TestCase):
                 self.assertIn('href="/mobile-app-development"', html)
                 self.assertIn('href="/custom-software-development"', html)
 
+    def test_nested_city_service_pages_are_complete_and_connected(self):
+        requested = {
+            "/website-development/etah", "/website-development/agra", "/website-development/aligarh", "/website-development/mathura",
+            "/app-development/etah", "/app-development/agra", "/app-development/aligarh", "/app-development/mathura",
+            "/software-development/etah", "/software-development/agra", "/software-development/aligarh", "/software-development/mathura",
+            "/ecommerce-development/etah", "/ecommerce-development/agra", "/ecommerce-development/aligarh", "/ecommerce-development/mathura",
+            "/ai-automation/etah", "/ai-automation/agra", "/ai-automation/aligarh", "/ai-automation/noida",
+            "/business-automation/etah", "/business-automation/agra",
+            "/school-website-development/etah", "/school-website-development/agra",
+            "/restaurant-website-development/etah", "/restaurant-website-development/agra",
+            "/custom-crm-development/agra", "/custom-software-development/noida",
+        }
+        self.assertEqual({page["path"] for page in site.CITY_SERVICE_DETAIL_PAGES}, requested)
+        self.assertEqual(len({page["meta_title"] for page in site.CITY_SERVICE_DETAIL_PAGES}), len(requested))
+        self.assertEqual(len({page["meta_description"] for page in site.CITY_SERVICE_DETAIL_PAGES}), len(requested))
+        directory = self.client.get("/services").get_data(as_text=True)
+        sitemap = self.client.get("/sitemap.xml").get_data(as_text=True)
+        for page in site.CITY_SERVICE_DETAIL_PAGES:
+            with self.subTest(path=page["path"]):
+                self.assertIn(f'href="{page["path"]}"', directory)
+                self.assertIn(f"<loc>{site.SITE_URL}{page['path']}</loc>", sitemap)
+                html = self.client.get(page["path"]).get_data(as_text=True)
+                self.assertIn(page["primary_keyword"], html)
+                self.assertIn('"areaServed"', html)
+                self.assertIn(page["related_paths"][0], html)
+
+    def test_old_app_city_urls_redirect_to_nested_urls(self):
+        for old_slug, destination in site.LEGACY_PATH_REDIRECTS.items():
+            with self.subTest(old_slug=old_slug):
+                response = self.client.get(f"/{old_slug}")
+                self.assertEqual(response.status_code, 301)
+                self.assertEqual(response.headers["Location"], destination)
+
     def test_legacy_keyword_urls_redirect_permanently(self):
         for old_slug, new_slug in site.LEGACY_SEO_REDIRECTS.items():
             with self.subTest(old_slug=old_slug):

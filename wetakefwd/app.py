@@ -12,7 +12,7 @@ import requests
 from flask import Flask, abort, redirect, render_template, request, send_from_directory, session, url_for
 from werkzeug.security import check_password_hash
 
-from content import AI_LOCATION_PAGES, APP_DEVELOPMENT_CITY_PAGES, CITY_SERVICE_PAGES, HOME_FAQ, LOCATION_MARKETING_PAGES, SEO_PAGES, SERVICES, SITE_URL
+from content import AI_LOCATION_PAGES, APP_DEVELOPMENT_CITY_PAGES, CITY_SERVICE_DETAIL_PAGES, CITY_SERVICE_PAGES, HOME_FAQ, LOCATION_MARKETING_PAGES, SEO_PAGES, SERVICES, SITE_URL
 
 APP_DIR = Path(__file__).resolve().parent
 
@@ -46,6 +46,8 @@ if os.getenv("FLASK_ENV") == "production":
 
 SERVICE_BY_SLUG = {service["slug"]: service for service in SERVICES}
 SEO_PAGE_BY_SLUG = {page["slug"]: page for page in SEO_PAGES}
+SEO_PAGE_BY_PATH = {page["path"]: page for page in SEO_PAGES}
+RELATED_PAGE_BY_PATH = SEO_PAGE_BY_PATH | {f"/services/{service['slug']}": service for service in SERVICES}
 LEGACY_SEO_REDIRECTS = {
     "ai-development": "ai-development-company-india",
     "ai-automation": "best-ai-automation-company-india",
@@ -53,6 +55,12 @@ LEGACY_SEO_REDIRECTS = {
     "chatbot-development": "ai-chatbot-development",
     "software-development": "custom-software-development",
     "business-automation": "business-automation-services",
+}
+LEGACY_PATH_REDIRECTS = {
+    "app-development-etah": "/app-development/etah",
+    "app-development-agra": "/app-development/agra",
+    "app-development-aligarh": "/app-development/aligarh",
+    "app-development-mathura": "/app-development/mathura",
 }
 FEATURED_SLUGS = ["ai-business-automation", "ai-agents-chatbots", "whatsapp-crm-automation", "lead-generation", "website-app-development", "meta-google-ads"]
 
@@ -108,6 +116,7 @@ def site_context():
             "ai_location_pages": AI_LOCATION_PAGES,
             "city_service_pages": CITY_SERVICE_PAGES,
             "app_development_city_pages": APP_DEVELOPMENT_CITY_PAGES,
+            "city_service_detail_pages": CITY_SERVICE_DETAIL_PAGES,
             "web3forms_access_key": os.getenv("WEB3FORMS_ACCESS_KEY", "f8858610-b7af-44d5-9073-b2eeefbca47f"),
             "current_year": datetime.now(timezone.utc).year}
 
@@ -147,6 +156,8 @@ def service_page(slug):
 
 @app.route("/<slug>")
 def seo_service_page(slug):
+    if slug in LEGACY_PATH_REDIRECTS and request.path == f"/{slug}":
+        return redirect(LEGACY_PATH_REDIRECTS[slug], code=301)
     if slug in LEGACY_SEO_REDIRECTS:
         return redirect(url_for("seo_service_page", slug=LEGACY_SEO_REDIRECTS[slug]), code=301)
     service = SEO_PAGE_BY_SLUG.get(slug)
@@ -171,6 +182,8 @@ def seo_service_page(slug):
     ]}
     if service in CITY_SERVICE_PAGES:
         related = [SEO_PAGE_BY_SLUG[slug] for slug in ("custom-software-development", "business-automation-services", "ai-agent-development")]
+    elif service in CITY_SERVICE_DETAIL_PAGES:
+        related = [RELATED_PAGE_BY_PATH[path] for path in service["related_paths"]]
     elif service in APP_DEVELOPMENT_CITY_PAGES:
         related = [SEO_PAGE_BY_SLUG[slug] for slug in ("mobile-app-development", "custom-software-development", "ai-agent-development")]
     else:
@@ -179,6 +192,14 @@ def seo_service_page(slug):
     return render_template("service.html", service=service, service_schema=service_schema,
                            service_faq_schema=faq_schema, related_services=related,
                            breadcrumb_schema=breadcrumb([("Home", f"{SITE_URL}/"), (service["title"], canonical)]))
+
+
+@app.route("/<service_slug>/<city_slug>")
+def nested_city_service_page(service_slug, city_slug):
+    service = SEO_PAGE_BY_PATH.get(f"/{service_slug}/{city_slug}")
+    if service is None:
+        abort(404)
+    return seo_service_page(service["slug"])
 
 
 @app.route("/robots.txt")

@@ -10,6 +10,10 @@
     { "source": "/ai-agents", "destination": "/ai-agent-development", "permanent": true },
     { "source": "/business-automation", "destination": "/business-automation-services", "permanent": true },
     { "source": "/software-development", "destination": "/custom-software-development", "permanent": true },
-    { "source": "/chatbot-development", "destination": "/ai-chatbot-development", "permanent": true }
+    { "source": "/chatbot-development", "destination": "/ai-chatbot-development", "permanent": true },
+    { "source": "/app-development-etah", "destination": "/app-development/etah", "permanent": true },
+    { "source": "/app-development-agra", "destination": "/app-development/agra", "permanent": true },
+    { "source": "/app-development-aligarh", "destination": "/app-development/aligarh", "permanent": true },
+    { "source": "/app-development-mathura", "destination": "/app-development/mathura", "permanent": true }
   ]
 }

@@ -1,3 +1,5 @@
+from city_service_pages import NESTED_CITY_SERVICE_PAGES
+
 SITE_URL = "https://www.wetakefwd.online"
 
 SERVICES = [
@@ -99,7 +101,7 @@ SEO_PAGES.extend(CITY_SERVICE_PAGES)
 
 APP_DEVELOPMENT_CITY_PAGES = [
     dict(
-        slug="app-development-etah", path="/app-development-etah", location="Etah",
+        slug="app-development-etah", path="/app-development/etah", location="Etah", parent_path="/mobile-app-development",
         primary_keyword="App Development in Etah", title="App Development in Etah",
         short_title="Etah app development", category="ETAH / APP DEVELOPMENT",
         summary="Focused mobile and web applications for Etah schools, service businesses, retailers and growing operational teams.",
@@ -116,7 +118,7 @@ APP_DEVELOPMENT_CITY_PAGES = [
         ],
     ),
     dict(
-        slug="app-development-agra", path="/app-development-agra", location="Agra",
+        slug="app-development-agra", path="/app-development/agra", location="Agra", parent_path="/mobile-app-development",
         primary_keyword="App Development in Agra", title="App Development in Agra",
         short_title="Agra app development", category="AGRA / APP DEVELOPMENT",
         summary="Mobile and web applications for Agra hospitality, tourism, retail, professional services and operational teams.",
@@ -133,7 +135,7 @@ APP_DEVELOPMENT_CITY_PAGES = [
         ],
     ),
     dict(
-        slug="app-development-aligarh", path="/app-development-aligarh", location="Aligarh",
+        slug="app-development-aligarh", path="/app-development/aligarh", location="Aligarh", parent_path="/mobile-app-development",
         primary_keyword="App Development in Aligarh", title="App Development in Aligarh",
         short_title="Aligarh app development", category="ALIGARH / APP DEVELOPMENT",
         summary="Practical mobile and web apps for Aligarh manufacturers, educational organisations, distributors and service teams.",
@@ -150,7 +152,7 @@ APP_DEVELOPMENT_CITY_PAGES = [
         ],
     ),
     dict(
-        slug="app-development-mathura", path="/app-development-mathura", location="Mathura",
+        slug="app-development-mathura", path="/app-development/mathura", location="Mathura", parent_path="/mobile-app-development",
         primary_keyword="App Development in Mathura", title="App Development in Mathura",
         short_title="Mathura app development", category="MATHURA / APP DEVELOPMENT",
         summary="Customer and operations applications for Mathura hospitality, local services, education, retail and visitor-focused businesses.",
@@ -203,6 +205,19 @@ APP_DEVELOPMENT_CITY_PAGES = [
 ]
 
 SEO_PAGES.extend(APP_DEVELOPMENT_CITY_PAGES)
+
+SEO_PAGES.extend(NESTED_CITY_SERVICE_PAGES)
+CITY_SERVICE_DETAIL_PAGES = [
+    page for page in APP_DEVELOPMENT_CITY_PAGES
+    if page["location"] in {"Etah", "Agra", "Aligarh", "Mathura"}
+] + NESTED_CITY_SERVICE_PAGES
+
+for page in CITY_SERVICE_DETAIL_PAGES:
+    city_peers = [
+        candidate["path"] for candidate in CITY_SERVICE_DETAIL_PAGES
+        if candidate["location"] == page["location"] and candidate["path"] != page["path"]
+    ]
+    page["related_paths"] = [page["parent_path"], *city_peers[:2]]
 
 AI_LOCATION_PAGES = [
     dict(slug="ai-agency-delhi", path="/ai-agency-delhi", location="Delhi", primary_keyword="AI Agency in Delhi", title="AI Agency in Delhi", short_title="Delhi AI solutions", category="DELHI / AI SOLUTIONS", summary="Practical AI agents, automation and custom applications for Delhi businesses that want measurable operational improvement.", intro="WeTakeFWD helps Delhi businesses move from AI ideas to controlled, useful systems. We begin with a specific workflow, the information it depends on and the decisions that must remain with people, then design the smallest reliable solution that can prove value.", detail="Projects can combine AI agents, knowledge assistants, document processing, CRM automation and custom software. Every scope includes clear permissions, testing, human escalation and a plan for what happens after launch—not just a demonstration.", includes=["AI opportunity and workflow discovery", "AI agents and knowledge assistants", "Business automation and integrations", "Evaluation, guardrails and human review"], use_case="A Delhi service company can use an AI assistant to classify enquiries, find approved service information, prepare a response and ask a team member to approve it before anything is sent.", meta_title="AI Agency in Delhi | Agents & Automation — WeTakeFWD", meta_description="AI agency serving Delhi businesses with AI agents, workflow automation, knowledge assistants and custom AI applications built with human oversight.", faq=[("What should I look for in the best AI agency in Delhi?", "Look for clear problem definition, evidence-based scoping, secure data handling, evaluation, human controls and realistic ownership after launch—not broad claims or a model demo alone."), ("Does WeTakeFWD work with businesses throughout Delhi?", "Yes. We can deliver remotely and shape the solution around your team, systems and service area. Any on-site requirement is agreed during discovery.")]),
