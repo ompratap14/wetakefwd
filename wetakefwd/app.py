@@ -85,7 +85,7 @@ def breadcrumb(items):
 ORGANIZATION_SCHEMA = {
     "@context": "https://schema.org", "@type": "Organization", "@id": f"{SITE_URL}/#organization",
     "name": "WeTakeFWD", "alternateName": "We Take Forward", "url": SITE_URL,
-    "logo": f"{SITE_URL}/static/images/official-logo.png", "description": "AI automation and digital growth agency serving businesses in India.",
+    "logo": f"{SITE_URL}/static/images/official-logo.png", "description": "AI automation and digital growth services for businesses in India.",
     "email": "wetakefwd@gmail.com", "telephone": "+91-8191904121",
     "areaServed": {"@type": "Country", "name": "India"},
     "sameAs": ["https://www.linkedin.com/company/wetakefwd-369/", "https://www.instagram.com/weta_kefwd", "https://x.com/wetakefwd"],
