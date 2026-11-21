@@ -97,6 +97,113 @@ CITY_SERVICE_PAGES = [
 
 SEO_PAGES.extend(CITY_SERVICE_PAGES)
 
+APP_DEVELOPMENT_CITY_PAGES = [
+    dict(
+        slug="app-development-etah", path="/app-development-etah", location="Etah",
+        primary_keyword="App Development in Etah", title="App Development in Etah",
+        short_title="Etah app development", category="ETAH / APP DEVELOPMENT",
+        summary="Focused mobile and web applications for Etah schools, service businesses, retailers and growing operational teams.",
+        intro="An app is useful when customers or staff need to complete an important task repeatedly. For Etah organisations, that may mean admissions and parent communication, bookings, field updates, customer orders or a simpler way to manage work that currently moves through calls, paper and chat groups.",
+        detail="We begin with the users, the repeated task and the information they need. The first release stays focused, works well on everyday mobile devices and includes the administration, permissions and support plan required to keep it useful after launch.",
+        includes=["Mobile product and workflow discovery", "Responsive web apps and cross-platform applications", "Secure logins, roles and administration", "APIs, notifications and existing-system integrations"],
+        use_case="An Etah school can give parents one mobile-friendly place for notices, fee information and approved student updates while staff manage content through role-based controls.",
+        meta_title="App Development in Etah | Mobile & Web Apps — WeTakeFWD",
+        meta_description="App development in Etah for schools, shops and service businesses, including mobile-friendly web apps, portals, integrations and support.",
+        faq=[
+            ("What kinds of apps can you build for Etah businesses?", "We can build customer portals, booking and enquiry apps, school and staff workflows, field-service tools, dashboards and other focused applications based on a defined operational need."),
+            ("Do we need separate Android and iPhone apps?", "Not always. A responsive web app or cross-platform build may cover the audience more efficiently. We recommend an approach after reviewing device needs, offline use, notifications and budget."),
+            ("Can you improve an existing app or portal?", "Yes. We can review usability, performance, architecture and unfinished workflows before recommending a focused improvement plan."),
+        ],
+    ),
+    dict(
+        slug="app-development-agra", path="/app-development-agra", location="Agra",
+        primary_keyword="App Development in Agra", title="App Development in Agra",
+        short_title="Agra app development", category="AGRA / APP DEVELOPMENT",
+        summary="Mobile and web applications for Agra hospitality, tourism, retail, professional services and operational teams.",
+        intro="Agra businesses may serve residents, visitors, partners and staff through very different journeys. A focused app can make booking, service information, ordering, customer support or internal coordination easier without forcing every user through the same process.",
+        detail="We map the customer or team journey first, then define the smallest release that creates value. Projects can include multilingual content, booking and payment integrations, notifications, dashboards and a controlled handoff to staff when a request needs personal attention.",
+        includes=["Customer journey and app experience design", "Booking, ordering and service applications", "Payment, CRM and notification integrations", "Admin dashboards, analytics and ongoing improvement"],
+        use_case="An Agra experience provider can offer mobile booking, date and group selection, confirmation and support while its team manages availability and exceptions from one dashboard.",
+        meta_title="App Development in Agra | Mobile & Web Apps — WeTakeFWD",
+        meta_description="App development in Agra for hospitality, tourism, retail and service businesses, from product planning and UX to integrations and support.",
+        faq=[
+            ("Can you build a booking app for an Agra business?", "Yes. The scope can include availability, booking details, confirmations, payment integration and an administration view, subject to the operational and provider requirements."),
+            ("Can an app support more than one language?", "Yes, when the audience requires it. The content and interface should be properly translated, reviewed and maintained rather than automatically duplicated."),
+            ("Will the app connect with our website or CRM?", "Often yes. We assess the available APIs, data ownership and security requirements before confirming each integration."),
+        ],
+    ),
+    dict(
+        slug="app-development-aligarh", path="/app-development-aligarh", location="Aligarh",
+        primary_keyword="App Development in Aligarh", title="App Development in Aligarh",
+        short_title="Aligarh app development", category="ALIGARH / APP DEVELOPMENT",
+        summary="Practical mobile and web apps for Aligarh manufacturers, educational organisations, distributors and service teams.",
+        intro="An Aligarh organisation may need an application for customers, dealers, students, field staff or internal operations. The right product begins with the workflow—such as quotations, order visibility, service requests, attendance or document access—not with a long feature list.",
+        detail="We define roles, data, approvals and integrations before development. A phased release can prove the most important workflow first and reduce the risk of replacing spreadsheets, messaging groups or older software all at once.",
+        includes=["B2B, education and operations app discovery", "Dealer, customer and staff portals", "Workflow, document and approval features", "Backend APIs, dashboards and phased rollout"],
+        use_case="An Aligarh distributor can give dealers a mobile-friendly catalogue and enquiry flow while the sales team receives structured product, quantity and location details in an internal dashboard.",
+        meta_title="App Development in Aligarh | Business Apps — WeTakeFWD",
+        meta_description="App development in Aligarh for manufacturers, education, distribution and service teams, including portals, workflows, APIs and dashboards.",
+        faq=[
+            ("Can you build an app for a manufacturing or distribution workflow?", "Yes. We can scope catalogue, enquiry, dealer, order-status, field-service or internal approval workflows around the systems and roles already in place."),
+            ("Can the app work with weak or intermittent connectivity?", "Where the workflow requires it, we can plan caching or limited offline behaviour. The exact capability depends on the data, conflict rules and device environment."),
+            ("How do you decide the first version?", "We prioritise the smallest set of features that completes one valuable user journey and can be tested with real users before expansion."),
+        ],
+    ),
+    dict(
+        slug="app-development-mathura", path="/app-development-mathura", location="Mathura",
+        primary_keyword="App Development in Mathura", title="App Development in Mathura",
+        short_title="Mathura app development", category="MATHURA / APP DEVELOPMENT",
+        summary="Customer and operations applications for Mathura hospitality, local services, education, retail and visitor-focused businesses.",
+        intro="Mathura organisations can serve local customers, visitors and distributed teams with different information needs. A well-scoped app can simplify reservations, service requests, schedules, customer communication or staff coordination while keeping the human support route obvious.",
+        detail="We plan mobile usability, content management, permissions and integrations together. Where users do not need an app-store download, a progressive web app can offer a fast home-screen experience with easier distribution and maintenance.",
+        includes=["Visitor and local-customer journey design", "Reservations, schedules and service-request apps", "Progressive web and cross-platform development", "Content, notification and administration tools"],
+        use_case="A Mathura hospitality or experience team can publish current service information, collect reservation details and send confirmations while staff handle changes and special requests personally.",
+        meta_title="App Development in Mathura | Mobile & Web Apps — WeTakeFWD",
+        meta_description="App development in Mathura for hospitality, local services, education and retail, including booking, customer and operations applications.",
+        faq=[
+            ("Can you build an app for visitors as well as local customers?", "Yes. We can separate journeys, content and actions for each audience where their needs genuinely differ."),
+            ("Would a progressive web app be enough?", "Often it can be. A progressive web app is easier to open and update, while a native or cross-platform app may be better when deeper device features or app-store distribution are important."),
+            ("Can staff update information without a developer?", "Yes. We can include an administration area for approved staff to manage content, availability or workflow data based on their roles."),
+        ],
+    ),
+    dict(
+        slug="app-development-ghaziabad", path="/app-development-ghaziabad", location="Ghaziabad",
+        primary_keyword="App Development in Ghaziabad", title="App Development in Ghaziabad",
+        short_title="Ghaziabad app development", category="GHAZIABAD / APP DEVELOPMENT",
+        summary="Mobile and web applications for Ghaziabad service teams, distributors, field operations and growing businesses.",
+        intro="Ghaziabad teams often coordinate customers, field staff, inventory, documents and approvals across several tools. A focused application can create one dependable workflow while preserving the roles and checks that matter to the business.",
+        detail="Projects can cover customer portals, field-service apps, dealer workflows, task and document systems or operational dashboards. We define security, integration and ownership early so the application can be supported as usage grows.",
+        includes=["Customer, dealer and field-service applications", "Role-based tasks, documents and approvals", "CRM, ERP and third-party integrations", "Testing, deployment and maintenance planning"],
+        use_case="A Ghaziabad field-service team can receive assigned jobs, view customer context, complete a checklist and submit status updates while managers monitor exceptions from a dashboard.",
+        meta_title="App Development in Ghaziabad | Business Apps — WeTakeFWD",
+        meta_description="App development in Ghaziabad for customer portals, field operations, dealers and service teams, with integrations and role-based workflows.",
+        faq=[
+            ("Can you build a field-service app for a Ghaziabad team?", "Yes. The app can support assignments, customer details, checklists, documents, status updates and escalation based on the confirmed workflow."),
+            ("Can the application connect to an ERP or CRM?", "Often yes when the existing product provides suitable APIs and access. We verify technical and security dependencies before committing to an integration."),
+            ("Do you provide maintenance after launch?", "Yes. Monitoring, updates, support response and ongoing improvements are scoped clearly before launch."),
+        ],
+    ),
+    dict(
+        slug="app-development-noida", path="/app-development-noida", location="Noida",
+        primary_keyword="App Development in Noida", title="App Development in Noida",
+        short_title="Noida app development", category="NOIDA / APP DEVELOPMENT",
+        summary="Product-focused mobile and web application development for Noida startups, B2B teams and operational businesses.",
+        intro="Noida product and operations teams may need a customer application, an internal platform or a new workflow inside an existing system. We start with the user outcome, product boundaries and evidence needed to decide whether the first release is working.",
+        detail="The build can combine product discovery, interface design, backend APIs, authentication, integrations, analytics and deployment. We can collaborate with an internal engineering team or own a clearly defined product scope with documented responsibilities.",
+        includes=["Product discovery, prototyping and UX", "Cross-platform mobile and responsive web apps", "Backend APIs, authentication and integrations", "Analytics, testing and release planning"],
+        use_case="A Noida B2B team can launch a customer portal for onboarding, documents, tasks and support, then use real adoption data to prioritise the next release.",
+        meta_title="App Development in Noida | Product & Business Apps — WeTakeFWD",
+        meta_description="App development in Noida for startups and B2B teams, covering product discovery, UX, mobile and web apps, APIs, integrations and launch.",
+        faq=[
+            ("Can you work with an existing Noida engineering team?", "Yes. We can own a defined product component or collaborate on discovery, UX, architecture, implementation, testing and release planning."),
+            ("Can you build an MVP?", "Yes. We define the smallest release that completes a valuable user journey and produces evidence for the next product decision, rather than treating an MVP as an unfinished full product."),
+            ("Can the app include AI features?", "Yes, when AI supports a defined user outcome. We scope approved data, evaluation, limitations and human review alongside the feature."),
+        ],
+    ),
+]
+
+SEO_PAGES.extend(APP_DEVELOPMENT_CITY_PAGES)
+
 AI_LOCATION_PAGES = [
     dict(slug="ai-agency-delhi", path="/ai-agency-delhi", location="Delhi", primary_keyword="AI Agency in Delhi", title="AI Agency in Delhi", short_title="Delhi AI solutions", category="DELHI / AI SOLUTIONS", summary="Practical AI agents, automation and custom applications for Delhi businesses that want measurable operational improvement.", intro="WeTakeFWD helps Delhi businesses move from AI ideas to controlled, useful systems. We begin with a specific workflow, the information it depends on and the decisions that must remain with people, then design the smallest reliable solution that can prove value.", detail="Projects can combine AI agents, knowledge assistants, document processing, CRM automation and custom software. Every scope includes clear permissions, testing, human escalation and a plan for what happens after launch—not just a demonstration.", includes=["AI opportunity and workflow discovery", "AI agents and knowledge assistants", "Business automation and integrations", "Evaluation, guardrails and human review"], use_case="A Delhi service company can use an AI assistant to classify enquiries, find approved service information, prepare a response and ask a team member to approve it before anything is sent.", meta_title="AI Agency in Delhi | Agents & Automation — WeTakeFWD", meta_description="AI agency serving Delhi businesses with AI agents, workflow automation, knowledge assistants and custom AI applications built with human oversight.", faq=[("What should I look for in the best AI agency in Delhi?", "Look for clear problem definition, evidence-based scoping, secure data handling, evaluation, human controls and realistic ownership after launch—not broad claims or a model demo alone."), ("Does WeTakeFWD work with businesses throughout Delhi?", "Yes. We can deliver remotely and shape the solution around your team, systems and service area. Any on-site requirement is agreed during discovery.")]),
     dict(slug="ai-automation-company-delhi", path="/ai-automation-company-delhi", location="Delhi", primary_keyword="AI Automation Company in Delhi", title="AI Automation Company in Delhi", short_title="Delhi AI automation", category="DELHI / AI AUTOMATION", summary="Connect enquiries, documents, CRM updates and repetitive team workflows with controlled AI automation.", intro="AI automation is most valuable when it removes repeated handling without hiding important decisions. We map the trigger, data, owner, exceptions and approval points first, then connect the systems needed to move the process forward reliably.", detail="For Delhi businesses, this can include website and WhatsApp enquiries, email classification, document extraction, proposal drafting, CRM updates and operational reminders. Sensitive or unusual cases stay visible to the responsible person.", includes=["Workflow mapping and automation design", "Email, WhatsApp and CRM connections", "AI classification, extraction and drafting", "Approvals, monitoring and exception handling"], use_case="A Delhi sales team can capture an enquiry, classify the requested service, create a CRM record, prepare an acknowledgement and alert the right owner while uncertain requests wait for review.", meta_title="AI Automation Company in Delhi | WeTakeFWD", meta_description="AI automation company for Delhi businesses, connecting enquiries, documents, CRM and approvals into reliable workflows with people in control.", faq=[("What process should a Delhi business automate first?", "Start with a frequent, predictable workflow where delays or repeated data handling have a measurable cost and exceptions can be reviewed safely."), ("Will AI automation replace our employees?", "Our goal is to remove avoidable administration and improve consistency. People retain responsibility for judgement, relationships and high-impact decisions.")]),

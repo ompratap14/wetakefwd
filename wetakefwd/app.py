@@ -12,7 +12,7 @@ import requests
 from flask import Flask, abort, redirect, render_template, request, send_from_directory, session, url_for
 from werkzeug.security import check_password_hash
 
-from content import AI_LOCATION_PAGES, CITY_SERVICE_PAGES, HOME_FAQ, LOCATION_MARKETING_PAGES, SEO_PAGES, SERVICES, SITE_URL
+from content import AI_LOCATION_PAGES, APP_DEVELOPMENT_CITY_PAGES, CITY_SERVICE_PAGES, HOME_FAQ, LOCATION_MARKETING_PAGES, SEO_PAGES, SERVICES, SITE_URL
 
 APP_DIR = Path(__file__).resolve().parent
 
@@ -107,6 +107,7 @@ def site_context():
             "location_marketing_pages": LOCATION_MARKETING_PAGES,
             "ai_location_pages": AI_LOCATION_PAGES,
             "city_service_pages": CITY_SERVICE_PAGES,
+            "app_development_city_pages": APP_DEVELOPMENT_CITY_PAGES,
             "web3forms_access_key": os.getenv("WEB3FORMS_ACCESS_KEY", "f8858610-b7af-44d5-9073-b2eeefbca47f"),
             "current_year": datetime.now(timezone.utc).year}
 
@@ -170,6 +171,8 @@ def seo_service_page(slug):
     ]}
     if service in CITY_SERVICE_PAGES:
         related = [SEO_PAGE_BY_SLUG[slug] for slug in ("custom-software-development", "business-automation-services", "ai-agent-development")]
+    elif service in APP_DEVELOPMENT_CITY_PAGES:
+        related = [SEO_PAGE_BY_SLUG[slug] for slug in ("mobile-app-development", "custom-software-development", "ai-agent-development")]
     else:
         index = SEO_PAGES.index(service)
         related = [SEO_PAGES[(index + offset) % len(SEO_PAGES)] for offset in (1, 2, 3)]
