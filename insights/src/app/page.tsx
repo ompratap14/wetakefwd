@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { ArticleCard } from "@/components/article-card";
 import { CategoryTag } from "@/components/category-tag";
 import { CoverImage } from "@/components/cover-image";
@@ -7,8 +8,15 @@ import { NewsletterSection } from "@/components/newsletter-section";
 import { NumberedList } from "@/components/numbered-list";
 import { categoryRecord, latestArticles } from "@/lib/queries";
 import { plainText } from "@/lib/article-content";
+import { PUBLICATION_NAME, SITE_URL, TAGLINE } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
+export const metadata: Metadata = {
+  title: { absolute: "Insights by WeTakeFwd | AI, Automation & Business Technology" },
+  description: "Practical articles on AI, automation, WhatsApp, software and business technology from WeTakeFwd.",
+  alternates: { canonical: SITE_URL, types: { "application/rss+xml": `${SITE_URL}/rss.xml` } },
+  openGraph: { type: "website", title: PUBLICATION_NAME, description: TAGLINE, url: SITE_URL },
+};
 
 const editorialSections = [
   { title: "Artificial Intelligence", slug: "artificial-intelligence" },

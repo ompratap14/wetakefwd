@@ -9,7 +9,7 @@ import { NewsletterSection } from "@/components/newsletter-section";
 import { ReadingProgress } from "@/components/reading-progress";
 import { ArticleContent, plainText } from "@/lib/article-content";
 import { articleBySlug, latestArticles } from "@/lib/queries";
-import { absoluteUrl, formatDate, safeExternalUrl } from "@/lib/site";
+import { absoluteMediaUrl, absoluteUrl, formatDate, safeExternalUrl } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
 type Props = { params: Promise<{ slug: string }> };
@@ -20,17 +20,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = article.seoTitle || article.title;
   const description = article.seoDescription || article.summary;
   const canonical = safeExternalUrl(article.canonicalOverride) || absoluteUrl(`/article/${article.slug}`);
-  return { title, description, alternates: { canonical }, openGraph: { type: "article", title, description, url: canonical, publishedTime: article.publishedAt?.toISOString(), authors: [article.author.name], images: article.coverImageUrl ? [{ url: article.coverImageUrl, alt: article.coverImageAlt || title }] : [] }, twitter: { card: "summary_large_image", title, description } };
+  const image = absoluteMediaUrl(article.coverImageUrl);
+  const keywords = article.articleTags.map(({ tag }) => tag.name);
+  return { title, description, keywords, authors: [{ name: article.author.name, url: absoluteUrl(`/author/${article.author.slug}`) }], alternates: { canonical }, robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } }, openGraph: { type: "article", title, description, url: canonical, siteName: "Insights by WeTakeFwd", publishedTime: article.publishedAt?.toISOString(), modifiedTime: article.updatedAt.toISOString(), section: article.category.name, tags: keywords, authors: [article.author.name], images: image ? [{ url: image, alt: article.coverImageAlt || title }] : [] }, twitter: { card: "summary_large_image", title, description, images: image ? [image] : [] } };
 }
 
 export default async function ArticlePage({ params }: Props) {
   const article = await articleBySlug((await params).slug);
   if (!article) notFound();
   const related = (await latestArticles(4, 0, article.categoryId)).filter((item) => item.id !== article.id).slice(0, 3);
-  const canonical = absoluteUrl(`/article/${article.slug}`);
+  const canonical = safeExternalUrl(article.canonicalOverride) || absoluteUrl(`/article/${article.slug}`);
   const readingTime = Math.max(1, Math.ceil(plainText(article.body).split(/\s+/).length / 220));
+  const wordCount = plainText(article.body).trim().split(/\s+/).filter(Boolean).length;
   const isEditorialTeam = article.author.slug === "wetakefwd-editorial-team";
-  const schema = { "@context": "https://schema.org", "@type": "Article", headline: article.title, description: article.summary, datePublished: article.publishedAt?.toISOString(), dateModified: article.updatedAt.toISOString(), author: { "@type": "Person", name: article.author.name, url: absoluteUrl(`/author/${article.author.slug}`) }, publisher: { "@type": "Organization", name: "Insights by WeTakeFwd", url: absoluteUrl("") }, mainEntityOfPage: canonical, image: article.coverImageUrl || undefined };
+  const schema = { "@context": "https://schema.org", "@type": "BlogPosting", "@id": `${canonical}#article`, headline: article.title, description: article.summary, datePublished: article.publishedAt?.toISOString(), dateModified: article.updatedAt.toISOString(), inLanguage: "en-IN", articleSection: article.category.name, keywords: article.articleTags.map(({ tag }) => tag.name), wordCount, timeRequired: `PT${readingTime}M`, author: { "@type": isEditorialTeam ? "Organization" : "Person", name: article.author.name, url: absoluteUrl(`/author/${article.author.slug}`) }, publisher: { "@type": "Organization", name: "Insights by WeTakeFwd", url: absoluteUrl(""), logo: { "@type": "ImageObject", url: absoluteUrl("/images/wetakefwd-mark.png") } }, mainEntityOfPage: { "@type": "WebPage", "@id": canonical }, image: absoluteMediaUrl(article.coverImageUrl) ? { "@type": "ImageObject", url: absoluteMediaUrl(article.coverImageUrl), caption: article.coverImageAlt || article.title } : undefined };
   const breadcrumbSchema = { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("") }, { "@type": "ListItem", position: 2, name: article.category.name, item: absoluteUrl(`/${article.category.slug}`) }, { "@type": "ListItem", position: 3, name: article.title, item: canonical }] };
 
   return <>

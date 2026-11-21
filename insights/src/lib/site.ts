@@ -33,6 +33,12 @@ export function absoluteUrl(path: string) {
   return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
+export function absoluteMediaUrl(value: string | null | undefined) {
+  if (!value) return undefined;
+  if (value.startsWith("/") && !value.startsWith("//")) return absoluteUrl(value);
+  return safeExternalUrl(value) || undefined;
+}
+
 export function safeExternalUrl(value: string | null | undefined) {
   if (!value) return null;
   try {
