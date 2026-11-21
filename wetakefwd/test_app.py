@@ -79,7 +79,7 @@ class WebsiteTests(unittest.TestCase):
         self.assertIn('data-example-panel="future" hidden', service)
         sitemap = self.client.get('/sitemap.xml').get_data(as_text=True)
         self.assertEqual(sitemap.count('<url>'), len(paths))
-        self.assertEqual(sitemap.count('<lastmod>2026-11-16</lastmod>'), len(paths))
+        self.assertEqual(sitemap.count('<lastmod>2026-11-21</lastmod>'), len(paths))
         self.assertIn('<priority>1.0</priority>', sitemap)
 
     def test_keyword_landing_pages_own_their_search_intent(self):
@@ -117,6 +117,22 @@ class WebsiteTests(unittest.TestCase):
                 self.assertIn(page["primary_keyword"], html)
                 self.assertIn(page["location"], html)
                 self.assertIn('"areaServed"', html)
+
+    def test_city_service_hubs_are_unique_and_discoverable(self):
+        self.assertEqual(len(site.CITY_SERVICE_PAGES), 2)
+        self.assertEqual({page["location"] for page in site.CITY_SERVICE_PAGES}, {"Etah", "Agra"})
+        self.assertEqual(len({page["meta_title"] for page in site.CITY_SERVICE_PAGES}), 2)
+        self.assertEqual(len({page["meta_description"] for page in site.CITY_SERVICE_PAGES}), 2)
+        directory = self.client.get("/services").get_data(as_text=True)
+        for page in site.CITY_SERVICE_PAGES:
+            with self.subTest(path=page["path"]):
+                self.assertIn(f'href="{page["path"]}"', directory)
+                html = self.client.get(page["path"]).get_data(as_text=True)
+                self.assertIn(page["primary_keyword"], html)
+                self.assertIn(page["location"], html)
+                self.assertIn('"areaServed"', html)
+                self.assertIn('href="/custom-software-development"', html)
+                self.assertIn('href="/business-automation-services"', html)
 
     def test_legacy_keyword_urls_redirect_permanently(self):
         for old_slug, new_slug in site.LEGACY_SEO_REDIRECTS.items():

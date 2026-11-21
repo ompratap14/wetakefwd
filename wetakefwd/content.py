@@ -52,6 +52,51 @@ LOCATION_MARKETING_PAGES = [
 
 SEO_PAGES.extend(LOCATION_MARKETING_PAGES)
 
+# Broad city hubs combine closely related capabilities around one local business
+# journey. They are intentionally distinct from single-service location pages.
+CITY_SERVICE_PAGES = [
+    dict(
+        slug="digital-growth-automation-etah", path="/digital-growth-automation-etah",
+        location="Etah", primary_keyword="Digital Growth and Automation Services in Etah",
+        title="Digital Growth and Automation Services in Etah", short_title="Etah digital systems",
+        category="ETAH / DIGITAL GROWTH + AUTOMATION",
+        summary="Websites, marketing, custom software and practical automation for Etah businesses ready to improve how they attract customers and manage everyday work.",
+        intro="Businesses in Etah often manage enquiries, follow-ups, records and customer communication through a mix of phone calls, WhatsApp, paper and spreadsheets. WeTakeFWD helps turn those disconnected steps into a clearer digital journey—from being discovered online to responding quickly and keeping important work organised.",
+        detail="The right starting point depends on the bottleneck. A school may need a clearer admissions and parent communication flow; a retailer may need local discovery and faster enquiry handling; a clinic or service business may need appointment, reminder and follow-up automation. We begin with one useful outcome, preserve human ownership and build only what the team can maintain.",
+        includes=["Local search, websites and lead generation", "WhatsApp enquiry and follow-up workflows", "Custom dashboards, portals and business software", "AI-assisted automation with human review"],
+        use_case="An Etah school can connect its website enquiry form to an organised admissions workflow, acknowledge parents immediately, assign follow-up to the right staff member and keep every conversation visible without replacing the personal support families expect.",
+        meta_title="Digital Growth & Automation Services in Etah | WeTakeFWD",
+        meta_description="Digital growth, websites, custom software, WhatsApp workflows and AI automation services for schools, shops and growing businesses in Etah.",
+        faq=[
+            ("What services does WeTakeFWD provide for Etah businesses?", "We can combine websites, local search, digital campaigns, lead handling, WhatsApp and CRM workflows, custom software and practical AI automation. The first scope is based on the business problem rather than a fixed package."),
+            ("Can you work with schools, shops, clinics and restaurants in Etah?", "Yes. We shape the workflow around the organisation, its customers and the tools already in use. Any sector-specific privacy, consent or professional requirement must be reviewed before implementation."),
+            ("Do you need to replace our current tools?", "Not always. We first assess the website, WhatsApp process, spreadsheets, CRM or other systems already in use and keep what still works."),
+            ("Can you guarantee that an Etah business will rank first on Google?", "No. Search visibility depends on relevance, competition, technical quality, reviews, authority and ongoing work. We improve the elements we can control and measure performance through Search Console and enquiry data."),
+        ],
+    ),
+    dict(
+        slug="digital-growth-automation-agra", path="/digital-growth-automation-agra",
+        location="Agra", primary_keyword="Digital Growth and Automation Services in Agra",
+        title="Digital Growth and Automation Services in Agra", short_title="Agra digital systems",
+        category="AGRA / DIGITAL GROWTH + AUTOMATION",
+        summary="Connected marketing, websites, custom software and automation for Agra businesses serving local customers, visitors and wider markets.",
+        intro="Agra businesses can serve very different audiences: residents looking for a nearby service, visitors planning an experience, buyers comparing products and teams managing operations behind the scenes. WeTakeFWD helps create a clear digital path for each audience instead of sending every customer into the same generic page or inbox.",
+        detail="A useful system may combine fast mobile pages, search and campaign journeys, WhatsApp response flows, booking or enquiry capture, CRM visibility and custom operational tools. Hospitality and tourism businesses may prioritise visitor information and booking; retailers and service teams may need local discovery, follow-up and repeat-customer workflows; growing operations may benefit from dashboards or custom software.",
+        includes=["Local and visitor-focused websites and marketing", "Booking, WhatsApp and CRM automation", "Custom software, portals and operational dashboards", "AI-assisted customer and team workflows"],
+        use_case="An Agra hospitality business can separate local and visitor enquiries, collect dates and group details on a mobile-friendly page, acknowledge the request through WhatsApp and route it to the right person while unusual requests remain visible for review.",
+        meta_title="Digital Growth & Automation Services in Agra | WeTakeFWD",
+        meta_description="Digital growth, websites, custom software, WhatsApp and AI automation services for hospitality, retail and growing businesses in Agra.",
+        faq=[
+            ("How can WeTakeFWD support a business in Agra?", "We can improve the journey from discovery to enquiry and follow-up through websites, search, campaigns, WhatsApp and CRM automation, custom software and focused AI workflows."),
+            ("Can you support both local customers and visitors to Agra?", "Yes. We can separate the content, landing pages and enquiry paths for residents, domestic visitors, international visitors or B2B buyers where those audiences genuinely differ."),
+            ("Do you build custom software for Agra businesses?", "Yes. When standard tools cannot support an important workflow economically, we can scope dashboards, portals, booking or operations tools and integrations around the people who will use them."),
+            ("Will one project include marketing, software and automation together?", "It can, but it does not have to. We normally start with the highest-value bottleneck and connect additional capabilities only when they support a measurable outcome."),
+        ],
+    ),
+]
+
+SEO_PAGES.extend(CITY_SERVICE_PAGES)
+
 AI_LOCATION_PAGES = [
     dict(slug="ai-agency-delhi", path="/ai-agency-delhi", location="Delhi", primary_keyword="AI Agency in Delhi", title="AI Agency in Delhi", short_title="Delhi AI solutions", category="DELHI / AI SOLUTIONS", summary="Practical AI agents, automation and custom applications for Delhi businesses that want measurable operational improvement.", intro="WeTakeFWD helps Delhi businesses move from AI ideas to controlled, useful systems. We begin with a specific workflow, the information it depends on and the decisions that must remain with people, then design the smallest reliable solution that can prove value.", detail="Projects can combine AI agents, knowledge assistants, document processing, CRM automation and custom software. Every scope includes clear permissions, testing, human escalation and a plan for what happens after launch—not just a demonstration.", includes=["AI opportunity and workflow discovery", "AI agents and knowledge assistants", "Business automation and integrations", "Evaluation, guardrails and human review"], use_case="A Delhi service company can use an AI assistant to classify enquiries, find approved service information, prepare a response and ask a team member to approve it before anything is sent.", meta_title="AI Agency in Delhi | Agents & Automation — WeTakeFWD", meta_description="AI agency serving Delhi businesses with AI agents, workflow automation, knowledge assistants and custom AI applications built with human oversight.", faq=[("What should I look for in the best AI agency in Delhi?", "Look for clear problem definition, evidence-based scoping, secure data handling, evaluation, human controls and realistic ownership after launch—not broad claims or a model demo alone."), ("Does WeTakeFWD work with businesses throughout Delhi?", "Yes. We can deliver remotely and shape the solution around your team, systems and service area. Any on-site requirement is agreed during discovery.")]),
     dict(slug="ai-automation-company-delhi", path="/ai-automation-company-delhi", location="Delhi", primary_keyword="AI Automation Company in Delhi", title="AI Automation Company in Delhi", short_title="Delhi AI automation", category="DELHI / AI AUTOMATION", summary="Connect enquiries, documents, CRM updates and repetitive team workflows with controlled AI automation.", intro="AI automation is most valuable when it removes repeated handling without hiding important decisions. We map the trigger, data, owner, exceptions and approval points first, then connect the systems needed to move the process forward reliably.", detail="For Delhi businesses, this can include website and WhatsApp enquiries, email classification, document extraction, proposal drafting, CRM updates and operational reminders. Sensitive or unusual cases stay visible to the responsible person.", includes=["Workflow mapping and automation design", "Email, WhatsApp and CRM connections", "AI classification, extraction and drafting", "Approvals, monitoring and exception handling"], use_case="A Delhi sales team can capture an enquiry, classify the requested service, create a CRM record, prepare an acknowledgement and alert the right owner while uncertain requests wait for review.", meta_title="AI Automation Company in Delhi | WeTakeFWD", meta_description="AI automation company for Delhi businesses, connecting enquiries, documents, CRM and approvals into reliable workflows with people in control.", faq=[("What process should a Delhi business automate first?", "Start with a frequent, predictable workflow where delays or repeated data handling have a measurable cost and exceptions can be reviewed safely."), ("Will AI automation replace our employees?", "Our goal is to remove avoidable administration and improve consistency. People retain responsibility for judgement, relationships and high-impact decisions.")]),
