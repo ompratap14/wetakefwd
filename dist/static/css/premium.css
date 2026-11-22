@@ -333,3 +333,39 @@ button,input,select,textarea,.button,.nav-contact,.neo-btn,.neo-text-link,.neo-c
   .neo-home .neo-copy h1{font-size:40px}
   .neo-brands-head h2,.neo-section-head h2,.neo-insight h2,.neo-about h2,.neo-faq h2,.neo-contact h2{font-size:37px}
 }
+
+/* Cinematic motion system: high impact, low noise, no accessibility penalty. */
+.premium-motion .neo-home{--pointer-x:50vw;--pointer-y:30vh;position:relative}
+.premium-motion .neo-home::after{content:"";position:fixed;z-index:30;inset:0;pointer-events:none;background:radial-gradient(420px circle at var(--pointer-x) var(--pointer-y),#4c78ff14,transparent 68%);mix-blend-mode:multiply}
+.premium-motion .neo-eyebrow{animation:heroRise .7s .12s cubic-bezier(.2,.8,.2,1) both}
+.premium-motion .neo-copy h1{animation:heroRise .95s .22s cubic-bezier(.16,1,.3,1) both}
+.premium-motion .neo-copy h1 em{animation:heroBlue .9s .52s cubic-bezier(.16,1,.3,1) both}
+.premium-motion .neo-footnote{animation:heroRise .8s .62s cubic-bezier(.16,1,.3,1) both}
+.premium-motion .neo-actions{animation:heroRise .75s .75s cubic-bezier(.16,1,.3,1) both}
+.premium-motion .neo-scroll{animation:scrollPulse 1.8s 1.2s ease-in-out infinite}
+.motion-section{opacity:0;transform:translateY(48px) scale(.988);transition:opacity .8s ease,transform 1s cubic-bezier(.16,1,.3,1)}
+.motion-section.is-inview{opacity:1;transform:none}
+.motion-section .neo-section-head,.motion-section .neo-brands-head,.motion-section .neo-audit-grid,.motion-section .neo-quote-inner,.motion-section .neo-insight-grid,.motion-section .neo-about-grid,.motion-section .neo-faq-grid,.motion-section .neo-contact-grid{opacity:0;transform:translateY(25px);transition:opacity .7s .16s ease,transform .85s .16s cubic-bezier(.16,1,.3,1)}
+.motion-section.is-inview .neo-section-head,.motion-section.is-inview .neo-brands-head,.motion-section.is-inview .neo-audit-grid,.motion-section.is-inview .neo-quote-inner,.motion-section.is-inview .neo-insight-grid,.motion-section.is-inview .neo-about-grid,.motion-section.is-inview .neo-faq-grid,.motion-section.is-inview .neo-contact-grid{opacity:1;transform:none}
+.motion-depth{--tilt-x:0deg;--tilt-y:0deg;transform:perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));transform-style:preserve-3d;transition:transform .22s ease,box-shadow .3s ease,background .3s ease}
+.motion-depth:hover{box-shadow:0 24px 50px #1027571a}
+.neo-audit-grid::before{animation:auditOrbit 11s linear infinite}
+.neo-audit-grid::after{animation:auditOrbitReverse 8s linear infinite}
+.neo-quote-person img{transition:transform .45s cubic-bezier(.16,1,.3,1),filter .45s}
+.neo-quote:hover .neo-quote-person img{transform:scale(1.08) rotate(-3deg);filter:grayscale(0)}
+@keyframes heroRise{from{opacity:0;transform:translateY(34px);filter:blur(8px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes heroBlue{from{opacity:0;transform:translateY(24px) skewY(2deg)}to{opacity:1;transform:none}}
+@keyframes scrollPulse{0%,100%{transform:translate(-50%,0);opacity:.45}50%{transform:translate(-50%,7px);opacity:1}}
+@keyframes auditOrbit{to{transform:rotate(360deg) scale(1.04)}}
+@keyframes auditOrbitReverse{to{transform:rotate(-360deg) scale(.96)}}
+@media(max-width:650px){
+  .premium-motion .neo-home::after{display:none}
+  .motion-section{transform:translateY(20px);transition-duration:.6s}
+  .motion-section .neo-section-head,.motion-section .neo-brands-head,.motion-section .neo-audit-grid,.motion-section .neo-quote-inner,.motion-section .neo-insight-grid,.motion-section .neo-about-grid,.motion-section .neo-faq-grid,.motion-section .neo-contact-grid{transform:translateY(12px);transition-duration:.55s}
+  .premium-motion .neo-copy h1,.premium-motion .neo-copy h1 em{animation-duration:.7s}
+}
+@media(prefers-reduced-motion:reduce){
+  .premium-motion .neo-home::after{display:none}
+  .motion-section,.motion-section *{opacity:1!important;transform:none!important;transition:none!important;animation:none!important}
+  .neo-audit-grid::before,.neo-audit-grid::after,.neo-quote-person img{animation:none!important;transition:none!important}
+}
