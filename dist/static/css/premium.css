@@ -286,3 +286,50 @@ button,input,select,textarea,.button,.nav-contact,.neo-btn,.neo-text-link,.neo-c
   .neo-audit-grid{padding:34px 22px;border-radius:18px}
   .neo-audit .neo-btn{width:100%;min-width:0}
 }
+
+/* Final phone layout guardrails: never squeeze editorial content into desktop columns. */
+@media(max-width:650px){
+  .container,.shell{width:min(calc(100% - 36px),var(--max))}
+  .neo-home h1,.neo-home h2,.neo-home h3,.neo-authority-grid h3{
+    max-width:100%;overflow-wrap:normal;word-break:normal;hyphens:none
+  }
+  .neo-hero{min-height:auto;padding:74px 0 58px}
+  .neo-hero-grid{text-align:left}
+  .neo-eyebrow{margin-bottom:24px;font-size:10px;line-height:1.5}
+  .neo-home .neo-copy h1{font-size:clamp(42px,12vw,54px);line-height:1.02;letter-spacing:-.052em}
+  .neo-copy h1 em{font-size:.94em;line-height:1.02}
+  .neo-footnote{width:100%;margin-top:36px;padding-top:22px}
+  .neo-footnote p{font-size:16px;line-height:1.5}
+  .neo-actions{align-items:stretch;gap:10px;margin-top:28px}
+  .neo-actions .neo-btn,.neo-actions .neo-text-link{width:100%;justify-content:space-between}
+  .floating-project-cta{display:none}
+
+  .neo-brands-head,.neo-section-head,.neo-manifesto .container,.neo-insight-grid,.neo-about-grid,.neo-faq-grid,.neo-contact-grid{
+    display:grid;grid-template-columns:minmax(0,1fr);gap:20px
+  }
+  .neo-brands-head>span,.neo-section-head>span,.neo-faq-grid>div>span,.neo-contact-grid>div>span,.neo-insight-grid>div>span{
+    max-width:190px;line-height:1.5
+  }
+  .neo-brands-head h2,.neo-section-head h2,.neo-insight h2,.neo-about h2,.neo-faq h2,.neo-contact h2{
+    margin:0;font-size:clamp(38px,11vw,48px);line-height:1.02
+  }
+  .neo-brands-head p,.neo-section-head p{max-width:34rem;font-size:16px;line-height:1.6}
+  .neo-brands-head,.neo-section-head{margin-bottom:36px}
+  .neo-manifesto p{margin:0}
+  .neo-manifesto h2{font-size:clamp(38px,11vw,50px)}
+
+  .neo-card-grid,.neo-method-grid,.neo-authority-grid{grid-template-columns:minmax(0,1fr)}
+  .neo-card,.neo-card-feature,.neo-method-grid article,.neo-authority-grid a{min-height:auto;padding:24px}
+  .neo-card h3,.neo-card-feature h3,.neo-authority-grid h3{font-size:clamp(30px,9vw,39px);line-height:1.06}
+  .neo-authority-grid a{min-height:180px}
+  .neo-region-links{align-items:flex-start;flex-direction:column}
+  .neo-story{min-height:280px}
+  .neo-about-grid{display:block}
+  .neo-about-grid>div{max-width:100%}
+  .neo-about-grid p{font-size:17px}
+}
+@media(max-width:380px){
+  .container,.shell{width:min(calc(100% - 28px),var(--max))}
+  .neo-home .neo-copy h1{font-size:40px}
+  .neo-brands-head h2,.neo-section-head h2,.neo-insight h2,.neo-about h2,.neo-faq h2,.neo-contact h2{font-size:37px}
+}
