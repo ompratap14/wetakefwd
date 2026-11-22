@@ -263,3 +263,26 @@ button,input,select,textarea,.button,.nav-contact,.neo-btn,.neo-text-link,.neo-c
   .neo-manifesto,.neo-brands,.neo-audit,.neo-quote,.neo-solutions,.neo-method,.neo-insight,.neo-about,.neo-authority,.neo-faq,.neo-contact,.site-footer{margin:7px;border-radius:20px}
   .neo-card,.neo-method-grid article,.neo-authority-grid a{border:1px solid var(--line);border-radius:16px}
 }
+
+/* Premium workflow starting point: focused, calm and clearly actionable. */
+.neo-audit{padding:78px 0;background:#e7ecf8;border:0}
+.neo-audit-grid{position:relative;isolation:isolate;grid-template-columns:1.08fr .92fr;gap:8%;padding:64px 68px;border:1px solid #ffffff40;border-radius:26px;background:linear-gradient(135deg,#111c36 0%,#162a59 62%,#2148ad 100%);color:#fff;box-shadow:0 24px 60px #10275726;overflow:hidden}
+.neo-audit-grid::before{content:"";position:absolute;z-index:-1;right:-130px;top:-180px;width:430px;height:430px;border:1px solid #ffffff1f;border-radius:50%}
+.neo-audit-grid::after{content:"";position:absolute;z-index:-1;right:-50px;top:-100px;width:270px;height:270px;border:1px solid #ffffff24;border-radius:50%;background:#ffffff08}
+.neo-audit-grid>div:last-child{padding-left:8%;border-left:1px solid #ffffff35}
+.neo-audit span{display:inline-flex;padding:8px 11px;border:1px solid #9cb5f359;border-radius:999px;background:#ffffff0b;color:#b9cbff;letter-spacing:.11em}
+.neo-audit h2{margin-top:28px;color:#fff;font-size:clamp(46px,5vw,70px);line-height:.98}
+.neo-audit h2 em{color:#a9c0ff}
+.neo-audit p{color:#e0e7f7;font-size:18px;line-height:1.65}
+.neo-audit .neo-btn{min-width:230px;justify-content:space-between;border:1px solid #ffffff33;border-radius:13px;background:#fff;color:#13265a;box-shadow:0 12px 30px #08132d40}
+.neo-audit .neo-btn:hover{background:#b9cbff;color:#111c36;transform:translateY(-2px)}
+.neo-audit small{color:#b9c5dc;line-height:1.5}
+@media(max-width:760px){
+  .neo-audit{padding:56px 0}
+  .neo-audit-grid{grid-template-columns:1fr;gap:36px;padding:42px 30px}
+  .neo-audit-grid>div:last-child{padding:34px 0 0;border-left:0;border-top:1px solid #ffffff35}
+}
+@media(max-width:450px){
+  .neo-audit-grid{padding:34px 22px;border-radius:18px}
+  .neo-audit .neo-btn{width:100%;min-width:0}
+}
