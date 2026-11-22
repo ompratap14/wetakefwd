@@ -52,13 +52,18 @@
 {% block site_intro %}{% endblock %}
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="{{ url_for('home') }}" aria-label="WeTakeFWD home"><img src="{{ url_for('static', filename='images/official-logo-transparent.png') }}" width="2560" height="640" alt="WeTakeFWD"></a>
+      <a class="brand header-mobile-brand" href="{{ url_for('home') }}" aria-label="WeTakeFWD home"><img src="{{ url_for('static', filename='images/official-logo-transparent.png') }}" width="2560" height="640" alt="WeTakeFWD"></a>
       <nav class="main-nav" id="primary-nav" aria-label="Main navigation">
-        <a href="{{ url_for('home') }}#solutions">Solutions</a>
-        <a href="{{ url_for('services_index') }}">Services</a>
-        <a href="{{ url_for('home') }}#process">How we work</a>
-        <a href="{{ url_for('home') }}#about">About</a>
-        <a class="nav-contact" href="{{ url_for('home') }}#contact">Let's talk <span aria-hidden="true">↗</span></a>
+        <div class="nav-side nav-side-left">
+          <a href="{{ url_for('home') }}#solutions">Solutions</a>
+          <a href="{{ url_for('services_index') }}">Services</a>
+        </div>
+        <a class="brand nav-center-brand" href="{{ url_for('home') }}" aria-label="WeTakeFWD home"><img src="{{ url_for('static', filename='images/official-logo-transparent.png') }}" width="2560" height="640" alt="WeTakeFWD"></a>
+        <div class="nav-side nav-side-right">
+          <a href="{{ url_for('home') }}#process">How we work</a>
+          <a href="{{ url_for('home') }}#about">About</a>
+          <a class="nav-contact" href="{{ url_for('home') }}#contact">Let's talk <span aria-hidden="true">↗</span></a>
+        </div>
       </nav>
       <button class="menu-button" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu"><span></span><span></span></button>
     </div>

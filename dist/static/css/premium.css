@@ -221,3 +221,44 @@ button,input,select,textarea,.button,.nav-contact,.neo-btn,.neo-text-link,.neo-c
   .neo-card,.neo-method-grid article,.neo-authority-grid a{border-right:0}
   .neo-audit-grid,.neo-story,.neo-form{border-radius:14px}
 }
+
+/* Centered brand navigation and a softer rounded surface language. */
+.site-header{margin:10px 12px 0;border:1px solid var(--line);border-radius:20px;background:#f8f7f2f2;overflow:visible;box-shadow:0 10px 32px #17213c0a}
+.header-inner{position:relative;width:min(calc(100% - 46px),1280px);min-height:72px}
+.header-mobile-brand{display:none}
+.main-nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;width:100%;gap:34px}
+.nav-side{display:flex;align-items:center;gap:32px}
+.nav-side-left{justify-content:flex-start}
+.nav-side-right{justify-content:flex-end}
+.nav-side a{min-height:44px;display:inline-flex;align-items:center;font-size:13px;font-weight:600;white-space:nowrap}
+.nav-center-brand{justify-self:center}
+.nav-center-brand img{width:178px;height:auto}
+.nav-side .nav-contact{min-height:42px;padding:10px 17px;border-radius:12px;background:#171714;color:#fff}
+
+.neo-manifesto,.neo-brands,.neo-audit,.neo-quote,.neo-solutions,.neo-method,.neo-insight,.neo-about,.neo-authority,.neo-faq,.neo-contact,.site-footer{
+  margin:12px;border-radius:26px;overflow:hidden
+}
+.neo-card-grid,.neo-method-grid,.neo-authority-grid{gap:12px;border:0}
+.neo-card,.neo-method-grid article,.neo-authority-grid a{border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.neo-card-feature{border-radius:22px}
+.faq-list details{margin-bottom:10px;border:1px solid var(--line);border-radius:14px}
+.neo-region-links a,.neo-card-wide>div b,.neo-mini-flow strong,.neo-tabs button{border-radius:12px}
+.neo-audit-grid,.neo-story,.neo-form{border-radius:22px}
+
+@media(max-width:1000px) and (min-width:821px){
+  .main-nav{gap:20px}.nav-side{gap:18px}.nav-center-brand img{width:150px}.nav-side a{font-size:12px}.nav-side .nav-contact{padding-inline:13px}
+}
+@media(max-width:820px){
+  .site-header{margin:7px 8px 0;border-radius:17px}
+  .header-inner{width:min(calc(100% - 28px),var(--max));min-height:66px}
+  .header-mobile-brand{display:inline-flex}
+  .header-mobile-brand img{width:min(166px,48vw)}
+  .main-nav{display:none;top:72px;left:0;right:0;width:auto;grid-template-columns:1fr;gap:0;padding:10px 18px 18px;border:1px solid var(--line);border-radius:17px;background:#f8f7f2;box-shadow:0 20px 35px #13234b1f}
+  .main-nav.open{display:flex}
+  .nav-center-brand{display:none}
+  .nav-side{display:flex;flex-direction:column;align-items:stretch;gap:0}
+  .nav-side a{width:100%;padding:12px 4px;border-bottom:1px solid var(--line)}
+  .nav-side .nav-contact{justify-content:space-between;width:100%;margin-top:12px;padding:12px 17px;border:0;border-radius:12px}
+  .neo-manifesto,.neo-brands,.neo-audit,.neo-quote,.neo-solutions,.neo-method,.neo-insight,.neo-about,.neo-authority,.neo-faq,.neo-contact,.site-footer{margin:7px;border-radius:20px}
+  .neo-card,.neo-method-grid article,.neo-authority-grid a{border:1px solid var(--line);border-radius:16px}
+}
