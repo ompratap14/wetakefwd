@@ -16,7 +16,8 @@
     "admin:bootstrap": "tsx scripts/bootstrap-admin.ts",
     "publish:chatgpt-business-discovery": "tsx scripts/publish-chatgpt-business-discovery.ts",
     "publish:small-town-india": "tsx scripts/publish-small-town-india.ts",
-    "schedule:whatsapp-automations": "tsx scripts/schedule-whatsapp-automations.ts"
+    "schedule:whatsapp-automations": "tsx scripts/schedule-whatsapp-automations.ts",
+    "schedule:automation-audit": "tsx scripts/schedule-automation-audit.ts"
   },
   "dependencies": {
     "@prisma/adapter-pg": "7.10.1",
