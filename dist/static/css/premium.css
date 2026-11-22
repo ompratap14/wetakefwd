@@ -127,3 +127,97 @@ button,input,select,textarea,.button,.nav-contact,.neo-btn,.neo-text-link,.neo-c
   line-height: 1.18;
   letter-spacing: -0.015em;
 }
+
+/* YC-inspired editorial refinement: one calm canvas, strong type, quiet proof. */
+.neo-home{
+  --bg:#f4f3ed;
+  --paper:#fbfaf6;
+  --ink:#171714;
+  --muted:#5f5f59;
+  --line:#d1cfc5;
+  --blue:#2d5bdb;
+  background:var(--bg)
+}
+.site-header{margin:0;border-radius:0;border-bottom:1px solid var(--line);background:#f4f3edf2;box-shadow:none}
+.header-inner{min-height:76px}
+.header-inner>.brand img{width:190px}
+.main-nav{gap:31px}
+.main-nav a{font-size:13px;font-weight:600;letter-spacing:-.01em}
+.main-nav .nav-contact{padding:12px 20px;border-radius:10px;background:#171714}
+.main-nav .nav-contact:hover{background:var(--blue)}
+.neo-hero{min-height:calc(100svh - 77px);display:grid;place-items:center;padding:78px 0 52px;border-bottom:1px solid var(--line)}
+.neo-hero-grid{display:block;width:min(1120px,100%);text-align:center}
+.neo-eyebrow{color:var(--blue);font-size:11px;letter-spacing:.14em}
+.neo-copy{max-width:1080px;margin:auto}
+.neo-home .neo-copy h1{max-width:1060px;margin:27px auto 0;font-family:Georgia,'Times New Roman',serif;font-size:clamp(70px,8vw,116px);font-weight:400;line-height:.98;letter-spacing:-.06em;text-wrap:balance}
+.neo-copy h1 em{display:block;margin-top:.04em;font-style:italic;color:var(--blue)}
+.neo-footnote{max-width:520px;margin:54px auto 0;padding-top:22px;border-top:1px solid var(--line);text-align:left}
+.neo-footnote p{margin:0;font:italic 18px/1.5 Georgia,'Times New Roman',serif;color:#3d3d39}
+.neo-footnote b{display:block;margin-top:12px;text-align:right;font:600 13px/1.4 'DM Sans',sans-serif}
+.neo-actions{justify-content:center;margin-top:34px}
+.neo-btn{border-radius:10px;background:#171714}
+.neo-btn:hover{background:var(--blue)}
+.neo-text-link{padding:12px 4px;text-underline-offset:6px}
+.neo-scroll{bottom:18px;color:#555;font-size:22px}
+
+.neo-manifesto,.neo-brands,.neo-audit,.neo-quote,.neo-solutions,.neo-method,.neo-insight,.neo-about,.neo-authority,.neo-faq,.neo-contact,.site-footer{
+  margin:0;border-radius:0
+}
+.neo-manifesto{padding:92px 0;background:var(--blue)}
+.neo-manifesto .container{display:grid;grid-template-columns:.45fr 1.55fr;gap:6%;align-items:start}
+.neo-manifesto p{margin:8px 0 0;font-size:13px;font-weight:700;letter-spacing:.02em}
+.neo-manifesto h2{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:clamp(44px,5.6vw,78px);font-weight:400;line-height:1.02;letter-spacing:-.05em}
+.neo-brands,.neo-solutions,.neo-method,.neo-about,.neo-faq{padding:110px 0}
+.neo-brands{background:var(--paper);border-bottom:1px solid var(--line)}
+.neo-brands-head,.neo-section-head{grid-template-columns:.36fr 1.16fr .72fr;gap:5%}
+.neo-brands-head h2,.neo-section-head h2,.neo-audit h2,.neo-insight h2,.neo-about h2,.neo-faq h2,.neo-contact h2{
+  font-family:Georgia,'Times New Roman',serif;font-weight:400;letter-spacing:-.052em
+}
+.neo-brands-head h2 em,.neo-section-head h2 em,.neo-audit h2 em,.neo-insight h2 em,.neo-about h2 em,.neo-faq h2 em,.neo-contact h2 em{font-style:italic}
+.brand-flight{margin-top:14px}
+.brand-flight-card{height:112px}
+.neo-audit{padding:104px 0;background:#ecebe4;border-bottom:1px solid var(--line)}
+.neo-audit-grid{border-radius:16px;background:var(--paper);box-shadow:none}
+.neo-quote{padding:110px 0;background:#171714}
+.neo-quote blockquote{font-size:clamp(48px,6vw,82px)}
+.neo-card-grid{gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.neo-card{border-width:0 1px 1px 0;border-radius:0;background:transparent}
+.neo-card:hover{background:var(--paper);transform:none}
+.neo-card-feature{background:var(--paper)}
+.neo-method{background:var(--paper);border-block:1px solid var(--line)}
+.neo-method-grid{gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.neo-method-grid article{border-width:0 1px 1px 0;border-radius:0;background:transparent}
+.neo-insight{padding:105px 0;background:#dde5fa}
+.neo-story{border-radius:16px;box-shadow:none}
+.neo-about{background:var(--paper)}
+.neo-authority{padding:110px 0;background:var(--bg)}
+.neo-authority-grid{gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.neo-authority-grid a{border-width:0 1px 1px 0;border-radius:0;background:transparent}
+.neo-authority-grid a:hover{background:var(--paper);transform:none}
+.neo-faq{background:var(--paper);border-top:1px solid var(--line)}
+.faq-list details{margin:0;border-width:0 0 1px;border-radius:0;background:transparent}
+.neo-contact{padding:110px 0;background:#171714}
+.neo-form{border-radius:16px;box-shadow:none}
+.site-footer{border-top:0}
+
+@media(max-width:900px){
+  .neo-home .neo-copy h1{font-size:clamp(58px,10vw,88px)}
+  .neo-manifesto .container{grid-template-columns:1fr;gap:22px}
+}
+@media(max-width:650px){
+  .site-header{margin:0;border-radius:0}
+  .header-inner{min-height:68px}
+  .header-inner>.brand img{width:165px}
+  .neo-hero{min-height:calc(100svh - 68px);padding:62px 0 70px}
+  .neo-hero-grid{text-align:left}
+  .neo-home .neo-copy h1{margin-top:22px;font-size:clamp(47px,13.5vw,67px);line-height:1;letter-spacing:-.052em;text-wrap:pretty}
+  .neo-footnote{margin:38px 0 0}
+  .neo-footnote p{font-size:16px}
+  .neo-footnote b{text-align:left}
+  .neo-actions{align-items:stretch;justify-content:flex-start}
+  .neo-manifesto,.neo-brands,.neo-audit,.neo-quote,.neo-solutions,.neo-method,.neo-insight,.neo-about,.neo-authority,.neo-faq,.neo-contact,.site-footer{margin:0;border-radius:0}
+  .neo-brands,.neo-solutions,.neo-method,.neo-about,.neo-faq,.neo-authority,.neo-contact{padding:76px 0}
+  .neo-card-grid,.neo-method-grid,.neo-authority-grid{border-left:0}
+  .neo-card,.neo-method-grid article,.neo-authority-grid a{border-right:0}
+  .neo-audit-grid,.neo-story,.neo-form{border-radius:14px}
+}
