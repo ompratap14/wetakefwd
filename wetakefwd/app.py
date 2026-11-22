@@ -112,6 +112,7 @@ WEBSITE_SCHEMA = {
 @app.context_processor
 def site_context():
     return {"site_url": SITE_URL, "services": SERVICES, "seo_pages": SEO_PAGES,
+            "core_service_pages": [page for page in SEO_PAGES if not page.get("noindex")],
             "location_marketing_pages": LOCATION_MARKETING_PAGES,
             "ai_location_pages": AI_LOCATION_PAGES,
             "city_service_pages": CITY_SERVICE_PAGES,
@@ -186,9 +187,12 @@ def seo_service_page(slug):
         related = [RELATED_PAGE_BY_PATH[path] for path in service["related_paths"]]
     elif service in APP_DEVELOPMENT_CITY_PAGES:
         related = [SEO_PAGE_BY_SLUG[slug] for slug in ("mobile-app-development", "custom-software-development", "ai-agent-development")]
+    elif service.get("noindex"):
+        related = [SEO_PAGE_BY_SLUG[slug] for slug in ("web-development", "custom-software-development", "best-ai-automation-company-india")]
     else:
-        index = SEO_PAGES.index(service)
-        related = [SEO_PAGES[(index + offset) % len(SEO_PAGES)] for offset in (1, 2, 3)]
+        indexable_pages = [page for page in SEO_PAGES if not page.get("noindex")]
+        index = indexable_pages.index(service)
+        related = [indexable_pages[(index + offset) % len(indexable_pages)] for offset in (1, 2, 3)]
     return render_template("service.html", service=service, service_schema=service_schema,
                            service_faq_schema=faq_schema, related_services=related,
                            breadcrumb_schema=breadcrumb([("Home", f"{SITE_URL}/"), (service["title"], canonical)]))
@@ -221,7 +225,7 @@ def thank_you():
 def sitemap():
     urls = ([f"{SITE_URL}/", f"{SITE_URL}/services"] +
             [f"{SITE_URL}/services/{s['slug']}" for s in SERVICES] +
-            [f"{SITE_URL}{page['path']}" for page in SEO_PAGES])
+            [f"{SITE_URL}{page['path']}" for page in SEO_PAGES if not page.get('noindex')])
     updated = "2026-11-21"
     entries = []
     for url in urls:
