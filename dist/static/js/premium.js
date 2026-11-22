@@ -15,14 +15,3 @@ if(videoIntro){
     setTimeout(closeIntro,6500);
   }
 }
-
-const brandStrip = document.querySelector('.brand-flight');
-if (brandStrip && 'IntersectionObserver' in window) {
-  brandStrip.classList.add('waiting');
-  const arrivalObserver = new IntersectionObserver(([entry]) => {
-    if (!entry.isIntersecting) return;
-    brandStrip.classList.replace('waiting', 'arrived');
-    arrivalObserver.disconnect();
-  }, { threshold: 0.15 });
-  arrivalObserver.observe(brandStrip);
-}
