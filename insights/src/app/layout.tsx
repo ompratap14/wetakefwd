@@ -18,6 +18,10 @@ const baseMetadata: Metadata = {
   applicationName: PUBLICATION_NAME,
   openGraph: { type: "website", siteName: PUBLICATION_NAME, title: PUBLICATION_NAME, description: TAGLINE, url: SITE_URL },
   twitter: { card: "summary_large_image", title: PUBLICATION_NAME, description: TAGLINE },
+  icons: {
+    icon: [{ url: "/images/wetakefwd-mark.png", type: "image/png" }],
+    apple: [{ url: "/images/wetakefwd-mark.png", type: "image/png" }],
+  },
   robots: { index: true, follow: true },
 };
 
