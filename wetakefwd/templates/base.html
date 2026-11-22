@@ -21,8 +21,9 @@
   <title>{% block title %}{% endblock %}</title>
   <meta name="description" content="{% block description %}{% endblock %}">
   <link rel="canonical" href="{% block canonical %}{% endblock %}">
-  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/profile-picture-transparent.png') }}">
-  <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/profile-picture-transparent.png') }}">
+  <link rel="icon" type="image/png" sizes="519x519" href="{{ url_for('static', filename='favicon.png') }}">
+  <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+  <link rel="apple-touch-icon" sizes="519x519" href="{{ url_for('static', filename='favicon.png') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
