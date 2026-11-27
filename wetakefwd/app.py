@@ -13,6 +13,7 @@ from flask import Flask, abort, redirect, render_template, request, send_from_di
 from werkzeug.security import check_password_hash
 
 from content import AI_LOCATION_PAGES, APP_DEVELOPMENT_CITY_PAGES, CASE_STUDIES, CITY_SERVICE_DETAIL_PAGES, CITY_SERVICE_PAGES, HOME_FAQ, LOCATION_MARKETING_PAGES, SEO_PAGES, SERVICES, SITE_URL
+from guides import GUIDE_BY_SLUG, GUIDES
 
 APP_DIR = Path(__file__).resolve().parent
 
@@ -123,6 +124,7 @@ def site_context():
             "app_development_city_pages": APP_DEVELOPMENT_CITY_PAGES,
             "city_service_detail_pages": CITY_SERVICE_DETAIL_PAGES,
             "case_studies": CASE_STUDIES,
+            "guides": GUIDES,
             "web3forms_access_key": os.getenv("WEB3FORMS_ACCESS_KEY", "f8858610-b7af-44d5-9073-b2eeefbca47f"),
             "current_year": datetime.now(timezone.utc).year}
 
@@ -233,6 +235,43 @@ def seo_service_page(slug):
                            breadcrumb_schema=breadcrumb([("Home", f"{SITE_URL}/"), (service["title"], canonical)]))
 
 
+@app.route("/guides")
+def guides_index():
+    canonical = f"{SITE_URL}/guides"
+    collection_schema = {
+        "@context": "https://schema.org", "@type": "CollectionPage", "name": "Practical AI and Automation Guides",
+        "url": canonical, "description": "Practical guides to AI automation, AI agents and business process improvement.",
+        "mainEntity": {"@type": "ItemList", "itemListElement": [
+            {"@type": "ListItem", "position": index, "name": guide["title"], "url": f"{canonical}/{guide['slug']}"}
+            for index, guide in enumerate(GUIDES, 1)
+        ]},
+    }
+    return render_template("guides.html", guides=GUIDES, collection_schema=collection_schema,
+                           breadcrumb_schema=breadcrumb([("Home", f"{SITE_URL}/"), ("Guides", canonical)]))
+
+
+@app.route("/guides/<slug>")
+def guide_page(slug):
+    guide = GUIDE_BY_SLUG.get(slug)
+    if guide is None:
+        abort(404)
+    canonical = f"{SITE_URL}/guides/{slug}"
+    article_schema = {
+        "@context": "https://schema.org", "@type": "Article", "headline": guide["title"],
+        "description": guide["summary"], "url": canonical, "datePublished": "2026-11-27",
+        "dateModified": "2026-11-27", "inLanguage": "en-IN",
+        "author": {"@type": "Organization", "name": "WeTakeFWD", "url": SITE_URL},
+        "publisher": {"@id": f"{SITE_URL}/#organization"},
+        "mainEntityOfPage": {"@type": "WebPage", "@id": canonical},
+    }
+    faq_schema = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+        {"@type": "Question", "name": question, "acceptedAnswer": {"@type": "Answer", "text": answer}}
+        for question, answer in guide["faq"]
+    ]}
+    return render_template("guide.html", guide=guide, article_schema=article_schema, faq_schema=faq_schema,
+                           breadcrumb_schema=breadcrumb([("Home", f"{SITE_URL}/"), ("Guides", f"{SITE_URL}/guides"), (guide["title"], canonical)]))
+
+
 @app.route("/<service_slug>/<city_slug>")
 def nested_city_service_page(service_slug, city_slug):
     service = SEO_PAGE_BY_PATH.get(f"/{service_slug}/{city_slug}")
@@ -272,6 +311,7 @@ def sitemap():
             [f"{SITE_URL}/services/{s['slug']}" for s in SERVICES] +
             [f"{SITE_URL}{page['path']}" for page in SEO_PAGES if not page.get('noindex')] +
             [f"{SITE_URL}/work", *[f"{SITE_URL}/work/{case['slug']}" for case in CASE_STUDIES]] +
+            [f"{SITE_URL}/guides", *[f"{SITE_URL}/guides/{guide['slug']}" for guide in GUIDES]] +
             [f"{SITE_URL}/privacy", f"{SITE_URL}/terms"])
     updated = "2026-11-27"
     entries = []

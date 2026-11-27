@@ -80,12 +80,29 @@ class WebsiteTests(unittest.TestCase):
         self.assertIn('data-example-tab="future"', service)
         self.assertIn('data-example-panel="future" hidden', service)
         sitemap = self.client.get('/sitemap.xml').get_data(as_text=True)
-        indexable_count = 2 + len(site.SERVICES) + len([page for page in site.SEO_PAGES if not page.get('noindex')]) + 2 + 1 + len(site.CASE_STUDIES)
+        indexable_count = (2 + len(site.SERVICES) + len([page for page in site.SEO_PAGES if not page.get('noindex')]) +
+                           2 + 1 + len(site.CASE_STUDIES) + 1 + len(site.GUIDES))
         self.assertEqual(sitemap.count('<url>'), indexable_count)
         self.assertEqual(sitemap.count('<lastmod>2026-11-27</lastmod>'), indexable_count)
         self.assertIn('<priority>1.0</priority>', sitemap)
         self.assertIn(f'<loc>{site.SITE_URL}/privacy</loc>', sitemap)
         self.assertIn(f'<loc>{site.SITE_URL}/terms</loc>', sitemap)
+
+    def test_evergreen_guides_are_indexable_and_discoverable(self):
+        index_html = self.client.get('/guides').get_data(as_text=True)
+        sitemap = self.client.get('/sitemap.xml').get_data(as_text=True)
+        self.assertIn('AI guides for', index_html)
+        self.assertIn('"@type": "CollectionPage"', index_html)
+        for guide in site.GUIDES:
+            with self.subTest(slug=guide['slug']):
+                path = f"/guides/{guide['slug']}"
+                html = self.client.get(path).get_data(as_text=True)
+                self.assertIn(f'<link rel="canonical" href="{site.SITE_URL}{path}">', html)
+                self.assertIn('index,follow,max-image-preview:large', html)
+                self.assertIn('"@type": "Article"', html)
+                self.assertIn('"@type": "FAQPage"', html)
+                self.assertIn(guide['title'], html)
+                self.assertIn(f'<loc>{site.SITE_URL}{path}</loc>', sitemap)
 
     def test_case_studies_are_real_work_pages_and_indexable(self):
         self.assertEqual(len(site.CASE_STUDIES), 5)

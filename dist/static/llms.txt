@@ -1,6 +1,6 @@
 # WeTakeFWD
 
-> WeTakeFWD is an AI development and business automation company serving organisations in India. We design practical AI agents, connected workflows and custom software with human oversight.
+> WeTakeFWD is an AI development and business automation team serving organisations in India. We design practical AI agents, connected workflows and custom software with human oversight.
 
 ## Primary pages
 - [Homepage](https://www.wetakefwd.online/): Company overview and contact
@@ -13,6 +13,7 @@
 - [AI Chatbot Development](https://www.wetakefwd.online/ai-chatbot-development): Customer and internal conversational systems
 - [AI Automation for Clinics in Delhi NCR](https://www.wetakefwd.online/ai-automation-for-clinics-delhi-ncr): Free 20-minute workflow audit for clinics and diagnostic centres
 - [Insights](https://insights.wetakefwd.online/): Practical articles on AI and automation
+- [Practical Guides](https://www.wetakefwd.online/guides): Evergreen guides to AI automation, agents and business process improvement
 
 ## Contact
 - Email: wetakefwd@gmail.com

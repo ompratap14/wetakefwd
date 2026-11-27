@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Practical AI &amp; Automation Guides | WeTakeFWD{% endblock %}
+{% block description %}Practical guides to AI automation, AI agents and business process improvement for teams choosing what to build and automate next.{% endblock %}
+{% block canonical %}{{ site_url }}/guides{% endblock %}
+{% block schema %}<script type="application/ld+json">{{ breadcrumb_schema|tojson }}</script><script type="application/ld+json">{{ collection_schema|tojson }}</script>{% endblock %}
+{% block content %}
+<section class="interior-hero guides-hero"><div class="shell"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a><span>/</span>Guides</nav><div class="guides-heading"><span class="eyebrow">PRACTICAL KNOWLEDGE / WETAKEFWD</span><h1>AI guides for<br><em>better decisions.</em></h1><p>Clear explanations, practical frameworks and responsible next steps for businesses exploring AI and automation.</p></div></div></section>
+<section class="guide-directory section-space"><div class="shell"><div class="section-head"><span class="eyebrow">START WITH THE QUESTION</span><span class="eyebrow">{{ guides|length }} EVERGREEN GUIDES</span></div><div class="guide-grid">{% for guide in guides %}<a class="guide-card" href="{{ url_for('guide_page', slug=guide.slug) }}"><small>{{ '%02d'|format(loop.index) }} / {{ guide.kicker }}</small><h2>{{ guide.title }}</h2><p>{{ guide.summary }}</p><span>{{ guide.reading_time }} · Read guide ↗</span></a>{% endfor %}</div></div></section>
+<section class="interior-cta"><div class="shell"><span class="eyebrow">HAVE A REAL WORKFLOW IN MIND?</span><h2>Turn the question<br><em>into a useful next step.</em></h2><a class="button button-dark" href="{{ url_for('home') }}#contact">Start a conversation <span>↗</span></a></div></section>
+{% endblock %}

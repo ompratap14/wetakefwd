@@ -1,0 +1,110 @@
+"""Evergreen educational content for the main WeTakeFWD website."""
+
+GUIDES = [
+    {
+        "slug": "ai-automation-small-business-india",
+        "title": "AI Automation for Small Business in India",
+        "short_title": "AI automation for small business",
+        "kicker": "PRACTICAL AI GUIDE / INDIA",
+        "summary": "A practical guide to choosing, testing and measuring AI automation in an Indian small business without automating the wrong work.",
+        "seo_title": "AI Automation for Small Business in India: Practical Guide",
+        "seo_description": "Learn how Indian small businesses can choose an AI automation workflow, estimate value, control risk and run a practical 30-day pilot.",
+        "reading_time": "9 min read",
+        "updated": "27 November 2026",
+        "intro": [
+            "AI automation is useful when it removes a repeated delay, missed handoff or avoidable task. It is not useful merely because a tool can generate text.",
+            "For a small business, the strongest starting point is usually one workflow with clear volume, an accountable owner and an outcome that can be measured. This guide explains how to find that workflow and improve it safely.",
+        ],
+        "takeaways": [
+            "Start with a repeated business problem, not an AI product.",
+            "Measure the current time, delay, error or lost opportunity before building.",
+            "Keep people responsible for exceptions, commitments and sensitive decisions.",
+            "Run one controlled pilot before connecting more tools or data.",
+        ],
+        "sections": [
+            {"heading": "What AI automation means for a small business", "paragraphs": [
+                "AI automation combines business rules, connected software and an AI model where interpretation is genuinely needed. A normal automation may copy a website enquiry into a CRM. An AI-assisted workflow may also classify the request, prepare a response from approved information and send uncertain cases to a person.",
+                "The goal is not maximum autonomy. The goal is a dependable flow in which routine work moves faster and people retain judgement, ownership and customer relationships.",
+            ], "bullets": ["A clear trigger, such as an enquiry, document or scheduled check", "Approved information and limited access to the required tools", "Rules for what may happen automatically", "A visible human handoff when information is missing or risk is higher", "Logs and a measurable business outcome"]},
+            {"heading": "Where to look for the first opportunity", "paragraphs": [
+                "Look for work that happens frequently, follows a recognisable pattern and causes a visible delay. Staff should be able to explain the current steps and the exceptions. If nobody can agree how the work should happen, redesign the process before adding automation.",
+            ], "bullets": ["Website and WhatsApp enquiry capture", "Lead qualification and CRM updates", "Appointment reminders and rescheduling", "Invoice, form or document data extraction", "Routine customer questions with an escalation path", "Weekly operational reporting from several systems"]},
+            {"heading": "A simple value calculation", "paragraphs": [
+                "Record the number of times the workflow happens each month, the average handling time and the loaded hourly cost of the people involved. Add measurable losses such as missed leads, late follow-ups or preventable corrections. Compare that baseline with the complete cost of implementation, software usage, monitoring and maintenance.",
+                "A workflow can be worth improving even when it does not remove a role. Faster response, more consistent records and fewer missed handoffs often create more value than labour savings alone.",
+            ]},
+            {"heading": "A safe 30-day pilot", "steps": [
+                "Week 1 — map the existing workflow, baseline the result and name the owner.",
+                "Week 2 — build the smallest version using approved information and narrow permissions.",
+                "Week 3 — test normal, unclear, incorrect and sensitive cases with the people who do the work.",
+                "Week 4 — run with supervision, compare the result with the baseline and document every exception.",
+            ], "paragraphs": ["Expand only when the first workflow is reliable. More integrations increase both value and operational risk, so each added action needs an owner and a reason."]},
+            {"heading": "What should remain human", "paragraphs": [
+                "People should remain accountable for unusual complaints, payments, refunds, legal or medical matters, important commitments and any decision where context or empathy materially changes the outcome. An automation should never invent availability, pricing, policy or approval.",
+                "A good handoff includes the customer’s request, the information already collected, what the system attempted and why it stopped. Making a person start again defeats the purpose.",
+            ]},
+            {"heading": "How to measure success", "bullets": ["Time from trigger to useful response", "Percentage completed correctly", "Quality and frequency of human escalations", "Staff time spent on repetitive handling", "Corrections, complaints or failed actions", "Bookings, qualified leads, collections or another relevant business result"], "paragraphs": ["Review several operating cycles rather than judging a polished demonstration. A reliable workflow should keep producing the intended result when volume, wording and exceptions change."]},
+        ],
+        "faq": [
+            ("Does a small business need custom AI software?", "Not always. A focused workflow may use existing tools and a small integration. Custom software becomes useful when the process, permissions or customer experience cannot be handled reliably by standard products."),
+            ("Can AI automation work with WhatsApp?", "Yes, when the business uses an approved WhatsApp Business setup and follows consent, template and messaging requirements. Customer handoff and opt-out handling should be designed from the start."),
+            ("Will automation replace employees?", "The most practical first projects remove repetitive handling and give employees better context. People remain responsible for judgement, relationships, exceptions and improvement."),
+        ],
+        "service_path": "/ai-automation-services-india",
+        "service_label": "Explore AI automation services",
+    },
+    {
+        "slug": "ai-agent-vs-chatbot",
+        "title": "AI Agent vs Chatbot: What Is the Difference?",
+        "short_title": "AI agent vs chatbot",
+        "kicker": "AI BUYER'S GUIDE",
+        "summary": "A clear comparison of AI agents, chatbots and traditional automation—with examples, risks and a framework for choosing the right approach.",
+        "seo_title": "AI Agent vs Chatbot: Differences, Examples and Uses",
+        "seo_description": "Compare AI agents and chatbots by purpose, tools, autonomy, risk and cost. Learn which approach fits customer service and business workflows.",
+        "reading_time": "8 min read",
+        "updated": "27 November 2026",
+        "intro": [
+            "A chatbot holds a conversation. An AI agent works toward a defined outcome and may use tools to complete several steps. The terms overlap, but buying the wrong category creates unnecessary cost and risk.",
+            "The right question is not which label sounds more advanced. It is what responsibility the system should have, which actions it needs and when a person must take control.",
+        ],
+        "takeaways": ["Use a chatbot when the primary job is conversation or information retrieval.", "Use an agent when the system must choose and complete permitted actions across steps.", "Use traditional automation when the logic is stable and does not need interpretation.", "Increase controls as the consequences of an action become more serious."],
+        "sections": [
+            {"heading": "The short definition", "paragraphs": ["A rules-based chatbot follows designed conversation paths. An AI chatbot can understand varied wording and answer from approved knowledge. An AI agent adds goal-directed behaviour: it can decide which permitted tool to use, observe the result and continue until the task is complete or requires help."]},
+            {"heading": "Chatbot, automation and agent compared", "bullets": ["Traditional automation: predictable trigger, fixed rules and repeatable action", "Chatbot: conversational interface for questions, guidance or data collection", "AI agent: goal, context, permitted tools, multiple steps and an escalation rule"], "paragraphs": ["Many useful systems combine all three. A customer may speak to a chatbot, a rules-based integration may validate required fields, and an agent may classify the request and prepare a next step."]},
+            {"heading": "When a chatbot is enough", "bullets": ["Answering approved frequently asked questions", "Helping visitors find the right service or document", "Collecting structured enquiry information", "Checking a known status through a secure lookup", "Transferring the conversation to the right team"], "paragraphs": ["A well-designed chatbot can be more dependable than a broad agent because its responsibility is smaller. Do not add autonomy when conversation and routing solve the problem."]},
+            {"heading": "When an AI agent adds value", "bullets": ["Qualifying a lead and updating several CRM fields", "Reading a document, checking requirements and flagging missing information", "Preparing a support response and gathering relevant account context", "Monitoring a queue, prioritising cases and assigning work", "Creating a report from approved sources and highlighting exceptions"], "paragraphs": ["Every tool should have the minimum permission required. Reading a calendar is different from changing it; drafting a refund is different from approving one."]},
+            {"heading": "Risk grows with action", "paragraphs": ["A wrong answer is a content problem. A wrong action can affect money, data, customers or operations. Before an agent can write to a business system, define allowed actions, prohibited actions, confirmation requirements, limits and the person responsible for review."], "bullets": ["Show the source of important information", "Require confirmation for consequential actions", "Log tool calls and outcomes", "Set limits for value, volume and access", "Stop and escalate when confidence or information is insufficient"]},
+            {"heading": "How to choose", "steps": ["Write the outcome in one sentence.", "List the information and tools required.", "Separate predictable rules from interpretation.", "Rate the consequence of every possible action.", "Choose the least autonomous design that achieves the outcome.", "Test difficult cases and measure the business result."], "paragraphs": ["A focused chatbot with a good handoff often beats a general agent. A focused agent can outperform both when the work genuinely requires several connected steps."]},
+        ],
+        "faq": [("Is ChatGPT an AI agent?", "ChatGPT is a conversational AI product with capabilities that vary by configuration. A business agent is designed around a defined job, approved information, specific tools, permissions and operating controls."), ("Can a chatbot update a CRM?", "Yes. A chatbot can trigger a conventional integration or an agentic workflow. The interface does not determine the underlying architecture."), ("Which costs more?", "An agent usually costs more to design, test and operate because it has more decision paths, integrations and risk. The correct comparison is total value and control, not only build price.")],
+        "service_path": "/ai-agent-development",
+        "service_label": "Explore AI agent development",
+    },
+    {
+        "slug": "business-processes-to-automate-first",
+        "title": "10 Business Processes to Automate First",
+        "short_title": "Processes to automate first",
+        "kicker": "BUSINESS AUTOMATION CHECKLIST",
+        "summary": "Ten practical workflows businesses can evaluate first, plus a scorecard for choosing an automation project with measurable value.",
+        "seo_title": "10 Business Processes to Automate First: Practical Guide",
+        "seo_description": "Discover ten business processes worth automating first and use a practical scorecard to choose a workflow with measurable value and manageable risk.",
+        "reading_time": "10 min read",
+        "updated": "27 November 2026",
+        "intro": ["The first automation should not be the most impressive process. It should be the repeated process where a better flow creates visible value and manageable risk.", "Use this list to find candidates, then score each one against volume, time, consistency, data readiness, exceptions and consequence. The best choice will be different for every business."],
+        "takeaways": ["Choose work with frequent repetition and a measurable baseline.", "Fix unnecessary steps before automating them.", "Prefer a bounded workflow with clear exceptions.", "Measure the outcome, not the number of automated actions."],
+        "sections": [
+            {"heading": "1–3: enquiries, follow-up and appointments", "bullets": ["Enquiry capture: place website, campaign and WhatsApp enquiries into one controlled queue.", "Lead follow-up: assign ownership, prepare the next message and stop sequences when a person replies.", "Appointments: confirm, remind and reschedule against real calendar availability."], "paragraphs": ["These workflows are good candidates because response time and missed opportunities are visible. Keep consent, frequency, escalation and customer preference central to the design."]},
+            {"heading": "4–6: documents, invoices and data entry", "bullets": ["Document intake: extract fields and flag missing or uncertain information.", "Invoice processing: match approved records and route exceptions for review.", "System updates: move validated information between forms, spreadsheets, CRM and operational software."], "paragraphs": ["Do not allow uncertain extraction to silently change important records. Use confidence thresholds, validation and a review queue."]},
+            {"heading": "7–8: support and internal knowledge", "bullets": ["Routine support: answer from approved information and attach context to human handoffs.", "Employee knowledge: search policies and procedures with citations to the maintained source."], "paragraphs": ["The prerequisite is trustworthy information. Conflicting documents and unclear ownership will produce conflicting answers regardless of the model used."]},
+            {"heading": "9–10: reporting and operational alerts", "bullets": ["Recurring reporting: assemble data from permitted sources and explain unusual changes.", "Operational alerts: detect a defined condition, notify the right owner and track resolution."], "paragraphs": ["Reporting automation should link numbers to sources. An alert needs an owner, urgency level and next action or it simply creates more noise."]},
+            {"heading": "Score each candidate", "paragraphs": ["Give each workflow a score from one to five for frequency, staff time, delay, error, data readiness and ease of measurement. Then score risk, exception rate and integration complexity in the opposite direction. High-value, lower-risk candidates belong at the top of the pilot list."], "bullets": ["How often does it happen?", "How much handling time does it require?", "What is lost when it is late or wrong?", "Are the inputs reliable and accessible?", "Can success be measured within 30–60 days?", "Which cases must always go to a person?"]},
+            {"heading": "Processes not to automate first", "paragraphs": ["Avoid starting with rare workflows, poorly understood decisions, broad access to sensitive systems or tasks where an incorrect action has serious consequences. Do not automate a broken process merely to make the same confusion move faster."], "bullets": ["High-stakes approvals without human review", "Work with no agreed operating process", "Sensitive data without clear permission and security ownership", "Customer commitments based on unavailable information", "A company-wide assistant with no defined job"]},
+            {"heading": "Turn the winner into a pilot", "steps": ["Name the workflow owner and desired outcome.", "Record the current baseline.", "Draw the trigger, steps, systems and exceptions.", "Remove steps that create no value.", "Build with narrow access and human escalation.", "Run under supervision and compare against the baseline."], "paragraphs": ["When the pilot works, document the new operating process before expanding. Reliable automation is an operating capability, not a one-time installation."]},
+        ],
+        "faq": [("What is the easiest process to automate?", "Structured, repeated work with reliable inputs and a clear outcome is usually easiest. Examples include routing enquiries, reminders and recurring reports."), ("Should every repetitive task be automated?", "No. Low-volume tasks may cost more to automate than they save, and some work benefits from human context or relationship."), ("How many workflows should a business automate at once?", "Start with one or a small connected set. Prove ownership, measurement and support before expanding to more systems.")],
+        "service_path": "/business-automation-services",
+        "service_label": "Explore business automation",
+    },
+]
+
+GUIDE_BY_SLUG = {guide["slug"]: guide for guide in GUIDES}
