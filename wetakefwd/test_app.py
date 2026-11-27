@@ -100,6 +100,9 @@ class WebsiteTests(unittest.TestCase):
                 self.assertIn(case['client'], html)
                 self.assertIn(case['title'], html)
                 self.assertIn('"@type": "CreativeWork"', html)
+                for image in case['gallery']:
+                    self.assertIn(image['file'], html)
+                    self.assertIn(image['alt'], html)
 
     def test_keyword_landing_pages_own_their_search_intent(self):
         for page in site.SEO_PAGES:

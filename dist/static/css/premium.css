@@ -406,5 +406,15 @@ button,input,select,textarea,.button,.nav-contact,.neo-btn,.neo-text-link,.neo-c
 .case-delivery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:50px}
 .case-delivery-grid>div{min-height:190px;padding:30px;border:1px solid #ffffff33;border-radius:var(--radius-md);background:#ffffff0a}
 .case-delivery-grid h3{font:400 clamp(1.6rem,2.8vw,2.4rem)/1.1 Georgia,'Times New Roman',serif;margin:24px 0 0}
+.case-gallery{background:#f1f3f7}
+.case-gallery-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,3vw,34px);margin-top:50px}
+.case-shot{margin:0;padding:12px;border:1px solid var(--line);border-radius:var(--radius-lg);background:#fff;box-shadow:0 22px 55px #10254f0d;overflow:hidden}
+.case-shot-frame{display:grid;place-items:center;aspect-ratio:16/9;border-radius:calc(var(--radius-lg) - 10px);background:#e8ebf1;overflow:hidden}
+.case-shot img{display:block;width:100%;height:100%;object-fit:cover}
+.case-shot figcaption{display:grid;grid-template-columns:auto 1fr;gap:18px;padding:20px 10px 12px;align-items:start}
+.case-shot figcaption span{color:var(--blue);font-weight:800;letter-spacing:.09em;text-transform:uppercase;font-size:.76rem;white-space:nowrap}
+.case-shot figcaption p{margin:0;color:var(--muted);line-height:1.55}
+.case-shot-portrait .case-shot-frame{aspect-ratio:4/5;background:#f6ead6}
+.case-shot-portrait img{object-fit:contain}
 .case-related{color:var(--blue)}
-@media(max-width:760px){.work-card,.case-hero-grid,.case-story-grid{grid-template-columns:1fr}.work-card-logo{min-height:160px}.case-logo{min-height:230px;order:-1}.case-delivery-grid{grid-template-columns:1fr}.work-heading h1,.case-hero h1{font-size:clamp(3rem,13vw,4.5rem)}.work-card h2{font-size:2.2rem}}
+@media(max-width:760px){.work-card,.case-hero-grid,.case-story-grid,.case-gallery-grid{grid-template-columns:1fr}.work-card-logo{min-height:160px}.case-logo{min-height:230px;order:-1}.case-delivery-grid{grid-template-columns:1fr}.case-gallery-grid{margin-top:32px}.case-shot{padding:8px}.case-shot figcaption{grid-template-columns:1fr;gap:8px;padding:16px 8px 10px}.work-heading h1,.case-hero h1{font-size:clamp(3rem,13vw,4.5rem)}.work-card h2{font-size:2.2rem}}

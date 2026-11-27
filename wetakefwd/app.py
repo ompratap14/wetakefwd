@@ -157,6 +157,7 @@ def case_study(slug):
         "description": case["summary"], "url": canonical,
         "creator": {"@id": f"{SITE_URL}/#organization"},
         "about": {"@type": "Organization", "name": case["client"]},
+        "image": [f"{SITE_URL}/static/images/case-studies/{image['file']}" for image in case["gallery"]],
     }
     return render_template(
         "case_study.html", case=case, case_schema=case_schema,
