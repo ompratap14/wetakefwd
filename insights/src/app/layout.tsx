@@ -19,9 +19,13 @@ const baseMetadata: Metadata = {
   openGraph: { type: "website", siteName: PUBLICATION_NAME, title: PUBLICATION_NAME, description: TAGLINE, url: SITE_URL },
   twitter: { card: "summary_large_image", title: PUBLICATION_NAME, description: TAGLINE },
   icons: {
-    icon: [{ url: "/images/insights-arrow-favicon.png", type: "image/png", sizes: "1024x1024" }],
-    shortcut: [{ url: "/images/insights-arrow-favicon.png", type: "image/png" }],
-    apple: [{ url: "/images/insights-arrow-favicon.png", type: "image/png", sizes: "1024x1024" }],
+    icon: [
+      { url: "/favicon.ico", type: "image/x-icon", sizes: "48x48" },
+      { url: "/favicon-48x48.png", type: "image/png", sizes: "48x48" },
+      { url: "/favicon-96x96.png", type: "image/png", sizes: "96x96" },
+    ],
+    shortcut: [{ url: "/favicon.ico", type: "image/x-icon" }],
+    apple: [{ url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" }],
   },
   robots: { index: true, follow: true },
 };
