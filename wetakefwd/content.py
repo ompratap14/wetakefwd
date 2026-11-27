@@ -5,74 +5,74 @@ SITE_URL = "https://www.wetakefwd.online"
 CASE_STUDIES = [
     dict(
         slug="woodland-affairs-website-redesign", client="Woodland Affairs", sector="Hospitality & experiences",
-        service="Website redesign", logo="wva.png",
+        service="Website redesign", logo="wva.png", logo_width=2000, logo_height=1080,
         title="Giving Woodland Affairs a clearer digital presence",
         summary="We redesigned an outdated website into a clearer, more modern experience that better presents the brand online.",
         challenge="The previous Woodland Affairs website no longer represented the quality of the brand or made its offering easy to understand.",
         work=["Reviewed the existing website and content", "Restructured the visitor journey", "Created a modern, responsive website experience", "Improved the clarity of important information and contact paths"],
         gallery=[
-            dict(file="woodland-old-home.png", label="Before", alt="Previous Woodland Affairs homepage", caption="The previous homepage gave the venue limited hierarchy and few clear next steps."),
-            dict(file="woodland-old-outlets.png", label="Before", alt="Previous Woodland Affairs outlets page", caption="The previous outlet listing relied on dense, disconnected information cards."),
-            dict(file="woodland-new-home.png", label="After", alt="Redesigned Woodland Affairs homepage", caption="The redesigned homepage leads with the atmosphere, offering and primary visitor actions."),
-            dict(file="woodland-new-outlets.png", label="After", alt="Redesigned Woodland Affairs restaurant locations", caption="Restaurant locations now present useful details and contact actions in a consistent system."),
+            dict(file="woodland-old-home.png", width=1327, height=580, label="Before", alt="Previous Woodland Affairs homepage", caption="The previous homepage gave the venue limited hierarchy and few clear next steps."),
+            dict(file="woodland-old-outlets.png", width=1131, height=577, label="Before", alt="Previous Woodland Affairs outlets page", caption="The previous outlet listing relied on dense, disconnected information cards."),
+            dict(file="woodland-new-home.png", width=1337, height=611, label="After", alt="Redesigned Woodland Affairs homepage", caption="The redesigned homepage leads with the atmosphere, offering and primary visitor actions."),
+            dict(file="woodland-new-outlets.png", width=1244, height=532, label="After", alt="Redesigned Woodland Affairs restaurant locations", caption="Restaurant locations now present useful details and contact actions in a consistent system."),
         ],
         outcome="Woodland Affairs now has a cleaner digital foundation that presents the brand more confidently and gives visitors a more direct route to understand and contact it.",
         related="/website-redesign",
     ),
     dict(
         slug="dhumari-public-school-app", client="Dhumari Public School", sector="Education",
-        service="Custom application", logo="dhumari-public-school.png",
+        service="Custom application", logo="dhumari-public-school.png", logo_width=250, logo_height=250,
         title="A custom application for Dhumari Public School",
         summary="We built a dedicated application to support the school's digital operations and give its community a more useful digital experience.",
         challenge="The school needed an application shaped around its own operational requirements instead of relying only on disconnected general-purpose tools.",
         work=["Mapped the school's application requirements", "Designed the experience for practical day-to-day use", "Built the custom application", "Prepared the product for continued improvement as requirements evolve"],
         gallery=[
-            dict(file="dps-app-home.png", label="Website + app", alt="Dhumari Public School website with installable app prompt", caption="A school website that can be installed as an app for faster access on everyday devices."),
-            dict(file="dps-app-portals.png", label="Role-based access", alt="Dhumari Public School student teacher accounts and administration portals", caption="Separate access paths support students, teachers, accounts staff and administration."),
+            dict(file="dps-app-home.png", width=1350, height=609, label="Website + app", alt="Dhumari Public School website with installable app prompt", caption="A school website that can be installed as an app for faster access on everyday devices."),
+            dict(file="dps-app-portals.png", width=1332, height=604, label="Role-based access", alt="Dhumari Public School student teacher accounts and administration portals", caption="Separate access paths support students, teachers, accounts staff and administration."),
         ],
         outcome="The school has a purpose-built application foundation that can support its operational needs and future digital services.",
         related="/mobile-app-development",
     ),
     dict(
         slug="dr-lokman-das-public-school-website", client="Dr. Lokman Das Public School", sector="Education",
-        service="School website", logo="dr-lokman-das-public-school.png",
+        service="School website", logo="dr-lokman-das-public-school.png", logo_width=447, logo_height=447,
         title="A focused website for Dr. Lokman Das Public School",
         summary="We designed and built the school's website to create a clearer, more accessible online presence for families and the wider community.",
         challenge="The school needed a dependable website where important information could be presented clearly on desktop and mobile devices.",
         work=["Organised the school's website information", "Designed a responsive interface", "Built and launched the website", "Created clearer routes for families to find information and make contact"],
         gallery=[
-            dict(file="lokman-home.png", label="Homepage", alt="Dr. Lokman Das Public School website homepage", caption="A focused school homepage brings admissions, school information and important actions together."),
-            dict(file="lokman-about.png", label="School story", alt="Dr. Lokman Das Public School about section", caption="The responsive editorial layout gives families a clearer introduction to the school."),
-            dict(file="lokman-leadership.png", label="Leadership", alt="Principal and chairman messages on the Dr. Lokman Das Public School website", caption="Leadership messages are presented with readable typography and a consistent visual system."),
+            dict(file="lokman-home.png", width=1366, height=768, label="Homepage", alt="Dr. Lokman Das Public School website homepage", caption="A focused school homepage brings admissions, school information and important actions together."),
+            dict(file="lokman-about.png", width=1366, height=768, label="School story", alt="Dr. Lokman Das Public School about section", caption="The responsive editorial layout gives families a clearer introduction to the school."),
+            dict(file="lokman-leadership.png", width=1366, height=768, label="Leadership", alt="Principal and chairman messages on the Dr. Lokman Das Public School website", caption="Leadership messages are presented with readable typography and a consistent visual system."),
         ],
         outcome="The school now has a dedicated online presence that is easier to navigate and better suited to communicating with prospective and current families.",
         related="/web-development",
     ),
     dict(
         slug="tirvu-digital-management", client="Tirvu", sector="Digital product",
-        service="Ongoing digital management", logo="tirvu.png",
+        service="Ongoing digital management", logo="tirvu.png", logo_width=256, logo_height=87,
         title="Ongoing digital management for Tirvu",
         summary="We work with Tirvu as an ongoing digital partner, managing and improving its digital presence rather than treating the work as a one-time launch.",
         challenge="Tirvu needed consistent ownership across its digital work so updates, improvements and new requirements could move forward together.",
         work=["Ongoing management of digital requirements", "Coordination of updates and improvements", "Technical and experience support", "Continuous prioritisation as the product and business evolve"],
         gallery=[
-            dict(file="tirvu-home.png", label="Lead journey", alt="Tirvu clinic management software homepage and demo form", caption="The product landing experience explains the offer and gives clinics a direct demo path."),
-            dict(file="tirvu-product.png", label="Product story", alt="Tirvu clinic management product section", caption="Clear product storytelling translates daily clinic workflows into practical benefits."),
+            dict(file="tirvu-home.png", width=1308, height=615, label="Lead journey", alt="Tirvu clinic management software homepage and demo form", caption="The product landing experience explains the offer and gives clinics a direct demo path."),
+            dict(file="tirvu-product.png", width=1293, height=603, label="Product story", alt="Tirvu clinic management product section", caption="Clear product storytelling translates daily clinic workflows into practical benefits."),
         ],
         outcome="Tirvu has one continuing digital relationship for maintaining momentum, resolving needs and improving the experience over time.",
         related="/services/ongoing-support",
     ),
     dict(
         slug="ss-cafe-food-delivery-app", client="SS Cafe Dhumari", sector="Food & hospitality",
-        service="Food delivery application", logo="ss-cafe-dhumari.png",
+        service="Food delivery application", logo="ss-cafe-dhumari.png", logo_width=150, logo_height=150,
         title="A food delivery application for SS Cafe",
         summary="We built a custom application that gives SS Cafe a direct digital channel for its food delivery experience.",
         challenge="SS Cafe needed a digital ordering experience shaped around its own brand and delivery requirements.",
         work=["Defined the cafe's application flow", "Designed the food browsing and ordering experience", "Built the delivery application", "Created a foundation for ongoing menu and service improvements"],
         gallery=[
-            dict(file="ss-cafe-home.png", label="Customer app", alt="SS Cafe branded customer ordering app homepage", caption="Customers enter through a clearly branded mobile homepage and can move directly into the menu.", portrait=True),
-            dict(file="ss-cafe-cart.png", label="Cart + delivery", alt="SS Cafe customer cart and delivery checkout screen", caption="The cart keeps the order, charges and delivery step visible before checkout.", portrait=True),
-            dict(file="ss-cafe-counter.png", label="Staff counter", alt="SS Cafe live order counter for staff", caption="A separate staff view keeps incoming orders and fulfilment status visible.", portrait=True),
+            dict(file="ss-cafe-home.png", width=720, height=1600, label="Customer app", alt="SS Cafe branded customer ordering app homepage", caption="Customers enter through a clearly branded mobile homepage and can move directly into the menu.", portrait=True),
+            dict(file="ss-cafe-cart.png", width=720, height=1600, label="Cart + delivery", alt="SS Cafe customer cart and delivery checkout screen", caption="The cart keeps the order, charges and delivery step visible before checkout.", portrait=True),
+            dict(file="ss-cafe-counter.png", width=265, height=491, label="Staff counter", alt="SS Cafe live order counter for staff", caption="A separate staff view keeps incoming orders and fulfilment status visible.", portrait=True),
         ],
         outcome="SS Cafe has its own application-based delivery channel and a stronger foundation for serving customers digitally.",
         related="/mobile-app-development",
@@ -336,17 +336,36 @@ CLINIC_AUTOMATION_PAGE = dict(
 )
 SEO_PAGES.append(CLINIC_AUTOMATION_PAGE)
 
-# Keep legacy city and agency URLs accessible to visitors with direct links, but
-# do not use them as the site's indexable SEO strategy.
+# Keep unsupported city and agency URLs accessible to visitors with direct
+# links, but do not use them as the site's indexable SEO strategy.
 for _local_page in [*LOCATION_MARKETING_PAGES, *CITY_SERVICE_PAGES, *APP_DEVELOPMENT_CITY_PAGES, *NESTED_CITY_SERVICE_PAGES, *AI_LOCATION_PAGES, CLINIC_AUTOMATION_PAGE]:
     _local_page["noindex"] = True
+
+# These Etah pages are supported by real, published project evidence. Each is
+# linked to the most relevant case study rather than relying on generic local
+# claims. Other city variants remain noindex until equivalent evidence exists.
+LOCAL_PROOF_CASES = {
+    "/digital-growth-automation-etah": ["dhumari-public-school-app", "dr-lokman-das-public-school-website", "ss-cafe-food-delivery-app"],
+    "/app-development/etah": ["dhumari-public-school-app", "ss-cafe-food-delivery-app"],
+    "/website-development/etah": ["dr-lokman-das-public-school-website"],
+    "/software-development/etah": ["dhumari-public-school-app"],
+    "/ecommerce-development/etah": ["ss-cafe-food-delivery-app"],
+    "/school-website-development/etah": ["dr-lokman-das-public-school-website", "dhumari-public-school-app"],
+}
+for _local_page in SEO_PAGES:
+    if _local_page.get("path") in LOCAL_PROOF_CASES:
+        _local_page["noindex"] = False
+        # Keep focused search landing pages out of the public service directory.
+        # They remain crawlable through the XML sitemap and available by direct URL.
+        _local_page["show_in_directory"] = False
+        _local_page["featured_case_slugs"] = LOCAL_PROOF_CASES[_local_page["path"]]
 
 
 def _short_meta(text, limit=158):
     """Keep search snippets concise without cutting a word in half."""
     if len(text) <= limit:
         return text
-    return text[:limit + 1].rsplit(" ", 1)[0].rstrip(" ,;:-") + "."
+    return text[:limit].rsplit(" ", 1)[0].rstrip(" ,;:-") + "."
 
 
 for _service in SERVICES:

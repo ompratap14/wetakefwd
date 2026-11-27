@@ -104,6 +104,37 @@ class WebsiteTests(unittest.TestCase):
                     self.assertIn(image['file'], html)
                     self.assertIn(image['alt'], html)
 
+    def test_evidence_backed_etah_pages_are_indexable_and_link_to_real_work(self):
+        expected_paths = {
+            "/digital-growth-automation-etah", "/app-development/etah",
+            "/website-development/etah", "/software-development/etah",
+            "/ecommerce-development/etah", "/school-website-development/etah",
+        }
+        sitemap = self.client.get('/sitemap.xml').get_data(as_text=True)
+        services_html = self.client.get('/services').get_data(as_text=True)
+        for path in expected_paths:
+            with self.subTest(path=path):
+                page = next(item for item in site.SEO_PAGES if item['path'] == path)
+                self.assertFalse(page.get('noindex', False))
+                self.assertFalse(page.get('show_in_directory', True))
+                self.assertIn(f"<loc>{site.SITE_URL}{path}</loc>", sitemap)
+                self.assertNotIn(f'href="{path}"', services_html)
+                html = self.client.get(path).get_data(as_text=True)
+                self.assertIn('REAL PROJECT EVIDENCE', html)
+                self.assertIn('index,follow,max-image-preview:large', html)
+                for slug in page['featured_case_slugs']:
+                    self.assertIn(f'/work/{slug}', html)
+
+    def test_unsupported_local_pages_remain_noindex(self):
+        html = self.client.get('/ai-automation-company-delhi').get_data(as_text=True)
+        self.assertIn('<meta name="robots" content="noindex,follow">', html)
+
+    def test_search_descriptions_are_complete_sentences(self):
+        for page in site.SEO_PAGES:
+            with self.subTest(path=page['path']):
+                self.assertLessEqual(len(page['meta_description']), 158)
+                self.assertTrue(page['meta_description'].endswith(('.', '!', '?')))
+
     def test_keyword_landing_pages_own_their_search_intent(self):
         for page in site.SEO_PAGES:
             with self.subTest(path=page["path"]):
@@ -185,9 +216,13 @@ class WebsiteTests(unittest.TestCase):
         sitemap = self.client.get("/sitemap.xml").get_data(as_text=True)
         for page in site.CITY_SERVICE_DETAIL_PAGES:
             with self.subTest(path=page["path"]):
-                self.assertNotIn(f"<loc>{site.SITE_URL}{page['path']}</loc>", sitemap)
                 html = self.client.get(page["path"]).get_data(as_text=True)
-                self.assertIn('<meta name="robots" content="noindex,follow">', html)
+                if page.get("noindex"):
+                    self.assertNotIn(f"<loc>{site.SITE_URL}{page['path']}</loc>", sitemap)
+                    self.assertIn('<meta name="robots" content="noindex,follow">', html)
+                else:
+                    self.assertIn(f"<loc>{site.SITE_URL}{page['path']}</loc>", sitemap)
+                    self.assertIn('index,follow,max-image-preview:large', html)
                 self.assertIn(page["primary_keyword"], html)
                 self.assertIn('"areaServed"', html)
                 self.assertIn(page["related_paths"][0], html)

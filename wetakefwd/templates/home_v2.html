@@ -9,13 +9,13 @@
 <section class="neo-hero"><div class="container neo-hero-grid"><div class="neo-copy"><div class="neo-eyebrow">AI AUTOMATION &amp; DIGITAL GROWTH</div><h1>Your next growth move isn’t hiring. <em>It’s automating.</em></h1><div class="neo-footnote"><p>“An AI-powered operator uses technology to move faster without giving up judgement, ownership or the human relationships that make a business work.”</p><b>— WeTakeFWD</b></div><div class="neo-actions"><a href="#contact" class="neo-btn">Start a project <span>↗</span></a><a href="#solutions" class="neo-text-link">Explore the work ↓</a></div></div></div><a class="neo-scroll" href="#solutions" aria-label="Scroll to capabilities">⌄</a></section>
 <section class="neo-manifesto"><div class="container"><p>AI should not be another tool your team has to manage.</p><h2>It should quietly remove friction from the way work already moves.</h2></div></section>
 {% set brand_logos = [
-  ('wva.png', 'WVA'),
-  ('m-brand.png', 'M brand'),
-  ('ss-cafe-dhumari.png', 'SS Cafe Dhumari'),
-  ('dhumari-public-school.png', 'Dhumari Public School'),
-  ('dr-lokman-das-public-school.png', 'Dr. Lokman Das Public School, Etah'),
-  ('tirvu.png', 'Tirvu'),
-  ('i-arrow.png', 'I Arrow')
+  ('wva.png', 'WVA', 2000, 1080),
+  ('m-brand.png', 'M brand', 192, 192),
+  ('ss-cafe-dhumari.png', 'SS Cafe Dhumari', 150, 150),
+  ('dhumari-public-school.png', 'Dhumari Public School', 250, 250),
+  ('dr-lokman-das-public-school.png', 'Dr. Lokman Das Public School, Etah', 447, 447),
+  ('tirvu.png', 'Tirvu', 256, 87),
+  ('i-arrow.png', 'I Arrow', 1024, 1024)
 ] %}
 <section class="neo-brands" aria-labelledby="brands-heading">
   <div class="container">
@@ -30,14 +30,14 @@
     <div class="brand-flight-lane lane-left">
       <div class="brand-flight-track">
         {% for copy in range(2) %}<div class="brand-flight-group">
-          {% for image, name in brand_logos %}<div class="brand-flight-card{% if image == 'i-arrow.png' %} brand-flight-card-arrow{% endif %}"><img src="{{ url_for('static', filename='images/brands/' ~ image) }}" alt="" loading="lazy"></div>{% endfor %}
+          {% for image, name, width, height in brand_logos %}<div class="brand-flight-card{% if image == 'i-arrow.png' %} brand-flight-card-arrow{% endif %}"><img src="{{ url_for('static', filename='images/brands/' ~ image) }}" width="{{ width }}" height="{{ height }}" alt="" loading="lazy" decoding="async"></div>{% endfor %}
         </div>{% endfor %}
       </div>
     </div>
     <div class="brand-flight-lane lane-right">
       <div class="brand-flight-track">
         {% for copy in range(2) %}<div class="brand-flight-group">
-          {% for image, name in brand_logos|reverse %}<div class="brand-flight-card{% if image == 'i-arrow.png' %} brand-flight-card-arrow{% endif %}"><img src="{{ url_for('static', filename='images/brands/' ~ image) }}" alt="" loading="lazy"></div>{% endfor %}
+          {% for image, name, width, height in brand_logos|reverse %}<div class="brand-flight-card{% if image == 'i-arrow.png' %} brand-flight-card-arrow{% endif %}"><img src="{{ url_for('static', filename='images/brands/' ~ image) }}" width="{{ width }}" height="{{ height }}" alt="" loading="lazy" decoding="async"></div>{% endfor %}
         </div>{% endfor %}
       </div>
     </div>
