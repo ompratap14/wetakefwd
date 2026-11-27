@@ -18,7 +18,8 @@
     "publish:small-town-india": "tsx scripts/publish-small-town-india.ts",
     "publish:ai-automation-cost-india": "tsx scripts/publish-ai-automation-cost-india-2027.ts",
     "schedule:whatsapp-automations": "tsx scripts/schedule-whatsapp-automations.ts",
-    "schedule:automation-audit": "tsx scripts/schedule-automation-audit.ts"
+    "schedule:automation-audit": "tsx scripts/schedule-automation-audit.ts",
+    "schedule:ai-agents-small-business": "tsx scripts/schedule-ai-agents-small-business.ts"
   },
   "dependencies": {
     "@prisma/adapter-pg": "7.10.1",
