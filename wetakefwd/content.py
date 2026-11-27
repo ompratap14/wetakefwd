@@ -71,7 +71,6 @@ CASE_STUDIES = [
         work=["Defined the cafe's application flow", "Designed the food browsing and ordering experience", "Built the delivery application", "Created a foundation for ongoing menu and service improvements"],
         gallery=[
             dict(file="ss-cafe-home.png", label="Customer app", alt="SS Cafe branded customer ordering app homepage", caption="Customers enter through a clearly branded mobile homepage and can move directly into the menu.", portrait=True),
-            dict(file="ss-cafe-product.png", label="Product detail", alt="SS Cafe food item detail and add to order screen", caption="Dish details, pricing, quantity and ordering actions stay clear on a small screen.", portrait=True),
             dict(file="ss-cafe-cart.png", label="Cart + delivery", alt="SS Cafe customer cart and delivery checkout screen", caption="The cart keeps the order, charges and delivery step visible before checkout.", portrait=True),
             dict(file="ss-cafe-counter.png", label="Staff counter", alt="SS Cafe live order counter for staff", caption="A separate staff view keeps incoming orders and fulfilment status visible.", portrait=True),
         ],
