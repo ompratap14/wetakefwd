@@ -33,7 +33,7 @@ def build():
     OUTPUT.mkdir(exist_ok=True)
     shutil.copytree(ROOT / 'static', OUTPUT / 'static', dirs_exist_ok=True)
     shutil.copy2(ROOT / 'static' / 'favicon.ico', OUTPUT / 'favicon.ico')
-    routes = (['/','/services'] + ['/services/' + item['slug'] for item in SERVICES] +
+    routes = (['/','/services', '/privacy', '/terms'] + ['/services/' + item['slug'] for item in SERVICES] +
               [item['path'] for item in SEO_PAGES])
     with app.test_client() as client:
         for route in routes:

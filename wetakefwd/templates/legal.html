@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% if page == 'privacy' %}
+  {% set page_title = 'Privacy Policy | WeTakeFWD' %}
+  {% set page_description = 'How WeTakeFWD collects, uses and protects information submitted through this website.' %}
+{% else %}
+  {% set page_title = 'Website Terms | WeTakeFWD' %}
+  {% set page_description = 'The terms that apply when you use the WeTakeFWD website or contact us about a project.' %}
+{% endif %}
+{% block title %}{{ page_title }}{% endblock %}
+{% block description %}{{ page_description }}{% endblock %}
+{% block canonical %}{{ site_url }}/{{ page }}{% endblock %}
+{% block content %}
+<section class="interior-hero legal-hero">
+  <div class="shell">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a><span>/</span>{{ 'Privacy' if page == 'privacy' else 'Terms' }}</nav>
+    <div class="legal-heading">
+      <span class="eyebrow">WETAKEFWD / TRUST &amp; TRANSPARENCY</span>
+      <h1>{{ 'Privacy policy' if page == 'privacy' else 'Website terms' }}<em>.</em></h1>
+      <p>Effective 27 November 2026 · Contact: <a href="mailto:wetakefwd@gmail.com">wetakefwd@gmail.com</a></p>
+    </div>
+  </div>
+</section>
+<section class="section-space legal-copy"><div class="shell"><article>
+{% if page == 'privacy' %}
+  <h2>Information we collect</h2>
+  <p>When you submit an enquiry, we receive the details you choose to provide, such as your name, email address, business name, project interest and message. Basic technical and usage information may also be collected through hosting, security and analytics tools.</p>
+  <h2>How we use information</h2>
+  <p>We use enquiry information to respond, understand your requirements, prepare a proposal where requested and maintain the security and performance of this website. We do not sell personal information.</p>
+  <h2>Service providers</h2>
+  <p>The website may use providers for hosting, analytics, form delivery and email. They process only the information needed to provide those services under their own security and privacy commitments.</p>
+  <h2>Retention and your choices</h2>
+  <p>We retain enquiry information only while it remains reasonably useful for the conversation, legal obligations or security. You may ask us to correct or delete information by emailing us. We will verify the request before acting.</p>
+  <h2>External links and updates</h2>
+  <p>External websites have their own privacy practices. We may update this notice as the website or the tools it uses change; the effective date above identifies the current version.</p>
+{% else %}
+  <h2>Using this website</h2>
+  <p>This website provides general information about WeTakeFWD's services. You may browse it and contact us for legitimate business purposes. Do not attempt to disrupt the website, access restricted systems or submit unlawful or misleading material.</p>
+  <h2>No automatic project agreement</h2>
+  <p>An enquiry, conversation, estimate or website description does not create a project agreement. Scope, deliverables, fees, ownership, access, timelines and support are confirmed in a separate written proposal or agreement.</p>
+  <h2>Information and illustrative examples</h2>
+  <p>We aim to keep information accurate, but technology, third-party services and project requirements change. Workflow examples are illustrative unless they are clearly identified as a verified case study. Results depend on the starting point, implementation and factors outside our control.</p>
+  <h2>Intellectual property and external services</h2>
+  <p>Website design, copy and original assets may not be republished as your own without permission. Third-party names, platforms and links remain subject to their respective owners and terms.</p>
+  <h2>Questions</h2>
+  <p>If anything on this page is unclear, email <a href="mailto:wetakefwd@gmail.com">wetakefwd@gmail.com</a> before relying on it or beginning a project.</p>
+{% endif %}
+</article></div></section>
+{% endblock %}

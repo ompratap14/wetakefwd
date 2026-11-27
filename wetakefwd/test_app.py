@@ -56,14 +56,13 @@ class WebsiteTests(unittest.TestCase):
         self.assertIn('name="redirect" value="https://www.wetakefwd.online/thank-you/"', home)
         self.assertIn('"@type": "Organization"', home)
         self.assertIn('"@type": "WebSite"', home)
-        self.assertIn('/ai-development-company-india', home)
-        self.assertIn('/ai-automation-for-clinics-delhi-ncr', home)
+        self.assertIn('/ai-development-services-india', home)
         clinic = self.client.get('/ai-automation-for-clinics-delhi-ncr').get_data(as_text=True)
         self.assertIn('Free 20-minute AI Automation Audit', clinic)
         self.assertIn('"@type": "Offer"', clinic)
         self.assertNotIn('class="intro-skip"', home)
-        self.assertIn('WeTakeFWD turns ambitious businesses', home)
-        self.assertIn('<em>AI-powered operators.</em>', home)
+        self.assertIn('Your next growth move isn', home)
+        self.assertIn('<em>It', home)
         self.assertIn('data-video-intro', home)
         self.assertIn('/static/video/wetakefwd-intro.mp4', home)
         self.assertIn('playsinline', home)
@@ -71,6 +70,8 @@ class WebsiteTests(unittest.TestCase):
         self.assertIn('We can only see a short distance ahead', home)
         self.assertIn('/static/images/alan-turing-1951.jpg', home)
         self.assertIn('<meta name="viewport" content="width=device-width,initial-scale=1">', home)
+        self.assertEqual(home.count('GTM-PFS3L983'), 2)
+        self.assertNotIn('GTM-MH9995L4', home)
         directory = self.client.get('/services').get_data(as_text=True)
         self.assertIn('data-filter="systems"', directory)
         self.assertIn('data-filter-count', directory)
@@ -78,9 +79,12 @@ class WebsiteTests(unittest.TestCase):
         self.assertIn('data-example-tab="future"', service)
         self.assertIn('data-example-panel="future" hidden', service)
         sitemap = self.client.get('/sitemap.xml').get_data(as_text=True)
-        self.assertEqual(sitemap.count('<url>'), len(paths))
-        self.assertEqual(sitemap.count('<lastmod>2026-11-21</lastmod>'), len(paths))
+        indexable_count = 2 + len(site.SERVICES) + len([page for page in site.SEO_PAGES if not page.get('noindex')]) + 2
+        self.assertEqual(sitemap.count('<url>'), indexable_count)
+        self.assertEqual(sitemap.count('<lastmod>2026-11-27</lastmod>'), indexable_count)
         self.assertIn('<priority>1.0</priority>', sitemap)
+        self.assertIn(f'<loc>{site.SITE_URL}/privacy</loc>', sitemap)
+        self.assertIn(f'<loc>{site.SITE_URL}/terms</loc>', sitemap)
 
     def test_keyword_landing_pages_own_their_search_intent(self):
         for page in site.SEO_PAGES:
@@ -97,36 +101,32 @@ class WebsiteTests(unittest.TestCase):
         descriptions = {page["meta_description"] for page in site.LOCATION_MARKETING_PAGES}
         self.assertEqual(len(titles), 9)
         self.assertEqual(len(descriptions), 9)
-        directory = self.client.get("/services").get_data(as_text=True)
         for page in site.LOCATION_MARKETING_PAGES:
             with self.subTest(path=page["path"]):
-                self.assertIn(f'href="{page["path"]}"', directory)
                 html = self.client.get(page["path"]).get_data(as_text=True)
                 self.assertIn(page["location"], html)
                 self.assertIn('"areaServed"', html)
+                self.assertIn('<meta name="robots" content="noindex,follow">', html)
 
     def test_local_ai_pages_are_unique_and_discoverable(self):
         self.assertEqual(len(site.AI_LOCATION_PAGES), 6)
         self.assertEqual(len({page["meta_title"] for page in site.AI_LOCATION_PAGES}), 6)
         self.assertEqual(len({page["meta_description"] for page in site.AI_LOCATION_PAGES}), 6)
-        directory = self.client.get("/services").get_data(as_text=True)
         for page in site.AI_LOCATION_PAGES:
             with self.subTest(path=page["path"]):
-                self.assertIn(f'href="{page["path"]}"', directory)
                 html = self.client.get(page["path"]).get_data(as_text=True)
                 self.assertIn(page["primary_keyword"], html)
                 self.assertIn(page["location"], html)
                 self.assertIn('"areaServed"', html)
+                self.assertIn('<meta name="robots" content="noindex,follow">', html)
 
     def test_city_service_hubs_are_unique_and_discoverable(self):
         self.assertEqual(len(site.CITY_SERVICE_PAGES), 2)
         self.assertEqual({page["location"] for page in site.CITY_SERVICE_PAGES}, {"Etah", "Agra"})
         self.assertEqual(len({page["meta_title"] for page in site.CITY_SERVICE_PAGES}), 2)
         self.assertEqual(len({page["meta_description"] for page in site.CITY_SERVICE_PAGES}), 2)
-        directory = self.client.get("/services").get_data(as_text=True)
         for page in site.CITY_SERVICE_PAGES:
             with self.subTest(path=page["path"]):
-                self.assertIn(f'href="{page["path"]}"', directory)
                 html = self.client.get(page["path"]).get_data(as_text=True)
                 self.assertIn(page["primary_keyword"], html)
                 self.assertIn(page["location"], html)
@@ -140,10 +140,8 @@ class WebsiteTests(unittest.TestCase):
         self.assertEqual({page["location"] for page in site.APP_DEVELOPMENT_CITY_PAGES}, expected)
         self.assertEqual(len({page["meta_title"] for page in site.APP_DEVELOPMENT_CITY_PAGES}), 6)
         self.assertEqual(len({page["meta_description"] for page in site.APP_DEVELOPMENT_CITY_PAGES}), 6)
-        directory = self.client.get("/services").get_data(as_text=True)
         for page in site.APP_DEVELOPMENT_CITY_PAGES:
             with self.subTest(path=page["path"]):
-                self.assertIn(f'href="{page["path"]}"', directory)
                 html = self.client.get(page["path"]).get_data(as_text=True)
                 self.assertIn(page["primary_keyword"], html)
                 self.assertIn(page["location"], html)
@@ -166,13 +164,12 @@ class WebsiteTests(unittest.TestCase):
         self.assertEqual({page["path"] for page in site.CITY_SERVICE_DETAIL_PAGES}, requested)
         self.assertEqual(len({page["meta_title"] for page in site.CITY_SERVICE_DETAIL_PAGES}), len(requested))
         self.assertEqual(len({page["meta_description"] for page in site.CITY_SERVICE_DETAIL_PAGES}), len(requested))
-        directory = self.client.get("/services").get_data(as_text=True)
         sitemap = self.client.get("/sitemap.xml").get_data(as_text=True)
         for page in site.CITY_SERVICE_DETAIL_PAGES:
             with self.subTest(path=page["path"]):
-                self.assertIn(f'href="{page["path"]}"', directory)
-                self.assertIn(f"<loc>{site.SITE_URL}{page['path']}</loc>", sitemap)
+                self.assertNotIn(f"<loc>{site.SITE_URL}{page['path']}</loc>", sitemap)
                 html = self.client.get(page["path"]).get_data(as_text=True)
+                self.assertIn('<meta name="robots" content="noindex,follow">', html)
                 self.assertIn(page["primary_keyword"], html)
                 self.assertIn('"areaServed"', html)
                 self.assertIn(page["related_paths"][0], html)

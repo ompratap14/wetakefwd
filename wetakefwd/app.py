@@ -49,8 +49,10 @@ SEO_PAGE_BY_SLUG = {page["slug"]: page for page in SEO_PAGES}
 SEO_PAGE_BY_PATH = {page["path"]: page for page in SEO_PAGES}
 RELATED_PAGE_BY_PATH = SEO_PAGE_BY_PATH | {f"/services/{service['slug']}": service for service in SERVICES}
 LEGACY_SEO_REDIRECTS = {
-    "ai-development": "ai-development-company-india",
-    "ai-automation": "best-ai-automation-company-india",
+    "ai-development": "ai-development-services-india",
+    "ai-development-company-india": "ai-development-services-india",
+    "ai-automation": "ai-automation-services-india",
+    "best-ai-automation-company-india": "ai-automation-services-india",
     "ai-agents": "ai-agent-development",
     "chatbot-development": "ai-chatbot-development",
     "software-development": "custom-software-development",
@@ -188,7 +190,7 @@ def seo_service_page(slug):
     elif service in APP_DEVELOPMENT_CITY_PAGES:
         related = [SEO_PAGE_BY_SLUG[slug] for slug in ("mobile-app-development", "custom-software-development", "ai-agent-development")]
     elif service.get("noindex"):
-        related = [SEO_PAGE_BY_SLUG[slug] for slug in ("web-development", "custom-software-development", "best-ai-automation-company-india")]
+        related = [SEO_PAGE_BY_SLUG[slug] for slug in ("web-development", "custom-software-development", "ai-automation-services-india")]
     else:
         indexable_pages = [page for page in SEO_PAGES if not page.get("noindex")]
         index = indexable_pages.index(service)
@@ -221,12 +223,23 @@ def thank_you():
     return render_template("thank_you.html")
 
 
+@app.route("/privacy")
+def privacy():
+    return render_template("legal.html", page="privacy")
+
+
+@app.route("/terms")
+def terms():
+    return render_template("legal.html", page="terms")
+
+
 @app.route("/sitemap.xml")
 def sitemap():
     urls = ([f"{SITE_URL}/", f"{SITE_URL}/services"] +
             [f"{SITE_URL}/services/{s['slug']}" for s in SERVICES] +
-            [f"{SITE_URL}{page['path']}" for page in SEO_PAGES if not page.get('noindex')])
-    updated = "2026-11-21"
+            [f"{SITE_URL}{page['path']}" for page in SEO_PAGES if not page.get('noindex')] +
+            [f"{SITE_URL}/privacy", f"{SITE_URL}/terms"])
+    updated = "2026-11-27"
     entries = []
     for url in urls:
         if url == f"{SITE_URL}/":

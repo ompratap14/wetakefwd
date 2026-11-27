@@ -369,3 +369,13 @@ button,input,select,textarea,.button,.nav-contact,.neo-btn,.neo-text-link,.neo-c
   .motion-section,.motion-section *{opacity:1!important;transform:none!important;transition:none!important;animation:none!important}
   .neo-audit-grid::before,.neo-audit-grid::after,.neo-quote-person img{animation:none!important;transition:none!important}
 }
+/* Trust and legal pages */
+.legal-hero{padding-bottom:clamp(3rem,8vw,7rem)}
+.legal-heading{max-width:880px;padding-top:clamp(2rem,6vw,5rem)}
+.legal-heading h1{font-size:clamp(3.5rem,9vw,8rem);line-height:.88;margin:1.2rem 0 2rem}
+.legal-heading p{font-size:1rem;color:#5f625d}
+.legal-heading a,.legal-copy a{text-decoration:underline;text-underline-offset:.22em}
+.legal-copy article{max-width:820px;margin:0 auto}
+.legal-copy h2{font-family:"Space Grotesk",sans-serif;font-size:clamp(1.45rem,3vw,2rem);margin:2.8rem 0 .8rem}
+.legal-copy h2:first-child{margin-top:0}
+.legal-copy p{font-size:clamp(1rem,1.8vw,1.15rem);line-height:1.75;color:#4d504b}

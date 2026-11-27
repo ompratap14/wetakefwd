@@ -5,8 +5,10 @@
   "installCommand": "echo Static site: no dependencies to install",
   "buildCommand": "echo Static site: using committed dist directory",
   "redirects": [
-    { "source": "/ai-development", "destination": "/ai-development-company-india", "permanent": true },
-    { "source": "/ai-automation", "destination": "/best-ai-automation-company-india", "permanent": true },
+    { "source": "/ai-development", "destination": "/ai-development-services-india", "permanent": true },
+    { "source": "/ai-development-company-india", "destination": "/ai-development-services-india", "permanent": true },
+    { "source": "/ai-automation", "destination": "/ai-automation-services-india", "permanent": true },
+    { "source": "/best-ai-automation-company-india", "destination": "/ai-automation-services-india", "permanent": true },
     { "source": "/ai-agents", "destination": "/ai-agent-development", "permanent": true },
     { "source": "/business-automation", "destination": "/business-automation-services", "permanent": true },
     { "source": "/software-development", "destination": "/custom-software-development", "permanent": true },
