@@ -16,6 +16,7 @@
     "admin:bootstrap": "tsx scripts/bootstrap-admin.ts",
     "publish:chatgpt-business-discovery": "tsx scripts/publish-chatgpt-business-discovery.ts",
     "publish:small-town-india": "tsx scripts/publish-small-town-india.ts",
+    "publish:ai-automation-cost-india": "tsx scripts/publish-ai-automation-cost-india-2027.ts",
     "schedule:whatsapp-automations": "tsx scripts/schedule-whatsapp-automations.ts",
     "schedule:automation-audit": "tsx scripts/schedule-automation-audit.ts"
   },
