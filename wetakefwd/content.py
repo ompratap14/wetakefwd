@@ -2,6 +2,59 @@ from city_service_pages import NESTED_CITY_SERVICE_PAGES
 
 SITE_URL = "https://www.wetakefwd.online"
 
+CASE_STUDIES = [
+    dict(
+        slug="woodland-affairs-website-redesign", client="Woodland Affairs", sector="Hospitality & experiences",
+        service="Website redesign", logo="wva.png",
+        title="Giving Woodland Affairs a clearer digital presence",
+        summary="We redesigned an outdated website into a clearer, more modern experience that better presents the brand online.",
+        challenge="The previous Woodland Affairs website no longer represented the quality of the brand or made its offering easy to understand.",
+        work=["Reviewed the existing website and content", "Restructured the visitor journey", "Created a modern, responsive website experience", "Improved the clarity of important information and contact paths"],
+        outcome="Woodland Affairs now has a cleaner digital foundation that presents the brand more confidently and gives visitors a more direct route to understand and contact it.",
+        related="/website-redesign",
+    ),
+    dict(
+        slug="dhumari-public-school-app", client="Dhumari Public School", sector="Education",
+        service="Custom application", logo="dhumari-public-school.png",
+        title="A custom application for Dhumari Public School",
+        summary="We built a dedicated application to support the school's digital operations and give its community a more useful digital experience.",
+        challenge="The school needed an application shaped around its own operational requirements instead of relying only on disconnected general-purpose tools.",
+        work=["Mapped the school's application requirements", "Designed the experience for practical day-to-day use", "Built the custom application", "Prepared the product for continued improvement as requirements evolve"],
+        outcome="The school has a purpose-built application foundation that can support its operational needs and future digital services.",
+        related="/mobile-app-development",
+    ),
+    dict(
+        slug="dr-lokman-das-public-school-website", client="Dr. Lokman Das Public School", sector="Education",
+        service="School website", logo="dr-lokman-das-public-school.png",
+        title="A focused website for Dr. Lokman Das Public School",
+        summary="We designed and built the school's website to create a clearer, more accessible online presence for families and the wider community.",
+        challenge="The school needed a dependable website where important information could be presented clearly on desktop and mobile devices.",
+        work=["Organised the school's website information", "Designed a responsive interface", "Built and launched the website", "Created clearer routes for families to find information and make contact"],
+        outcome="The school now has a dedicated online presence that is easier to navigate and better suited to communicating with prospective and current families.",
+        related="/web-development",
+    ),
+    dict(
+        slug="tirvu-digital-management", client="Tirvu", sector="Digital product",
+        service="Ongoing digital management", logo="tirvu.png",
+        title="Ongoing digital management for Tirvu",
+        summary="We work with Tirvu as an ongoing digital partner, managing and improving its digital presence rather than treating the work as a one-time launch.",
+        challenge="Tirvu needed consistent ownership across its digital work so updates, improvements and new requirements could move forward together.",
+        work=["Ongoing management of digital requirements", "Coordination of updates and improvements", "Technical and experience support", "Continuous prioritisation as the product and business evolve"],
+        outcome="Tirvu has one continuing digital relationship for maintaining momentum, resolving needs and improving the experience over time.",
+        related="/services/ongoing-support",
+    ),
+    dict(
+        slug="ss-cafe-food-delivery-app", client="SS Cafe Dhumari", sector="Food & hospitality",
+        service="Food delivery application", logo="ss-cafe-dhumari.png",
+        title="A food delivery application for SS Cafe",
+        summary="We built a custom application that gives SS Cafe a direct digital channel for its food delivery experience.",
+        challenge="SS Cafe needed a digital ordering experience shaped around its own brand and delivery requirements.",
+        work=["Defined the cafe's application flow", "Designed the food browsing and ordering experience", "Built the delivery application", "Created a foundation for ongoing menu and service improvements"],
+        outcome="SS Cafe has its own application-based delivery channel and a stronger foundation for serving customers digitally.",
+        related="/mobile-app-development",
+    ),
+]
+
 SERVICES = [
     dict(slug="ai-business-automation", title="AI Business Automation", short_title="AI business automation", category="AUTOMATE", summary="Remove repetitive steps and connect the systems your team already uses.", intro="Business automation connects repeated tasks, data and decisions across your existing tools. We identify the manual steps that slow your team down, then design a workflow with clear ownership and human review where it matters.", detail="A typical first phase could capture an enquiry, send it to the right person, create a CRM record and schedule a follow-up. We begin with the process and success measure before choosing tools.", includes=["Workflow mapping and prioritisation", "Integrations with existing tools", "Approvals, alerts and exception handling", "Documentation and ongoing improvement"], use_case="For a service business, an enquiry from a website can be logged, assigned, acknowledged and followed up without copying details between tools.", faq=[("What should we automate first?", "Start with a repetitive process that takes measurable time or causes missed opportunities. We assess volume, complexity and risk before recommending a first build.")]),
     dict(slug="ai-agents-chatbots", title="AI Agents & Chatbots", short_title="AI agents & chatbots", category="AI SYSTEMS", summary="Give customers and teams faster answers with a reliable human handoff.", intro="AI agents and chatbots can answer questions, search approved knowledge and help people complete routine tasks. The useful version is grounded in your actual business information and has a clear escalation path.", detail="We define what the assistant is allowed to do, connect the right sources, test common and difficult questions, and make it easy for a person to take over.", includes=["Website support assistants", "Internal knowledge assistants", "Lead qualification flows", "Testing, guardrails and escalation"], use_case="A support assistant can answer repeated questions about services and pass complex enquiries to a team member with the relevant context.", faq=[("Will the chatbot invent answers?", "No AI assistant is perfect. We reduce errors with approved sources, scoped tasks, testing and a clear human handoff.")]),

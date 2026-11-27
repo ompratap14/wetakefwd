@@ -379,3 +379,32 @@ button,input,select,textarea,.button,.nav-contact,.neo-btn,.neo-text-link,.neo-c
 .legal-copy h2{font-family:"Space Grotesk",sans-serif;font-size:clamp(1.45rem,3vw,2rem);margin:2.8rem 0 .8rem}
 .legal-copy h2:first-child{margin-top:0}
 .legal-copy p{font-size:clamp(1rem,1.8vw,1.15rem);line-height:1.75;color:#4d504b}
+
+/* Selected work and case studies */
+.brands-work-link{display:inline-block;margin-top:14px;color:var(--blue);font-weight:700;text-decoration:underline;text-underline-offset:5px}
+.work-hero,.case-hero{padding-bottom:clamp(4rem,9vw,8rem)}
+.work-heading{max-width:980px;padding-top:clamp(2rem,6vw,5rem)}
+.work-heading h1,.case-hero h1{font:400 clamp(3.6rem,8vw,7.5rem)/.9 Georgia,'Times New Roman',serif;letter-spacing:-.055em;margin:1.2rem 0 2rem}
+.work-heading h1 em,.case-hero h1 em,.case-story h2 em{color:var(--blue);font-style:italic}
+.work-heading>p,.case-hero-grid>div:first-child>p{max-width:720px;font-size:clamp(1.05rem,2vw,1.3rem);line-height:1.6;color:var(--muted)}
+.work-grid{display:grid;gap:18px}
+.work-card{display:grid;grid-template-columns:minmax(220px,.36fr) 1fr;gap:clamp(28px,5vw,72px);align-items:center;padding:clamp(24px,4vw,52px);border:1px solid var(--line);border-radius:var(--radius-lg);background:#fff;color:var(--ink);transition:transform .25s ease,box-shadow .25s ease}
+.work-card:hover{transform:translateY(-4px);box-shadow:0 20px 50px #183a8214}
+.work-card-logo,.case-logo{display:grid;place-items:center;min-height:220px;padding:28px;border-radius:var(--radius-md);background:#f1f4fa}
+.work-card-logo img,.case-logo img{max-width:85%;max-height:150px;object-fit:contain;mix-blend-mode:multiply}
+.work-card small,.case-delivery-grid small{color:var(--blue);font-weight:800;letter-spacing:.11em}
+.work-card h2{font:400 clamp(2rem,4vw,3.8rem)/1 Georgia,'Times New Roman',serif;letter-spacing:-.045em;margin:16px 0}
+.work-card p{max-width:720px;color:var(--muted);line-height:1.65}
+.work-card span,.case-related{display:inline-flex;margin-top:20px;font-weight:800;text-transform:uppercase;letter-spacing:.07em}
+.case-hero-grid,.case-story-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(300px,.55fr);gap:clamp(36px,7vw,100px);align-items:center}
+.case-logo{min-height:360px;background:#fff;border:1px solid var(--line)}
+.case-story h2{font:400 clamp(2.8rem,5vw,5.5rem)/.95 Georgia,'Times New Roman',serif;letter-spacing:-.05em;margin:18px 0}
+.case-story .story-lead{font-size:clamp(1.3rem,2.4vw,2rem);line-height:1.45;color:var(--ink)}
+.case-story p{color:var(--muted);line-height:1.7}
+.case-delivery{background:#10254f;color:#fff}
+.case-delivery .section-head .eyebrow{color:#9ebcff}
+.case-delivery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:50px}
+.case-delivery-grid>div{min-height:190px;padding:30px;border:1px solid #ffffff33;border-radius:var(--radius-md);background:#ffffff0a}
+.case-delivery-grid h3{font:400 clamp(1.6rem,2.8vw,2.4rem)/1.1 Georgia,'Times New Roman',serif;margin:24px 0 0}
+.case-related{color:var(--blue)}
+@media(max-width:760px){.work-card,.case-hero-grid,.case-story-grid{grid-template-columns:1fr}.work-card-logo{min-height:160px}.case-logo{min-height:230px;order:-1}.case-delivery-grid{grid-template-columns:1fr}.work-heading h1,.case-hero h1{font-size:clamp(3rem,13vw,4.5rem)}.work-card h2{font-size:2.2rem}}

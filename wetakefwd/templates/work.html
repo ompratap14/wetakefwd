@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Selected Work | Websites, Apps & Digital Systems | WeTakeFWD{% endblock %}
+{% block description %}Explore real WeTakeFWD work across school applications, websites, food delivery and ongoing digital management.{% endblock %}
+{% block canonical %}{{ site_url }}/work{% endblock %}
+{% block schema %}<script type="application/ld+json">{{ breadcrumb_schema|tojson }}</script>{% endblock %}
+{% block content %}
+<section class="interior-hero work-hero"><div class="shell">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('home') }}">Home</a><span>/</span>Selected work</nav>
+  <div class="work-heading"><span class="eyebrow">REAL PROJECTS / PRACTICAL OUTCOMES</span><h1>Work that moved<br><em>something forward.</em></h1><p>Websites, applications and ongoing digital work built around what each organisation actually needed.</p></div>
+</div></section>
+<section class="work-index section-space"><div class="shell">
+  <div class="work-grid">{% for case in case_studies %}
+    <a class="work-card" href="{{ url_for('case_study', slug=case.slug) }}">
+      <div class="work-card-logo"><img src="{{ url_for('static', filename='images/brands/' ~ case.logo) }}" alt="{{ case.client }} logo" loading="lazy"></div>
+      <div><small>{{ '%02d'|format(loop.index) }} / {{ case.sector|upper }}</small><h2>{{ case.title }}</h2><p>{{ case.summary }}</p><span>Read the case study ↗</span></div>
+    </a>
+  {% endfor %}</div>
+</div></section>
+<section class="interior-cta"><div class="shell"><span class="eyebrow">YOUR NEXT MOVE</span><h2>Have a challenge<br><em>we should see?</em></h2><a class="button button-dark" href="{{ url_for('home') }}#contact">Start a conversation <span>↗</span></a></div></section>
+{% endblock %}

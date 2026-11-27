@@ -12,7 +12,7 @@ import requests
 from flask import Flask, abort, redirect, render_template, request, send_from_directory, session, url_for
 from werkzeug.security import check_password_hash
 
-from content import AI_LOCATION_PAGES, APP_DEVELOPMENT_CITY_PAGES, CITY_SERVICE_DETAIL_PAGES, CITY_SERVICE_PAGES, HOME_FAQ, LOCATION_MARKETING_PAGES, SEO_PAGES, SERVICES, SITE_URL
+from content import AI_LOCATION_PAGES, APP_DEVELOPMENT_CITY_PAGES, CASE_STUDIES, CITY_SERVICE_DETAIL_PAGES, CITY_SERVICE_PAGES, HOME_FAQ, LOCATION_MARKETING_PAGES, SEO_PAGES, SERVICES, SITE_URL
 
 APP_DIR = Path(__file__).resolve().parent
 
@@ -47,6 +47,7 @@ if os.getenv("FLASK_ENV") == "production":
 SERVICE_BY_SLUG = {service["slug"]: service for service in SERVICES}
 SEO_PAGE_BY_SLUG = {page["slug"]: page for page in SEO_PAGES}
 SEO_PAGE_BY_PATH = {page["path"]: page for page in SEO_PAGES}
+CASE_STUDY_BY_SLUG = {case["slug"]: case for case in CASE_STUDIES}
 RELATED_PAGE_BY_PATH = SEO_PAGE_BY_PATH | {f"/services/{service['slug']}": service for service in SERVICES}
 LEGACY_SEO_REDIRECTS = {
     "ai-development": "ai-development-services-india",
@@ -120,6 +121,7 @@ def site_context():
             "city_service_pages": CITY_SERVICE_PAGES,
             "app_development_city_pages": APP_DEVELOPMENT_CITY_PAGES,
             "city_service_detail_pages": CITY_SERVICE_DETAIL_PAGES,
+            "case_studies": CASE_STUDIES,
             "web3forms_access_key": os.getenv("WEB3FORMS_ACCESS_KEY", "f8858610-b7af-44d5-9073-b2eeefbca47f"),
             "current_year": datetime.now(timezone.utc).year}
 
@@ -137,6 +139,29 @@ def home():
 @app.route("/services")
 def services_index():
     return render_template("services.html", breadcrumb_schema=breadcrumb([("Home", f"{SITE_URL}/"), ("Services", f"{SITE_URL}/services")]))
+
+
+@app.route("/work")
+def work_index():
+    return render_template("work.html", breadcrumb_schema=breadcrumb([("Home", f"{SITE_URL}/"), ("Selected work", f"{SITE_URL}/work")]))
+
+
+@app.route("/work/<slug>")
+def case_study(slug):
+    case = CASE_STUDY_BY_SLUG.get(slug)
+    if case is None:
+        abort(404)
+    canonical = f"{SITE_URL}/work/{slug}"
+    case_schema = {
+        "@context": "https://schema.org", "@type": "CreativeWork", "name": case["title"],
+        "description": case["summary"], "url": canonical,
+        "creator": {"@id": f"{SITE_URL}/#organization"},
+        "about": {"@type": "Organization", "name": case["client"]},
+    }
+    return render_template(
+        "case_study.html", case=case, case_schema=case_schema,
+        breadcrumb_schema=breadcrumb([("Home", f"{SITE_URL}/"), ("Selected work", f"{SITE_URL}/work"), (case["client"], canonical)]),
+    )
 
 
 @app.route("/services/<slug>")
@@ -238,6 +263,7 @@ def sitemap():
     urls = ([f"{SITE_URL}/", f"{SITE_URL}/services"] +
             [f"{SITE_URL}/services/{s['slug']}" for s in SERVICES] +
             [f"{SITE_URL}{page['path']}" for page in SEO_PAGES if not page.get('noindex')] +
+            [f"{SITE_URL}/work", *[f"{SITE_URL}/work/{case['slug']}" for case in CASE_STUDIES]] +
             [f"{SITE_URL}/privacy", f"{SITE_URL}/terms"])
     updated = "2026-11-27"
     entries = []

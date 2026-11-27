@@ -25,8 +25,9 @@ class WebsiteTests(unittest.TestCase):
         self.values = dict(name="Test visitor", email="test@example.com", company="", service="Not sure yet", message="Test enquiry")
 
     def test_pages_and_primary_contact_link(self):
-        for path in (["/", "/services", "/robots.txt", "/sitemap.xml", "/llms.txt"] +
+        for path in (["/", "/services", "/work", "/privacy", "/terms", "/robots.txt", "/sitemap.xml", "/llms.txt"] +
                      ["/services/" + s["slug"] for s in site.SERVICES] +
+                     ["/work/" + case["slug"] for case in site.CASE_STUDIES] +
                      [page["path"] for page in site.SEO_PAGES]):
             with self.subTest(path=path):
                 with self.client.get(path) as response:
@@ -79,12 +80,26 @@ class WebsiteTests(unittest.TestCase):
         self.assertIn('data-example-tab="future"', service)
         self.assertIn('data-example-panel="future" hidden', service)
         sitemap = self.client.get('/sitemap.xml').get_data(as_text=True)
-        indexable_count = 2 + len(site.SERVICES) + len([page for page in site.SEO_PAGES if not page.get('noindex')]) + 2
+        indexable_count = 2 + len(site.SERVICES) + len([page for page in site.SEO_PAGES if not page.get('noindex')]) + 2 + 1 + len(site.CASE_STUDIES)
         self.assertEqual(sitemap.count('<url>'), indexable_count)
         self.assertEqual(sitemap.count('<lastmod>2026-11-27</lastmod>'), indexable_count)
         self.assertIn('<priority>1.0</priority>', sitemap)
         self.assertIn(f'<loc>{site.SITE_URL}/privacy</loc>', sitemap)
         self.assertIn(f'<loc>{site.SITE_URL}/terms</loc>', sitemap)
+
+    def test_case_studies_are_real_work_pages_and_indexable(self):
+        self.assertEqual(len(site.CASE_STUDIES), 5)
+        sitemap = self.client.get('/sitemap.xml').get_data(as_text=True)
+        work = self.client.get('/work').get_data(as_text=True)
+        for case in site.CASE_STUDIES:
+            with self.subTest(slug=case['slug']):
+                path = f"/work/{case['slug']}"
+                self.assertIn(path, work)
+                self.assertIn(f"<loc>{site.SITE_URL}{path}</loc>", sitemap)
+                html = self.client.get(path).get_data(as_text=True)
+                self.assertIn(case['client'], html)
+                self.assertIn(case['title'], html)
+                self.assertIn('"@type": "CreativeWork"', html)
 
     def test_keyword_landing_pages_own_their_search_intent(self):
         for page in site.SEO_PAGES:
