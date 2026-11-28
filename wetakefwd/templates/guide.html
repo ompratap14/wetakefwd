@@ -10,6 +10,7 @@
   {% for paragraph in guide.intro %}<p class="guide-lead">{{ paragraph }}</p>{% endfor %}
   <section class="guide-takeaways"><h2>Key takeaways</h2><ul>{% for item in guide.takeaways %}<li>{{ item }}</li>{% endfor %}</ul></section>
   {% for section in guide.sections %}<section id="section-{{ loop.index }}"><h2>{{ section.heading }}</h2>{% for paragraph in section.get('paragraphs', []) %}<p>{{ paragraph }}</p>{% endfor %}{% if section.get('bullets') %}<ul>{% for item in section.bullets %}<li>{{ item }}</li>{% endfor %}</ul>{% endif %}{% if section.get('steps') %}<ol>{% for item in section.steps %}<li>{{ item }}</li>{% endfor %}</ol>{% endif %}</section>{% endfor %}
+  <section class="guide-sources"><span class="eyebrow">SOURCES &amp; FURTHER READING</span><h2>Continue with the evidence</h2><ul>{% for title, url in guide.sources %}<li><a href="{{ url }}" rel="noopener noreferrer">{{ title }} ↗</a></li>{% endfor %}</ul></section>
   <section class="guide-faq"><span class="eyebrow">FREQUENTLY ASKED QUESTIONS</span><h2>Good to know</h2>{% for question, answer in guide.faq %}<details><summary>{{ question }}<b aria-hidden="true">+</b></summary><p>{{ answer }}</p></details>{% endfor %}</section>
   <section class="guide-next"><span>THE PRACTICAL NEXT MOVE</span><h2>Apply this guide to one real workflow.</h2><p>WeTakeFWD helps businesses design controlled AI automation and software around measurable operating needs.</p><a class="button button-dark" href="{{ guide.service_path }}">{{ guide.service_label }} <span>↗</span></a></section>
 </div></div></article>

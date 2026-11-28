@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}{{ case.client }}: {{ case.service }} Case Study | WeTakeFWD{% endblock %}
+{% block title %}{{ case.client }} Case Study | WeTakeFWD{% endblock %}
 {% block description %}{{ case.summary }}{% endblock %}
 {% block canonical %}{{ site_url }}/work/{{ case.slug }}{% endblock %}
 {% block social_image %}{{ site_url }}/static/images/case-studies/{{ case.gallery[0].file }}{% endblock %}

@@ -259,10 +259,11 @@ def guide_page(slug):
     article_schema = {
         "@context": "https://schema.org", "@type": "Article", "headline": guide["title"],
         "description": guide["summary"], "url": canonical, "datePublished": "2026-11-27",
-        "dateModified": "2026-11-27", "inLanguage": "en-IN",
+        "dateModified": "2026-11-28", "inLanguage": "en-IN",
         "author": {"@type": "Organization", "name": "WeTakeFWD", "url": SITE_URL},
         "publisher": {"@id": f"{SITE_URL}/#organization"},
         "mainEntityOfPage": {"@type": "WebPage", "@id": canonical},
+        "citation": [url for _title, url in guide["sources"]],
     }
     faq_schema = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
         {"@type": "Question", "name": question, "acceptedAnswer": {"@type": "Answer", "text": answer}}
@@ -313,7 +314,7 @@ def sitemap():
             [f"{SITE_URL}/work", *[f"{SITE_URL}/work/{case['slug']}" for case in CASE_STUDIES]] +
             [f"{SITE_URL}/guides", *[f"{SITE_URL}/guides/{guide['slug']}" for guide in GUIDES]] +
             [f"{SITE_URL}/privacy", f"{SITE_URL}/terms"])
-    updated = "2026-11-27"
+    updated = "2026-11-28"
     entries = []
     for url in urls:
         if url == f"{SITE_URL}/":

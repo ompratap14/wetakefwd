@@ -11,7 +11,7 @@
 <section class="work-index section-space"><div class="shell">
   <div class="work-grid">{% for case in case_studies %}
     <a class="work-card" href="{{ url_for('case_study', slug=case.slug) }}">
-      <div class="work-card-logo"><img src="{{ url_for('static', filename='images/brands/' ~ case.logo) }}" alt="{{ case.client }} logo" loading="lazy"></div>
+      <div class="work-card-logo"><img src="{{ url_for('static', filename='images/brands/' ~ case.logo) }}" width="{{ case.logo_width }}" height="{{ case.logo_height }}" alt="{{ case.client }} logo" loading="lazy" decoding="async"></div>
       <div><small>{{ '%02d'|format(loop.index) }} / {{ case.sector|upper }}</small><h2>{{ case.title }}</h2><p>{{ case.summary }}</p><span>Read the case study ↗</span></div>
     </a>
   {% endfor %}</div>
