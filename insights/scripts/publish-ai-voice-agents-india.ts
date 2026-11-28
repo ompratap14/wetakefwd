@@ -170,7 +170,7 @@ async function publish() {
     isFeatured: true,
     publishedAt: existing?.publishedAt || new Date(),
     scheduledFor: null,
-    seoTitle: "AI Voice Agents in India: Cost, Uses and 2026 Guide",
+    seoTitle: "AI Voice Agents India: Cost & Uses",
     seoDescription: "AI voice agents in India explained: current cost components, business use cases, TRAI and data considerations, controls and a practical 30-day pilot.",
     canonicalOverride: null,
     sources: [
